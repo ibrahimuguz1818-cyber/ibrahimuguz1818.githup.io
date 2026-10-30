@@ -663,6 +663,18 @@ body{letter-spacing:-.005em}
 .notepop .onote{margin:8px 0 0;font-size:14px;line-height:1.55;white-space:normal}
 .nfil.nkim{margin-bottom:6px}
 .ekkim{font-weight:700;color:var(--coral)}
+/* dokunmatik seçim */
+.pb,.pb *{-webkit-user-select:text;user-select:text}
+.rpg{-webkit-touch-callout:default}
+#selpop button,#selpop .swatches button{min-height:36px}
+@media (pointer:coarse){#selpop .swatches button{width:30px;height:30px}#selpop button{padding-inline:12px}}
+/* seçim menüsündeki renk düğmeleri (".selpop button" arka planı silmesin) */
+.selpop .swatches .sw-sari,.notepop .swatches .sw-sari{background:#F5D35A}
+.selpop .swatches .sw-yesil,.notepop .swatches .sw-yesil{background:#8FCB80}
+.selpop .swatches .sw-mavi,.notepop .swatches .sw-mavi{background:#86B6EA}
+.selpop .swatches .sw-pembe,.notepop .swatches .sw-pembe{background:#EE98AF}
+.selpop .swatches .sw-mor,.notepop .swatches .sw-mor{background:#B89BE6}
+.selpop .swatches button{padding:0}
 
 </style>
 </head>
@@ -2040,8 +2052,20 @@ stage.addEventListener('click', ev => {
   if (s) { ev.stopPropagation(); showWordCard(s, mk); } else hidePop();
 });
 document.addEventListener('mousedown', ev => { if (!pop.contains(ev.target) && !selpop.contains(ev.target) && !ev.target.closest('.pb span.e')) { pop.hidden = true; selpop.hidden = true; } });
+let fareBasili = false, dokunma = false, selZ = null;
+document.addEventListener('mousedown', () => { fareBasili = true; }, true);
+document.addEventListener('touchstart', () => { dokunma = true; fareBasili = false; }, {passive: true, capture: true});
+document.addEventListener('selectionchange', () => {
+  if (fareBasili || reader.hidden) return;
+  clearTimeout(selZ);
+  selZ = setTimeout(() => { const s = getSelection(); if (s && s.rangeCount && String(s).trim().length > 1 && stage.contains(s.anchorNode)) secimMenusu(); }, 450);
+});
 document.addEventListener('mouseup', ev => {
+  fareBasili = false;
   if (reader.hidden || pop.contains(ev.target) || selpop.contains(ev.target) || notePop.contains(ev.target)) return;
+  secimMenusu();
+});
+function secimMenusu(){
   setTimeout(() => {
     const sel = getSelection(); const txt = String(sel || '').replace(/\s+/g, ' ').trim();
     if (!txt || txt.length < 2 || !sel.rangeCount || !stage.contains(sel.anchorNode)) return;
@@ -2049,14 +2073,14 @@ document.addEventListener('mouseup', ev => {
     const short = txt.length > 28 ? txt.slice(0, 26) + '…' : txt;
     const rg = rangeFromSelection();
     selpop.innerHTML = `<div class="swatches">${COLORS.map(c => `<button class="sw-${c}" data-c="${c}" aria-label="${CNAME[c]} vurgula" title="${CNAME[c]} vurgula" aria-pressed="${c === lastColor}"></button>`).join('')}</div><span class="sep"></span><button data-a="not">Not ekle</button><button data-a="fih">+ Fihriste ekle</button><button data-a="ara">Fihristte ara</button><button data-a="kop">Kopyala</button>`;
-    placePop(selpop, r);
+    placePop(selpop, dokunma ? {left: r.left, width: r.width, top: r.top, bottom: r.bottom + 30} : r);
     selpop.querySelectorAll('[data-c]').forEach(b => b.onclick = () => { if (rg) addHL(rg, b.dataset.c); hidePop(); });
     selpop.querySelector('[data-a="not"]').onclick = () => { if (!rg) return; const anchorRect = r; const h = addHL(rg, lastColor); selpop.hidden = true; const el = WIDX.get(h.b0 + '.' + h.i0); showNotePop(h, el || {getBoundingClientRect: () => anchorRect}); };
     selpop.querySelector('[data-a="ara"]').onclick = () => { hidePop(); if (reader.classList.contains('nopanel')) setPanel(true); closeDetail(); setTab('dizin'); $('#q').value = txt.replace(/['’].*$/, '').slice(0, 40); renderIndex(); };
     selpop.querySelector('[data-a="fih"]').onclick = () => { if (!rg) return; hidePop(); const c0 = BL[rg.b0].c[rg.i0]; UF.open({name: txt.replace(/['’][^\s]*$/, '').replace(/^[“"‘'(\[]+|[”"’'),.;:!?\]]+$/g, '').slice(0, 80), sel: rg, p: c0 ? c0[2] : visible[0]}); try { getSelection().removeAllRanges(); } catch {} };
     selpop.querySelector('[data-a="kop"]').onclick = async () => { try { await navigator.clipboard.writeText(txt); } catch {} hidePop(); };
   }, 10);
-});
+}
 addEventListener('resize', () => { if (!reader.hidden) repaginate(); });
 
 // ======================= VURGULAR VE NOTLAR =======================

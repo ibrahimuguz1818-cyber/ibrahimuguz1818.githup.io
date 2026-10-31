@@ -676,6 +676,14 @@ body{letter-spacing:-.005em}
 .selpop .swatches .sw-mor,.notepop .swatches .sw-mor{background:#B89BE6}
 .selpop .swatches button{padding:0}
 
+.pb .w.kb{font-weight:700}.pb .w.ki{font-style:italic}
+.pb .ar{text-align:center;margin:.95em 0 .3em;line-height:0}
+.pb .ar.cont{margin-top:0}
+.pb .arimg{display:inline-block;max-width:100%;height:auto;mix-blend-mode:multiply}
+.reader[data-rt="gece"] .pb .arimg{filter:invert(1);mix-blend-mode:screen;opacity:.92}
+.pb .ar + .q{text-align:center;margin-left:0;margin-top:.2em}
+.cover.mb{background:linear-gradient(90deg,rgba(0,0,0,.28) 0,rgba(0,0,0,0) 7%),linear-gradient(165deg,#1F5C4A,#0E3A2F 65%,#0A2620)}
+.cover.mb .ct{font-size:15px;line-height:1.12}
 </style>
 </head>
 <body>
@@ -1085,6 +1093,7 @@ const BK = BOOKS.find(b => b.key === window.__PACK.key) || BOOKS[0];
 function switchBook(k, read){ try { localStorage.setItem('lib.current', k); } catch {} location.hash = (read ? '#oku-' : '#kitap-') + k; location.reload(); }
 const D = window.__PACK.d, FLOW = window.__PACK.f, IMG = window.__PACK.i;
 const IMGSRC = p => `data:image/${BK.mime};base64,${IMG[p]}`;
+const AR = window.__PACK.a || {};
 document.title = BK.title + ' · Darülfünun Suffesi';
 addEventListener('hashchange', () => { const k = (location.hash.match(/^#(?:oku|kitap)-(\w+)/) || [])[1]; if (k && k !== BK.key && BOOKS.some(b => b.key === k)) { try { localStorage.setItem('lib.current', k); } catch {} location.reload(); } });
 const TYPES = {kisi:{ad:'Kişiler',tek:'Kişi'}, yer:{ad:'Yerler',tek:'Yer'}, olay:{ad:'Olaylar',tek:'Olay'}, kavram:{ad:'Kavramlar',tek:'Kavram'}, eser:{ad:'Eserler',tek:'Eser'}, kurum:{ad:'Kurumlar',tek:'Kurum'}};
@@ -1308,7 +1317,7 @@ const processed = Object.keys(PAGES).map(Number).sort((a,b)=>a-b);
 const chapterOf = p => { let c = D.bolumler[0]; for (const b of D.bolumler) if (b[0] <= p) c = b; return c; };
 let visible = [BK.start], tab = store.get('tab','sayfa'), selected = null, gMode = 'sayfa', mMode = 'sayfa', mView = 'avrupa';
 $('#cntAll').textContent = D.varliklar.length;
-$('#foot').innerHTML = `Okuma metni taranmış sayfalardan çıkarıldı; şüphelendiğin yerde üstteki sayfa simgesiyle asıl sayfaya bakabilirsin. <span style="font-family:var(--f-mono)">Kesikli</span> bağlantılar kitapta geçmeyen genel bilgilerdir.`;
+$('#foot').innerHTML = `Okuma metni kitabın sayfalarından çıkarıldı; şüphelendiğin yerde üstteki sayfa simgesiyle asıl sayfaya bakabilirsin. <span style="font-family:var(--f-mono)">Kesikli</span> bağlantılar kitapta geçmeyen genel bilgilerdir.`;
 function hasPlace(e){ return e.k || e.bag.some(r => E[r.o].k); }
 const scrollPanel = () => {};
 function hidePop(){ $('#pop').hidden = true; $('#selpop').hidden = true; document.querySelectorAll('.pb span.e.on').forEach(s => s.classList.remove('on')); }
@@ -1328,31 +1337,31 @@ function syncSeg(sel, key, val){ document.querySelectorAll(sel + ' button').forE
 function renderPages(){
   const box = $('#pageBox');
   let html = '', n = 0;
-  const notes = store.get('notlar', {});
+  const notes = sayfaNotlari();
   visible.forEach(p => {
     const d = PAGES[p], c = chapterOf(p);
     html += `<section class="pgsec"><div class="pg-head"><span class="eyebrow-s">${esc(c[1])}</span><span class="no">s. ${p}</span></div>`;
-    if (!d) html += `<div class="empty" style="margin-top:10px">${p < BK.start || BK.blank.includes(p) ? 'Bu sayfa başlık, içindekiler ya da boş sayfa.' : 'Bu sayfa henüz işlenmedi.'}</div>`;
+    if (!d) html += `<div class="empty" style="margin-top:10px">${p < BK.start || BK.blank.includes(p) ? 'Bu sayfa başlık, içindekiler ya da boş sayfa.' : (p >= BK.first && p <= BK.last ? 'Bu sayfada fihristteki bir ad geçmiyor.' : 'Bu sayfa henüz işlenmedi.')}</div>`;
     else {
       n += d.v.length;
-      html += `<p class="ozet">${esc(d.o)}</p>`;
+      if (d.o) html += `<p class="ozet">${esc(d.o)}</p>`;
       const by = {}; d.v.forEach(([id, nt]) => (by[E[id].t] ||= []).push([E[id], nt]));
       ORDER.filter(t => by[t]).forEach(t => {
         html += `<div class="group"><h3 style="--c:${col(t)}"><span class="dot"></span>${TYPES[t].ad} <span style="font-family:var(--f-mono);color:var(--faint)">${by[t].length}</span></h3>`;
         by[t].forEach(([e, nt]) => html += itemHtml(e, nt));
         html += `</div>`;
       });
-      html += hlListHtml(hlsOnPage(p), true);
+      html += hlListHtml(hlsOnPage(p).filter(h => !(mine(h) && /^pn-/.test(h.id))), true);
       html += `<div class="notes"><label class="eyebrow-s" for="note${p}">s. ${p} için notum</label><textarea id="note${p}" data-p="${p}" placeholder="Sunumda kullanmak istediğin bir fikir, soru ya da bağlantı…">${esc(notes[p] || '')}</textarea></div>`;
     }
     html += `</section>`;
   });
-  html += `<div class="notes"><div class="row"><span id="noteState">Notlar yalnız bu tarayıcıda saklanır.</span><button class="btn" id="copyNotes" style="padding:3px 10px;font-size:12px">Tüm notları kopyala</button></div></div>`;
+  html += `<div class="notes"><div class="row"><span id="noteState">Sayfa notların halkayla eşitlenir.</span><button class="btn" id="copyNotes" style="padding:3px 10px;font-size:12px">Tüm notları kopyala</button></div></div>`;
   box.innerHTML = html;
   $('#cntPage').textContent = n || '';
   box.querySelectorAll('[data-id]').forEach(b => b.onclick = () => openDetail(b.dataset.id));
   bindHlList(box);
-  box.querySelectorAll('textarea[data-p]').forEach(ta => { let t; ta.oninput = () => { clearTimeout(t); t = setTimeout(() => { const nn = store.get('notlar', {}); if (ta.value.trim()) nn[ta.dataset.p] = ta.value; else delete nn[ta.dataset.p]; store.set('notlar', nn); $('#noteState').textContent = 'Kaydedildi.'; }, 400); }; });
+  box.querySelectorAll('textarea[data-p]').forEach(ta => { let t; ta.oninput = () => { clearTimeout(t); t = setTimeout(() => { sayfaNotuYaz(+ta.dataset.p, ta.value); $('#noteState').textContent = 'Kaydedildi.'; }, 500); }; });
   $('#copyNotes').onclick = async () => {
     const txt = notesText();
     try { await navigator.clipboard.writeText(txt); $('#noteState').textContent = 'Notlar panoya kopyalandı.'; }
@@ -1799,7 +1808,9 @@ function tokHTML(b, from, to, pagesSeen){
     const id = ei >= 0 ? FLOW.ids[ei] : null;
     if (open !== null && id !== open) close();
     const sp = i > from ? `<span class="s" data-s="${b}.${i}"> </span>` : '';
-    const wd = `<span class="w" data-t="${b}.${i}">${esc(hyph(t))}</span>`;
+    if (k === 4){ close(); const a = AR[t]; if (a) h += `<img class="arimg" alt="Arapça metin (asıl sayfada da görülebilir)" src="data:image/webp;base64,${a.d}" style="width:min(100%,${(a.e * a.w / a.h).toFixed(2)}em);aspect-ratio:${a.w}/${a.h}">`; continue; }
+    const fl = c[i][4] | 0;
+    const wd = `<span class="w${fl & 1 ? ' kb' : ''}${fl & 2 ? ' ki' : ''}" data-t="${b}.${i}">${esc(hyph(t))}</span>`;
     if (id && open === null){ h += sp + `<span class="e" data-e="${id}" data-p="${p}" style="--c:${col(E[id].t)}">` + wd; open = id; }
     else h += sp + wd;
   }
@@ -1812,7 +1823,7 @@ function blockEl(b, from, to){
   if (t === 'h1') tag = 'h1'; else if (t === 'h2') tag = 'h2';
   else if (t === 'kicker') cls = 'kicker'; else if (t === 'part') cls = 'part'; else if (t === 'parttitle') cls = 'parttitle';
   else if (t === 'fn') cls = 'fn'; else if (t === 'li') cls = 'li';
-  else if (t === 'q') cls = 'q'; else if (t === 'v') cls = 'v'; else if (t === 'tr') cls = 'tr'; else if (t === 'cap') cls = 'cap'; else if (t === 'cap2') cls = 'cap2';
+  else if (t === 'q') cls = 'q'; else if (t === 'ar') cls = 'ar'; else if (t === 'v') cls = 'v'; else if (t === 'tr') cls = 'tr'; else if (t === 'cap') cls = 'cap'; else if (t === 'cap2') cls = 'cap2';
   if (cls && t !== 'li' && t !== 'fn') tag = 'div';
   if (t === 'li' || t === 'fn') tag = 'div';
   const el = document.createElement(tag);
@@ -2090,6 +2101,16 @@ const CHEX = {sari:'#E9C53A', yesil:'#6FB45F', mavi:'#5E9BDD', pembe:'#E07795', 
 let HL = store.get('vurgular', []);
 let lastColor = store.get('renk', 'sari');
 const saveHL = () => { store.set('vurgular', HL); const n = HL.filter(mine).length; $('#cntHl').textContent = n || ''; };
+// sayfa notları = sayfaya bağlı serbest not (eşitlenir)
+const pnId = p => `pn-${String(meUid() || 'yerel').slice(0, 8)}-${p}`;
+function sayfaNotlari(){ const o = {}; HL.forEach(h => { if (mine(h) && /^pn-/.test(h.id) && h.note) o[h.p] = h.note; }); return o; }
+function sayfaNotuYaz(p, v){
+  const id = pnId(p); let h = HL.find(x => x.id === id);
+  if (!v.trim()){ if (h){ HL = HL.filter(x => x !== h); saveHL(); } return; }
+  if (!h){ const b0 = Math.max(0, BL.findIndex(bl => bl.c.some(t => t[2] === p))); h = {id, u: meUid(), b0, i0: 0, b1: b0, i1: -1, c: 'sari', note: '', p, t: Date.now(), free: true, text: ''}; HL.push(h); }
+  h.note = v; saveHL();
+}
+(() => { const eski = store.get('notlar', {}); const ks = Object.keys(eski); if (!ks.length) return; ks.forEach(p => { if (eski[p] && !HL.some(h => h.id === pnId(+p))) sayfaNotuYaz(+p, eski[p]); }); store.set('notlar', {}); })();
 saveHL();
 let WIDX = new Map(), SIDX = new Map();
 function indexWords(){
@@ -2552,7 +2573,7 @@ const SYNC = (() => {
     if (eski && eski.surum >= row.surum) return;
     BU.katalog = BU.katalog.filter(r => r.key !== row.key).concat(row).sort((a, b) => a.sira - b.sira);
     LSS('suffe.katalog', BU.katalog);
-    bildir(`${row.meta.title}: ${eski ? 'yeni bölüm geldi' : 'kitaplığa eklendi'}.`, eski && row.key !== BK.key ? 'Tamam' : 'Şimdi aç', () => { if (row.key === BK.key || !eski) location.reload(); });
+    bildir(`${row.meta.title}: ${eski ? 'yeni bölüm geldi' : 'kitaplığa eklendi'}.`, eski && row.key !== BK.key ? 'Tamam' : 'Şimdi aç', () => { if (!eski){ try { localStorage.setItem('lib.current', row.key); } catch {} location.hash = '#kitap-' + row.key; } if (row.key === BK.key || !eski) location.reload(); });
   }
 
   // ---------------- canlı bağlantı ----------------

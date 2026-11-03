@@ -6,7 +6,7 @@
 <title>Darülfünun Suffesi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Amiri:wght@400;700&display=swap">
 <style>
 /* Kütüphane: sıcak krem zemin, pas rengi vurgular, dar kalın başlıklar, vazo ve mumlu sahne.
    Okuma: iPad Kitaplar gibi sade, kâğıt renkli iki sayfa; sağda panel. */
@@ -684,60 +684,214 @@ body{letter-spacing:-.005em}
 .pb .ar + .q{text-align:center;margin-left:0;margin-top:.2em}
 .cover.mb{background:linear-gradient(90deg,rgba(0,0,0,.28) 0,rgba(0,0,0,0) 7%),linear-gradient(165deg,#1F5C4A,#0E3A2F 65%,#0A2620)}
 .cover.mb .ct{font-size:15px;line-height:1.12}
+
+/* ==== Tasarım 7 · sade: beyaz zemin, siyah-gri, Inter ==== */
+:root{--bg:#FFFFFF;--wall:#FAFAFA;--wall-2:#F1F1F1;--surface:#FFFFFF;--surface-2:#F4F4F4;
+  --ink:#111111;--muted:#6E6E6E;--faint:#9A9A9A;--line:#E6E6E6;
+  --rust:#111111;--rust-2:#3A3A3A;--rust-soft:#F1F1F1;--accent:#111111;--coral:#7A7A7A;
+  --map-land:#ECECEC;--map-border:#FFFFFF;--map-sea:#FAFAFA;
+  --f-display:"Inter","Helvetica Neue",Arial,sans-serif;--f-ui:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05);--rff:"Inter",-apple-system,"Segoe UI",sans-serif}
+body{letter-spacing:-.01em}
+#lib{background:#FFFFFF;color:#111}
+#lib .wrap{max-width:none;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+/* üst çubuk */
+#lib .nav{background:rgba(255,255,255,.94);border-bottom:0;box-shadow:none}
+#lib .nav .wrap{height:auto;min-height:76px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-block:12px}
+#lib .logo{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:#111;margin-right:14px}
+#lib .logo .wm{font:600 15px/1 var(--f-ui);letter-spacing:.16em}
+#lib .logo .sep{width:1px;height:18px;background:#111;opacity:.35}
+#lib .logo .ar{font:700 22px/1 "Amiri","Noto Naskh Arabic","Times New Roman",serif;letter-spacing:0;transform:translateY(-1px)}
+#lib .links{display:flex;align-items:center;gap:8px;position:static;transform:none;margin:0}
+#lib .links button{font:500 14.5px var(--f-ui);color:#333;background:none;border:0;border-radius:999px;padding:12px 20px;cursor:pointer;letter-spacing:-.01em}
+#lib .links button:hover{background:#E9E9E9;color:#111}
+#lib .links > button.on,#lib .links > button[data-go="top"]{display:inline-flex;align-items:center;gap:12px;background:#111;color:#fff;padding:6px 22px 6px 6px}
+#lib .links > button[data-go="top"] i{width:36px;height:36px;border-radius:50%;background:#fff;display:grid;place-items:center}
+#lib .links > button[data-go="top"] i::after{content:"";width:5px;height:5px;border-radius:50%;background:#111}
+#lib .links .grp{display:flex;gap:4px;background:#F1F1F1;border-radius:999px;padding:6px}
+#lib .links .grp button.on{background:#fff;color:#111}
+#lib .tools{margin-left:auto;display:flex;align-items:center;gap:8px;background:#F1F1F1;border-radius:999px;padding:6px}
+#lib .tools .ib{width:40px;height:40px;border-radius:50%;background:#fff;color:#111;border:0}
+#lib .tools .bcip{background:#111;color:#fff}
+/* karşılama */
+#lib .hero{display:block;padding-block:0;max-width:none;grid-template-columns:none}
+#lib .hero>div{max-width:none}
+#lib .h7{position:relative;min-height:440px;display:grid;place-items:center;text-align:center;padding-block:36px}
+#lib .h7::before{content:"";position:absolute;width:min(420px,72vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#ECECEC 0,rgba(245,245,245,.6) 45%,rgba(255,255,255,0) 70%);box-shadow:inset 0 0 0 1px #F0F0F0}
+#lib .hero h1{position:relative;margin:0;font:500 clamp(44px,6.2vw,92px)/1.02 var(--f-ui);letter-spacing:-.045em;color:#111;text-transform:none}
+#lib .hero h1 span{color:#B5B5B5}
+#lib .f7{display:flex;align-items:flex-end;gap:32px;flex-wrap:wrap;padding-block:4px 52px}
+#lib .f7 .t{flex:1 1 340px;min-width:0}
+#lib .f7 small{display:block;font:400 14px var(--f-ui);color:#6E6E6E;margin-bottom:16px}
+#lib .f7 .lead{margin:0;font:400 19px/1.35 var(--f-ui);letter-spacing:-.01em;max-width:440px;color:#111}
+#lib .f7 .facts{margin-top:14px;font:400 13.5px var(--f-ui);color:#6E6E6E}
+#lib .f7 .facts b{color:#111;font-weight:500}
+#lib .f7 .rule{width:1px;align-self:stretch;background:#222;min-height:48px}
+#lib .cta{display:flex;gap:8px;flex-wrap:wrap;margin:0}
+#lib .pill{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 22px;border-radius:999px;font:500 14px var(--f-ui);letter-spacing:-.01em;background:transparent;color:#111;border:1px solid #E4E4E4;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+#lib .pill:hover{border-color:#111;background:transparent;color:#111}
+#lib .pill.fill{background:#111;color:#fff;border-color:#111}
+#lib .pill.fill:hover{background:#333;border-color:#333;color:#fff}
+@media (max-width:767px){ #lib .links .grp{display:none} #lib .h7{min-height:320px} #lib .f7 .rule{display:none} }
+/* bölüm başlıkları */
+#lib .sechead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:32px;border-top:1px solid #EDEDED;margin-top:0}
+#lib .sechead h2{font:500 36px var(--f-ui);letter-spacing:-.03em;margin:0;color:#111;text-transform:none}
+#lib .sechead span{display:block;margin-top:6px;font:400 13.5px var(--f-ui);color:#6E6E6E}
+.hzseg{display:inline-flex;gap:4px;background:#F1F1F1;border-radius:999px;padding:4px}
+.hzseg button{font:500 13.5px var(--f-ui);border:0;background:transparent;color:#333;padding:10px 18px;border-radius:999px;cursor:pointer}
+.hzseg button[aria-pressed="true"]{background:#111;color:#fff}
+.hzrow{display:flex;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;padding-block:0 40px;font:400 13px var(--f-ui);color:#6E6E6E}
+.hzrow span:first-child{color:#111;font-weight:500}
+/* fihrist kartları */
+#lib .cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:24px;padding-bottom:12px}
+#lib .cat{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;background:#F4F4F4;border:0;border-radius:18px;padding:20px;box-shadow:none;color:#111;cursor:pointer;position:relative;min-height:0}
+#lib .cat:hover{background:#EDEDED;box-shadow:none}
+#lib .cat .art{display:none}
+#lib .cat .t{order:2;display:flex;align-items:center;gap:8px;font:400 14px var(--f-ui);color:#6E6E6E}
+#lib .cat .t::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--c)}
+#lib .cat .n{order:1;font:400 40px var(--f-ui);letter-spacing:-.03em;color:#111}
+#lib .cat .s{order:3;font:400 12.5px/1.4 var(--f-ui);color:#9A9A9A;margin-top:6px}
+#lib .cat .arrow{position:absolute;right:14px;top:14px;width:30px;height:30px;border-radius:50%;background:#fff;color:#111;display:grid;place-items:center}
+/* kaldığın yer */
+#lib .feature{margin:40px max(24px,env(safe-area-inset-left,0px)) 40px;border-radius:24px;background:#F4F4F4;color:#111;box-shadow:none}
+#lib .feature::before,#lib .feature::after{display:none}
+#lib .feature small{font:400 13px var(--f-ui);color:#6E6E6E;letter-spacing:0;text-transform:none}
+#lib .feature h2{font:500 30px/1.15 var(--f-ui);letter-spacing:-.03em;color:#111;text-transform:none}
+#lib .feature p{color:#6E6E6E}
+#lib .fcard{background:#fff;color:#111;border:0;box-shadow:none}
+#lib .fcard .k{color:#6E6E6E;font-family:var(--f-ui);font-weight:400}
+#lib .fcard small,#lib .fcard p{color:#6E6E6E}
+#lib .fcard .tags button{background:#F4F4F4;color:#111;border:0}
+#lib footer{border-top:1px solid #EDEDED;padding-block:22px 36px;font:400 13px/1.6 var(--f-ui);color:#6E6E6E}
+#lib footer b{color:#111;font-weight:500}
+
+/* ---- Hizâne bandı ---- */
+.hz{position:relative;overflow:hidden;--cw:44vw;--ch:calc(var(--cw)*.6);--gap:4.5vw}
+@media (max-width:767px){ .hz{--cw:86vw;--gap:7vw} }
+.hz-belt{position:relative;width:100%;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.hz-belt.drag{cursor:grabbing}
+.hz.raf .hz-belt{cursor:pointer}
+.hz-codes,.hz-cards{position:absolute;inset:0}
+.hz:not(.raf) .hz-codes{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 24vw);mask-image:linear-gradient(90deg,transparent 0,#000 24vw)}
+.hz-fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hz-scan{position:absolute;width:0;pointer-events:none;z-index:3}
+.hz-scan i{position:absolute;left:-2px;top:0;bottom:0;width:4px;border-radius:4px;background:#111;box-shadow:0 0 8px 1px rgba(17,17,17,.28),0 0 26px 6px rgba(17,17,17,.12)}
+.hz-scan b{position:absolute;left:0;top:4%;bottom:4%;width:42px;background:linear-gradient(90deg,rgba(17,17,17,.18),transparent);filter:blur(6px)}
+.hz-badge{position:absolute;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;z-index:4}
+.hz-badge .lb{font:400 11.5px var(--f-ui);color:#6E6E6E;white-space:nowrap}
+.hz-pill{display:flex;height:26px;border-radius:999px;overflow:hidden;font:500 12.5px var(--f-mono);white-space:nowrap}
+.hz-pill .n{background:#111;color:#fff;padding:0 11px 0 13px;min-width:9ch;display:flex;align-items:center;justify-content:flex-end;font-variant-numeric:tabular-nums}
+.hz-pill .p{background:#F1F1F1;color:#111;font-size:11px;padding:0 12px 0 10px;display:flex;align-items:center}
+.hz-mini{position:absolute;transform:translate(-50%,-100%);pointer-events:none;z-index:4;font:500 11px var(--f-mono);color:#fff;background:#111;border-radius:999px;padding:4px 9px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.hz-card,.hz-code{position:absolute;left:0;top:0;width:var(--cw);height:var(--ch);will-change:transform}
+.hz-card{border-radius:1.6vw;overflow:hidden;color:#F4ECDD;container-type:inline-size;will-change:transform,clip-path;cursor:pointer}
+@media (max-width:767px){ .hz-card{border-radius:4vw} }
+.hz-card .in{position:absolute;inset:0;display:grid;grid-template-columns:31cqw 1fr;gap:5cqw;padding:5cqw}
+.hz-cv{position:relative;border-radius:1.2cqw;padding:3.4cqw 3cqw;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1.4cqw 3.4cqw rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.08)}
+.hz-cv::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(90deg,rgba(0,0,0,.3) 0,rgba(0,0,0,0) 7%,rgba(255,255,255,.06) 8%,transparent 10%)}
+.hz-cv .ct{position:relative;font:700 4.6cqw/1.02 "Oswald","Arial Narrow",sans-serif;letter-spacing:.04em}
+.hz-cv.long .ct{font-size:3.5cqw;line-height:1.1}
+.hz-cv .cs{position:relative;font:500 1.25cqw/1.35 var(--f-ui);letter-spacing:.08em;text-transform:uppercase;opacity:.8;margin-top:1.4cqw}
+.hz-cv hr{position:relative;border:0;border-top:1px solid rgba(235,221,191,.5);width:40%;margin:2cqw 0 0}
+.hz-cv .ca{position:relative;font:500 1.7cqw "Oswald",sans-serif;letter-spacing:.2em}
+.hz-info{display:flex;flex-direction:column;min-width:0}
+.hz-kick{font:500 1.35cqw var(--f-mono);letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.hz-ttl{font:400 6cqw/1.02 "Source Serif 4",Georgia,serif;letter-spacing:-.02em;margin-top:2.6cqw;text-wrap:balance}
+.hz-by{font:400 1.9cqw/1.4 var(--f-ui);opacity:.85;margin-top:1.6cqw}
+.hz-pub{font:400 1.6cqw var(--f-mono);opacity:.6;margin-top:.6cqw}
+.hz-bar{margin-top:auto;height:.9cqw;border-radius:1cqw;background:rgba(255,255,255,.14);overflow:hidden}
+.hz-bar i{display:block;height:100%;background:rgba(255,255,255,.85)}
+.hz-pl{display:flex;justify-content:space-between;font:400 1.5cqw var(--f-mono);opacity:.75;margin-top:1.2cqw}
+.hz-st{display:grid;grid-template-columns:repeat(3,1fr);gap:2.4cqw;margin-top:3cqw}
+.hz-st div{border-top:1px solid rgba(255,255,255,.28);padding-top:1.2cqw}
+.hz-st b{display:block;font:300 4.6cqw/.95 var(--f-ui);letter-spacing:-.04em}
+.hz-st span{font:400 1.4cqw var(--f-ui);opacity:.75}
+.hz-k-ad{background:radial-gradient(120% 90% at 85% 0%,#3B3326 0,#1C1813 55%,#120F0B 100%)}
+.hz-k-ad .hz-cv{background:linear-gradient(165deg,#2C2A2E,#17161A 65%,#0E0D10);color:#E9C98A}
+.hz-k-hs{background:radial-gradient(120% 90% at 85% 0%,#5A2219 0,#2C100C 60%,#1C0A08 100%)}
+.hz-k-hs .hz-cv{background:linear-gradient(165deg,#7A2A1F,#3A1410 70%,#24100D);color:#F1E2C9}
+.hz-k-mb{background:radial-gradient(120% 90% at 85% 0%,#1C4A3D 0,#0D2C24 60%,#081C17 100%)}
+.hz-k-mb .hz-cv{background:linear-gradient(165deg,#1F5C4A,#0E3A2F 65%,#0A2620);color:#EEDFBF}
+.hz-k-x{background:radial-gradient(120% 90% at 85% 0%,#2E3440 0,#1A1E26 60%,#111419 100%)}
+.hz-k-x .hz-cv{background:linear-gradient(165deg,#3A4150,#20252F 65%,#151920);color:#E8E3D8}
+.hz-code{white-space:pre;overflow:hidden;container-type:inline-size;pointer-events:none}
+.hz-code .h,.hz-code .m{position:absolute;top:2cqw;font-family:var(--f-mono);font-size:1.56cqw;line-height:1.42}
+.hz-code .h{left:1cqw;color:#8C8C8C}
+.hz-code .m{left:58%;color:#BDBDBD}
+.hz-code .bt{color:#111;font-weight:500}
+@media (prefers-reduced-motion: reduce){ .hz-belt{cursor:default} }
+
+/* ---- okuma ve hâşiye: ana sayfa ile uyumlu sade renkler ---- */
+.reader[data-rt="beyaz"]{--paper:#FFFFFF;--text:#111111;--text-2:#8A8A8A}
+.rbar{font-family:var(--f-ui)}
+.rbar .back{color:#111}
+.progress i{background:#111}
+.pb .kicker{color:#7A7A7A}
+.tabs button[aria-selected="true"]{background:#111;color:#fff;border-color:#111}
+.tabs button[aria-selected="true"] .count{background:rgba(255,255,255,.2);color:#fff}
+.tabs .count{background:#F1F1F1;color:#111}
+.ekadd{background:#111}
+.ekitem{background:#F7F7F7;border-color:#EBEBEB}
+.ekitem.confirm,.ekedit{border-color:#111}
+.ektx a,.eklink{color:#111}
+.btn.pri{background:#111;border-color:#111;color:#fff}
+.mine{color:#111}
+.minechip{color:#6E6E6E}
+.ufrel{background:#F1F1F1;color:#111}
+.uflink{color:#111}
+.ufbox input:focus,.ufbox textarea:focus{outline-color:#111}
+
 </style>
 </head>
 <body>
 
 <!-- ===================== KÜTÜPHANE ===================== -->
 <div id="lib">
-<header class="nav">
-  <div class="wrap">
-    <a class="logo" href="#kutuphane" aria-label="Darülfünun Suffesi">
-      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M3 29.2h26" stroke="#0B2A5B" stroke-width="1.8" stroke-linecap="round"/><path d="M5 28V15.5a11 11 0 0 1 22 0V28z" fill="#0B2A5B"/><path d="M10.5 28V17.5a5.5 5.5 0 0 1 11 0V28z" fill="#FFFFFF"/><path d="M12.4 25.6c1.2-.9 2.4-.9 3.6 0 1.2-.9 2.4-.9 3.6 0v-4.3c-1.2-.9-2.4-.9-3.6 0-1.2-.9-2.4-.9-3.6 0z" fill="#FF6B4A"/><path d="M16 21.3v4.3" stroke="#FFFFFF" stroke-width=".7"/></svg>
-      <span><b>DARÜLFÜNUN</b><small>Suffesi</small></span>
-    </a>
-    <nav class="links">
-      <button class="on" data-go="top">Suffe</button>
-      <button data-go="raf">Hizâne</button>
-      <button data-go="adlar">Fihrist</button>
-      <button data-go="oku">Kıraat</button>
+  <header class="nav"><div class="wrap">
+    <a class="logo" href="#kutuphane" aria-label="Darülfünun Suffe"><span class="wm">DARÜLFÜNUN</span><span class="sep" aria-hidden="true"></span><span class="ar" lang="ar" dir="rtl">الصُّفَّة</span></a>
+    <nav class="links" aria-label="Bölümler">
+      <button class="on" data-go="top"><i aria-hidden="true"></i>Suffe</button>
+      <span class="grp"><button data-go="raf">Hizâne</button><button data-go="adlar">Fihrist</button><button data-go="oku">Kıraat</button></span>
     </nav>
     <div class="tools">
-      <button class="ib" id="lSearch" aria-label="Fihristte ara"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></button>
+      <button class="ib" id="lSearch" aria-label="Fihristte ara"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
     </div>
-  </div>
-</header>
-<main class="wrap" id="top">
-  <section class="hero">
-    <div>
-      <span class="eyebrow">Darülfünun okuma halkası</span>
-      <h1>Oku. Bağla.<br><span style="color:var(--rust-2)">Şerh et.</span></h1>
-      <p class="lead">Ashâb-ı Suffe gibi bir arada okumak için: kitaplar, içlerindeki insanlar, yerler ve olaylarla aynı rafta. Bir ada dokun; kim kimi tanıyor, nerede yaşamış, gör; bildiğini kenarına hâşiye olarak düş.</p>
-      <div class="cta">
-        <button class="pill fill" id="heroRead">Okumaya devam et →</button>
-        <button class="pill" id="heroShelf">Hizâne</button>
+  </div></header>
+  <main id="top">
+    <section class="hero wrap">
+      <div class="h7"><h1>Oku. Bağla.<br><span>Şerh et.</span></h1></div>
+      <div class="f7">
+        <div class="t"><small>Darülfünun okuma halkası</small><p class="lead">Kitaplar, içlerindeki insanlar, yerler ve olaylarla aynı rafta; birlikte okumak için.</p>
+          <div class="facts"><span id="faces" hidden></span><b id="facesN"></b> ad, hizânedeki sayfalarda</div></div>
+        <span class="rule" aria-hidden="true"></span>
+        <div class="cta"><button class="pill fill" id="heroRead">Okumaya devam et</button><button class="pill" id="heroShelf">Hizâne</button><button class="pill" id="heroFih">Fihrist</button></div>
       </div>
-      <div class="faces"><div class="st" id="faces"></div><div><b id="facesN"></b><small>ad, hizânedeki sayfalarda</small></div></div>
-    </div>
     </section>
 
-  <div class="sechead" id="raf"><h2>Hizâne</h2><span id="shelfN"></span></div>
-  <section class="shelf" id="shelf"></section>
+    <div class="sechead wrap" id="raf"><div><h2>Hizâne</h2><span id="hzSub">Kitaplar çizgiden geçerken künyelerine döner · dokun, aç · sürükle, geri sar</span></div>
+      <div class="hzseg" role="group" aria-label="Hizâne görünümü"><button id="hzAkis" aria-pressed="true">Akış</button><button id="hzRaf" aria-pressed="false">İlerleme rafı</button></div></div>
+    <section class="hz" id="hz" aria-label="Hizâne">
+      <div class="hz-belt" id="hzBelt"><div class="hz-codes" id="hzCodes" aria-hidden="true"></div><div class="hz-cards" id="hzCards"></div><canvas class="hz-fx" id="hzFx" aria-hidden="true"></canvas></div>
+      <div class="hz-scan" id="hzScan" aria-hidden="true"><b></b><i></i></div>
+      <div class="hz-badge" id="hzBadge" aria-hidden="true"><div class="lb" id="hzLb">İşlenen sayfa</div><div class="hz-pill"><span class="n" id="hzN">0</span><span class="p" id="hzP">%0 işlendi</span></div></div>
+      <div id="hzMinis" aria-hidden="true"></div>
+    </section>
+    <div class="hzrow wrap"><span id="shelfN"></span><span>Yeni kitap için PDF'ini sohbete gönder; hazırlanıp bu rafa eklenir.</span></div>
+    <section class="shelf" id="shelf" hidden></section>
 
-  <div class="sechead" id="adlar"><h2>Fihrist</h2><span id="adlarSub">dokunursan fihristte açılır</span></div>
-  <section class="cats" id="cats"></section>
-
-  <section class="feature" id="feature">
-    <div class="txt">
-      <small>Kaldığın yer</small>
-      <h2 id="fTitle"></h2>
-      <p id="fText"></p>
-      <button class="pill" id="fOpen">Okumaya devam et →</button>
-    </div>
-    <div class="art"><div class="fcard" id="fCard"></div></div>
-  </section>
-  <footer><b>Darülfünun Suffesi</b> · Kitap sayfaları yalnız halka üyelerine açıktır ve cihazında saklanır; vurgular, notlar ve hâşiyeler halkayla anında paylaşılır. Açıklamalar bu çalışma için yazıldı; kesikli çizgili bağlantılar kitapta geçmeyen genel bilgilerdir.</footer>
-</main>
+    <div class="sechead wrap" id="adlar"><div><h2>Fihrist</h2><span id="adlarSub">dokunursan fihristte açılır</span></div></div>
+    <section class="cats wrap" id="cats"></section>
+    <section class="feature" id="feature">
+      <div class="txt">
+        <small>Kaldığın yer</small>
+        <h2 id="fTitle"></h2>
+        <p id="fText"></p>
+        <button class="pill fill" id="fOpen">Okumaya devam et</button>
+      </div>
+      <div class="art"><div class="fcard" id="fCard"></div></div>
+    </section>
+    <footer class="wrap"><b>Darülfünun Suffesi</b> · Kitap sayfaları yalnız halka üyelerine açıktır ve cihazında saklanır; vurgular, notlar ve hâşiyeler halkayla anında paylaşılır. Açıklamalar bu çalışma için yazıldı; kesikli çizgili bağlantılar kitapta geçmeyen genel bilgilerdir.</footer>
+  </main>
 </div>
 
 <!-- ===================== OKUMA ===================== -->
@@ -1976,7 +2130,7 @@ function applyLook(){
   if (ptOld && ptOld !== ptEff && typeof tab !== 'undefined' && (tab === 'sema' || tab === 'harita')) setTimeout(() => setTab(tab), 30);
 }
 let pt = store.get('pt', 'oto');
-const PT_AUTO = {beyaz: 'lacivert', kagit: 'grafit', sepya: 'murekkep', gece: 'acik'};
+const PT_AUTO = {beyaz: 'acik', kagit: 'grafit', sepya: 'murekkep', gece: 'acik'};
 const PT_SW = {lacivert: '#0F1E3A', grafit: '#25282E', murekkep: '#22204A', petrol: '#0E2E35', acik: '#FFFFFF'};
 document.querySelectorAll('#aaMenu [data-pt]').forEach(b => b.onclick = () => { pt = b.dataset.pt; store.set('pt', pt); applyLook(); });
 let rpT; const repaginate = () => { clearTimeout(rpT); rpT = setTimeout(() => { if (!reader.hidden) { $('#paging').hidden = false; requestAnimationFrame(() => buildBook()); } }, 120); };
@@ -2656,6 +2810,171 @@ const SYNC = (() => {
   return {kirli, gonder, cek, durum: () => durum};
 })();
 syncDirty = SYNC.kirli || (() => {});
+
+
+/* ===== Hizâne bandı ===== */
+(() => {
+  const stage = document.getElementById('hz'); if (!stage) return;
+  const belt = document.getElementById('hzBelt'), cardsEl = document.getElementById('hzCards'), codesEl = document.getElementById('hzCodes');
+  const cv = document.getElementById('hzFx'), g = cv.getContext('2d'), scan = document.getElementById('hzScan'), badge = document.getElementById('hzBadge');
+  const bN = document.getElementById('hzN'), bP = document.getElementById('hzP'), bLb = document.getElementById('hzLb'), minis = document.getElementById('hzMinis'), lib = document.getElementById('lib');
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fmt = n => Number(n).toLocaleString('tr-TR');
+  const es = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const cur = (window.AD && AD.BK) ? AD.BK.key : null;
+  const KIT = (window.__BOOKS || []).map(b => {
+    const ok = Math.max(1, (b.last || b.start || 1) - (b.first || b.start || 1) + 1);
+    const bl = (b.bolumler || []), done = bl.filter(x => x[0] <= (b.last || 0)), next = bl.find(x => x[0] > (b.last || 0));
+    const cls = b.cover && b.cover.cls ? b.cover.cls : (b.key === 'ad' ? 'ad' : 'x');
+    return {b, ok, oran: Math.min(1, (b.last || 0) / (b.pages || 1)), done, next, cls: ['ad', 'hs', 'mb'].includes(cls) ? cls : (cls ? 'x' : 'ad')};
+  });
+  if (!KIT.length) { stage.hidden = true; return; }
+  document.getElementById('shelfN').textContent = KIT.length + ' kitap · yenileri kendiliğinden gelir';
+
+  const kart = (k, i) => {
+    const b = k.b, c = b.cover || {}, long = (String(c.ct || '').match(/<br>/g) || []).length >= 2;
+    return `<div class="in"><div class="hz-cv${long ? ' long' : ''}"><div><div class="ct">${c.ct || es(b.title)}</div><div class="cs">${c.cs || ''}</div><hr></div><div class="ca">${c.ca || es(b.author)}</div></div>
+      <div class="hz-info"><div class="hz-kick">Hizâne · ${String(i % KIT.length + 1).padStart(2, '0')}${b.key === cur ? ' · okunuyor' : ''}</div><div class="hz-ttl">${es(b.title)}</div>
+      <div class="hz-by">${es(b.author)}${b.tr ? ' · ' + es(b.tr) : ''}</div><div class="hz-pub">${es(b.pub || '')} · ${b.pages} s.</div>
+      <div class="hz-bar"><i style="width:${(k.oran * 100).toFixed(1)}%"></i></div>
+      <div class="hz-pl"><span>s. ${b.first}–${b.last}</span><span>%${Math.round(k.oran * 100)}</span></div>
+      <div class="hz-st"><div><b>${fmt(b.ad)}</b><span>ad</span></div><div><b>${fmt(b.bag)}</b><span>bağlantı</span></div><div><b>${k.done.length}</b><span>bölüm işlendi</span></div></div></div></div>`;
+  };
+  const kod = k => {
+    const b = k.b, L = [];
+    L.push(`&lt;kitap id="${es(b.key)}"&gt;`, `  &lt;ad&gt;${es(b.title)}&lt;/ad&gt;`, `  &lt;yazar&gt;${es(b.author)}&lt;/yazar&gt;`);
+    if (b.tr) L.push(`  &lt;ceviri&gt;${es(b.tr)}&lt;/ceviri&gt;`);
+    if (b.pub) L.push(`  &lt;yayin&gt;${es(b.pub)}&lt;/yayin&gt;`);
+    L.push(`  &lt;islenen ilk="${b.first}" son="${b.last}" toplam="${b.pages}"/&gt;`);
+    if (b.ozetsiz) L.push(`  &lt;ozet/&gt;  <span class="bt">&lt;!-- müellifin şartı: özet yok --&gt;</span>`);
+    L.push('  &lt;bolumler&gt;');
+    for (const [s, t] of k.done.slice(-6)) L.push(`    &lt;b s="${s}"&gt;${es(String(t).length > 34 ? String(t).slice(0, 33) + '…' : t)}&lt;/b&gt;`);
+    if (k.next) L.push(`    <span class="bt">&lt;b s="${k.next[0]}" sonraki&gt;${es(String(k.next[1]).length > 34 ? String(k.next[1]).slice(0, 33) + '…' : k.next[1])}&lt;/b&gt;</span>`);
+    L.push('  &lt;/bolumler&gt;', `  &lt;fihrist ad="${b.ad}" bag="${b.bag}"/&gt;`, '&lt;/kitap&gt;');
+    const M = [`&lt;!-- işlenen: ${k.ok} sayfa --&gt;`, `&lt;!-- toplam: ${fmt(b.pages)} sayfa --&gt;`, `&lt;!-- suffe/kitap/${es(b.key)} --&gt;`];
+    return `<div class="h">${L.join('\n')}</div><div class="m">${M.join('\n')}</div>`;
+  };
+
+  let mod = 'akis', items = [];
+  function kur(){
+    cardsEl.innerHTML = ''; codesEl.innerHTML = ''; minis.innerHTML = ''; items = [];
+    const n = mod === 'akis' ? Math.max(6, Math.ceil(6 / KIT.length) * KIT.length) : KIT.length;
+    for (let i = 0; i < n; i++){
+      const k = KIT[i % KIT.length];
+      const c = document.createElement('div'); c.className = 'hz-card hz-k-' + k.cls; c.dataset.k = k.b.key; c.innerHTML = kart(k, i);
+      c.setAttribute('role', 'button'); c.setAttribute('tabindex', i < KIT.length ? '0' : '-1'); c.setAttribute('aria-label', k.b.title + ' kitabını aç');
+      cardsEl.appendChild(c);
+      const d = document.createElement('div'); d.className = 'hz-code'; d.innerHTML = kod(k); codesEl.appendChild(d);
+      const it = {k, c, d, i, x: 0, y: 0};
+      if (mod === 'raf'){ const m = document.createElement('div'); m.className = 'hz-mini'; minis.appendChild(m); it.m = m; }
+      items.push(it);
+    }
+    olc(); rafT0 = performance.now();
+  }
+  let W = 0, cw = 0, ch = 0, gap = 0, Lx = 0, dpr = 1, H = 0, PAD = 70, rowGap = 0;
+  function olc(){
+    if (!items.length) return;
+    W = stage.clientWidth; const r = items[0].c.getBoundingClientRect(); cw = r.width; ch = r.height;
+    if (!cw) return;
+    gap = innerWidth < 768 ? innerWidth * .07 : innerWidth * .045; Lx = W / 2;
+    H = mod === 'akis' ? ch + PAD * 2 + 40 : (rowGap = Math.max(54, ch * .18), PAD + items.length * (ch + rowGap));
+    belt.style.height = H + 'px';
+    dpr = Math.min(2, devicePixelRatio || 1); cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    const ak = mod === 'akis'; scan.hidden = !ak; badge.hidden = !ak;
+    if (ak){ scan.style.left = Lx + 'px'; scan.style.top = (PAD + 40 - 14) + 'px'; scan.style.height = (ch + 40) + 'px'; badge.style.left = Lx + 'px'; badge.style.top = (PAD + 40 - 62) + 'px'; }
+  }
+  let off = 0, vel = 0, hover = 0, hovering = false, drag = null, crossing = -1, shown = 0, rafT0 = 0, onScreen = true, ilk = true;
+  const auto = () => RM ? 0 : -0.075 * innerWidth;
+  const md = (a, b) => ((a % b) + b) % b;
+  belt.addEventListener('pointerenter', () => hovering = true);
+  belt.addEventListener('pointerleave', () => hovering = false);
+  belt.addEventListener('pointerdown', e => { if (e.button) return; drag = {x: e.clientX, x0: e.clientX, t: performance.now(), v: 0, moved: false}; if (mod === 'akis') belt.setPointerCapture(e.pointerId); });
+  belt.addEventListener('pointermove', e => { if (!drag) return; const now = performance.now(), dx = e.clientX - drag.x; if (Math.abs(e.clientX - drag.x0) > 6){ drag.moved = true; belt.classList.add('drag'); }
+    if (mod === 'akis' && drag.moved){ off += dx; drag.v = dx / Math.max(8, now - drag.t) * 1000 * .8 + drag.v * .2; } drag.x = e.clientX; drag.t = now; });
+  const ac = key => { if (!window.AD) return; if (key === AD.BK.key) AD.openReader(); else AD.switchBook(key, true); };
+  const birak = e => { if (!drag) return; const d = drag; drag = null; belt.classList.remove('drag');
+    if (d.moved){ if (mod === 'akis') vel = d.v; return; }
+    if (mod === 'raf'){ const el = document.elementFromPoint(e.clientX, e.clientY), c = el && el.closest('.hz-card'); if (c) ac(c.dataset.k); else rafT0 = performance.now(); return; }
+    const el = document.elementFromPoint(e.clientX, e.clientY), c = el && el.closest('.hz-card'); if (c) ac(c.dataset.k); };
+  belt.addEventListener('pointerup', birak); belt.addEventListener('pointercancel', () => { drag = null; belt.classList.remove('drag'); });
+  belt.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('hz-card')){ e.preventDefault(); ac(e.target.dataset.k); } });
+  belt.addEventListener('wheel', e => { if (mod !== 'akis') return; if (Math.abs(e.deltaX) > Math.abs(e.deltaY)){ e.preventDefault(); vel += -e.deltaX * 6; } }, {passive: false});
+  if ('IntersectionObserver' in window) new IntersectionObserver(es_ => { onScreen = es_[0].isIntersecting; }).observe(stage);
+
+  function hash(a, b, c){ let h = (Math.imul(a, 374761393) + Math.imul(b, 668265263) + Math.imul(c, 2147483647)) | 0; h = Math.imul(h ^ (h >>> 13), 1274126177) | 0; return ((h ^ (h >>> 16)) >>> 0) / 4294967296; }
+  const PAL = ['#1F2227', '#25282E', '#30343B', '#3D424B', '#4A4F58', '#5D626B', '#7A7F88'];
+  let kiv = [];
+  function fx(it, line, t, bv){
+    const x = it.x, y = it.y, cut = Math.max(0, Math.min(cw, line - x));
+    if (cut <= 0 || x + cw <= line) return;
+    const hw = Math.min(150, x + cw - line);
+    if (hw > 0){ const gr = g.createLinearGradient(line, 0, line + 150, 0); gr.addColorStop(0, 'rgba(48,52,59,.22)'); gr.addColorStop(1, 'rgba(48,52,59,0)'); g.fillStyle = gr; g.fillRect(line, y, hw, ch); }
+    const R = .3 * cw, S = 3, rows = Math.ceil(ch / S), gx0 = Math.floor(cut / S), gx1 = Math.min(Math.ceil(cw / S), Math.ceil((cut + R) / S)), tk = Math.floor(t * 9);
+    for (let gx = gx0; gx < gx1; gx++){
+      const sx = x + gx * S, d = sx - line; if (d < 0) continue;
+      const p = Math.pow(Math.max(0, 1 - d / R), 1.7); if (p <= .002) continue;
+      for (let r = -5; r < rows + 5; r++){
+        const ic = r >= 0 && r < rows, pr = ic ? p * .92 : p * .16 * (1 - Math.min(5, r < 0 ? -r : r - rows + 1) / 5);
+        if (hash(gx, r, it.i) >= pr) continue;
+        if (!RM && hash(gx, r, tk + 97) < .22) continue;
+        const h2 = hash(r, gx, it.i + 31);
+        g.fillStyle = d < 10 ? PAL[Math.floor(h2 * 2)] : PAL[Math.floor(h2 * h2 * 7)];
+        const s = 1.1 + h2 * 1.7, jx = RM ? 0 : (hash(gx, r, tk + 7) - .5) * 1.6, jy = RM ? 0 : (hash(r, gx, tk + 3) - .5) * 1.6;
+        g.fillRect(sx + jx, y + r * S + jy, s, s);
+      }
+    }
+    if (!RM) for (let q = 0; q < 3; q++) if (Math.random() < .7) kiv.push({x: line + Math.random() * 30, y: y - 10 + Math.random() * (ch + 20), vx: -30 + Math.random() * 70 + bv * .6, vy: (Math.random() - .5) * 50, s: .8 + Math.random() * 1.8, c: PAL[Math.floor(Math.random() * 7)], l: .3 + Math.random() * .8});
+  }
+  function uygula(it, line){
+    const cut = Math.max(0, Math.min(cw, line - it.x)), tr = `translate3d(${it.x}px,${it.y}px,0)`;
+    it.c.style.transform = tr; it.d.style.transform = tr;
+    if (cut > 0){ const rad = getComputedStyle(it.c).borderTopRightRadius;
+      it.c.style.clipPath = `inset(0 0 0 ${cut}px round 0 ${rad} ${rad} 0)`;
+      const m = `linear-gradient(90deg,transparent ${cut}px,#000 ${cut + 26}px)`; it.c.style.webkitMaskImage = m; it.c.style.maskImage = m;
+      it.d.style.clipPath = `inset(0 ${cw - cut}px 0 0)`; it.d.style.visibility = 'visible';
+    } else { it.c.style.clipPath = ''; it.c.style.webkitMaskImage = ''; it.c.style.maskImage = ''; it.d.style.visibility = 'hidden'; }
+    return cut;
+  }
+  let tPrev = 0;
+  function kare(now){
+    requestAnimationFrame(kare);
+    if (lib.hidden || !onScreen){ tPrev = now; return; }
+    if (!cw) { olc(); if (!cw) return; }
+    if (ilk){ ilk = false; off = Lx - .62 * cw - (cw + gap); }
+    const dt = Math.min(.05, (now - (tPrev || now)) / 1000); tPrev = now; const t = now / 1000;
+    g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, cv.width, cv.height); g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (mod === 'akis'){
+      hover += ((hovering ? 1 : 0) - hover) * Math.min(1, dt * 4);
+      if (!drag || !drag.moved){ const hd = auto() * (1 - .65 * hover); vel += (hd - vel) * (1 - Math.exp(-2.2 * dt)); off += vel * dt; }
+      const span = cw + gap, per = span * items.length; let cr = -1, prog = 0;
+      for (const it of items){ it.x = md(off + it.i * span + span, per) - span; it.y = PAD + 40; const cut = uygula(it, Lx); if (cut > 0 && cut < cw){ cr = it.i; prog = cut / cw; } fx(it, Lx, t, drag && drag.moved ? drag.v : vel); }
+      if (cr >= 0){ const k = items[cr].k, hd = Math.round(k.ok * prog);
+        if (cr !== crossing){ crossing = cr; shown = hd; bP.textContent = `%${Math.round(k.oran * 100)} işlendi`; bLb.textContent = k.b.title.length > 24 ? 'İşlenen sayfa' : k.b.title + ' · işlenen'; }
+        shown += (hd - shown) * Math.min(1, dt * 14); bN.textContent = `${fmt(Math.round(shown))} / ${fmt(k.b.pages)}`; }
+    } else {
+      const x0 = (W - cw) / 2, e = RM ? 1 : Math.min(1, (now - rafT0) / 2400), ea = 1 - Math.pow(1 - e, 3);
+      for (const it of items){ it.x = x0; it.y = PAD + it.i * (ch + rowGap); const line = it.x + cw * it.k.oran * ea;
+        uygula(it, line); fx(it, line, t, 0);
+        it.m.style.left = line + 'px'; it.m.style.top = (it.y - 8) + 'px';
+        it.m.textContent = `%${Math.round(it.k.oran * 100 * ea)} · s. ${it.k.b.first + Math.round((it.k.ok - 1) * ea)}`;
+        g.save(); g.shadowColor = 'rgba(17,17,17,.35)'; g.shadowBlur = 8; g.fillStyle = '#111'; g.fillRect(line - 1.5, it.y - 6, 3, ch + 12); g.restore(); }
+    }
+    for (const s of kiv){ s.l -= dt; s.x += s.vx * dt; s.y += s.vy * dt; if (s.l > 0){ g.globalAlpha = Math.min(1, s.l * 2.2); g.fillStyle = s.c; g.fillRect(s.x, s.y, s.s, s.s); } }
+    g.globalAlpha = 1; kiv = kiv.filter(s => s.l > 0);
+  }
+  function modSec(m){
+    mod = m; stage.classList.toggle('raf', m === 'raf');
+    document.getElementById('hzAkis').setAttribute('aria-pressed', m === 'akis');
+    document.getElementById('hzRaf').setAttribute('aria-pressed', m === 'raf');
+    document.getElementById('hzSub').textContent = m === 'akis' ? 'Kitaplar çizgiden geçerken künyelerine döner · dokun, aç · sürükle, geri sar' : 'Her kitap, işlenen kısmı kadar metne dönmüş · kitaba dokun, aç';
+    kiv = []; crossing = -1; ilk = m === 'akis'; kur();
+  }
+  document.getElementById('hzAkis').onclick = () => modSec('akis');
+  document.getElementById('hzRaf').onclick = () => modSec('raf');
+  const hf = document.getElementById('heroFih'); if (hf) hf.onclick = () => document.getElementById('adlar').scrollIntoView({behavior: 'smooth'});
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(olc, 120); });
+  modSec('akis'); requestAnimationFrame(kare);
+})();
 
 
 setTab(tab);

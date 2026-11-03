@@ -784,7 +784,7 @@ body{letter-spacing:-.01em}
 .hz-pill .p{background:#F1F1F1;color:#111;font-size:11px;padding:0 12px 0 10px;display:flex;align-items:center}
 .hz-mini{position:absolute;transform:translate(-50%,-100%);pointer-events:none;z-index:4;font:500 11px var(--f-mono);color:#fff;background:#111;border-radius:999px;padding:4px 9px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .hz-card,.hz-code{position:absolute;left:0;top:0;width:var(--cw);height:var(--ch);will-change:transform}
-.hz-card{border-radius:1.6vw;overflow:hidden;color:#F4ECDD;container-type:inline-size;will-change:transform,clip-path;cursor:pointer}
+.hz-card{border-radius:1.6vw;overflow:hidden;color:#F4ECDD;container-type:inline-size;will-change:transform;cursor:pointer;contain:layout paint}
 @media (max-width:767px){ .hz-card{border-radius:4vw} }
 .hz-card .in{position:absolute;inset:0;display:grid;grid-template-columns:31cqw 1fr;gap:5cqw;padding:5cqw}
 .hz-cv{position:relative;border-radius:1.2cqw;padding:3.4cqw 3cqw;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1.4cqw 3.4cqw rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.08)}
@@ -814,7 +814,7 @@ body{letter-spacing:-.01em}
 .hz-k-mb .hz-cv{background:linear-gradient(165deg,#1F5C4A,#0E3A2F 65%,#0A2620);color:#EEDFBF}
 .hz-k-x{background:radial-gradient(120% 90% at 85% 0%,#2E3440 0,#1A1E26 60%,#111419 100%)}
 .hz-k-x .hz-cv{background:linear-gradient(165deg,#3A4150,#20252F 65%,#151920);color:#E8E3D8}
-.hz-code{white-space:pre;overflow:hidden;container-type:inline-size;pointer-events:none}
+.hz-code{white-space:pre;overflow:hidden;container-type:inline-size;pointer-events:none;contain:layout paint}
 .hz-code .h,.hz-code .m{position:absolute;top:2cqw;font-family:var(--f-mono);font-size:1.56cqw;line-height:1.42}
 .hz-code .h{left:1cqw;color:#8C8C8C}
 .hz-code .m{left:58%;color:#BDBDBD}
@@ -2871,7 +2871,7 @@ syncDirty = SYNC.kirli || (() => {});
     }
     olc(); rafT0 = performance.now();
   }
-  let W = 0, cw = 0, ch = 0, gap = 0, Lx = 0, dpr = 1, H = 0, PAD = 70, rowGap = 0;
+  let W = 0, cw = 0, ch = 0, gap = 0, Lx = 0, dpr = 1, H = 0, PAD = 70, rowGap = 0, RAD = '0px';
   function olc(){
     if (!items.length) return;
     W = stage.clientWidth; const r = items[0].c.getBoundingClientRect(); cw = r.width; ch = r.height;
@@ -2879,7 +2879,7 @@ syncDirty = SYNC.kirli || (() => {});
     gap = innerWidth < 768 ? innerWidth * .07 : innerWidth * .045; Lx = W / 2;
     H = mod === 'akis' ? ch + PAD * 2 + 40 : (rowGap = Math.max(54, ch * .18), PAD + items.length * (ch + rowGap));
     belt.style.height = H + 'px';
-    dpr = Math.min(2, devicePixelRatio || 1); cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    dpr = Math.min(1.25, devicePixelRatio || 1); cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); RAD = getComputedStyle(items[0].c).borderTopRightRadius; for (const it of items) it.lc = -1;
     const ak = mod === 'akis'; scan.hidden = !ak; badge.hidden = !ak;
     if (ak){ scan.style.left = Lx + 'px'; scan.style.top = (PAD + 40 - 14) + 'px'; scan.style.height = (ch + 40) + 'px'; badge.style.left = Lx + 'px'; badge.style.top = (PAD + 40 - 62) + 'px'; }
   }
@@ -2904,46 +2904,49 @@ syncDirty = SYNC.kirli || (() => {});
   function hash(a, b, c){ let h = (Math.imul(a, 374761393) + Math.imul(b, 668265263) + Math.imul(c, 2147483647)) | 0; h = Math.imul(h ^ (h >>> 13), 1274126177) | 0; return ((h ^ (h >>> 16)) >>> 0) / 4294967296; }
   const PAL = ['#1F2227', '#25282E', '#30343B', '#3D424B', '#4A4F58', '#5D626B', '#7A7F88'];
   let kiv = [];
+  const KOVA = PAL.map(() => []);
   function fx(it, line, t, bv){
     const x = it.x, y = it.y, cut = Math.max(0, Math.min(cw, line - x));
     if (cut <= 0 || x + cw <= line) return;
-    const hw = Math.min(150, x + cw - line);
-    if (hw > 0){ const gr = g.createLinearGradient(line, 0, line + 150, 0); gr.addColorStop(0, 'rgba(48,52,59,.22)'); gr.addColorStop(1, 'rgba(48,52,59,0)'); g.fillStyle = gr; g.fillRect(line, y, hw, ch); }
-    const R = .3 * cw, S = 3, rows = Math.ceil(ch / S), gx0 = Math.floor(cut / S), gx1 = Math.min(Math.ceil(cw / S), Math.ceil((cut + R) / S)), tk = Math.floor(t * 9);
+    const hw = Math.min(140, x + cw - line);
+    if (hw > 0){ const gr = g.createLinearGradient(line, 0, line + 140, 0); gr.addColorStop(0, 'rgba(48,52,59,.2)'); gr.addColorStop(1, 'rgba(48,52,59,0)'); g.fillStyle = gr; g.fillRect(line, y, hw, ch); }
+    const R = .22 * cw, S = 4, rows = Math.ceil(ch / S), gx0 = Math.floor(cut / S), gx1 = Math.min(Math.ceil(cw / S), Math.ceil((cut + R) / S)), tk = Math.floor(t * 8);
+    for (const k of KOVA) k.length = 0;
     for (let gx = gx0; gx < gx1; gx++){
       const sx = x + gx * S, d = sx - line; if (d < 0) continue;
       const p = Math.pow(Math.max(0, 1 - d / R), 1.7); if (p <= .002) continue;
-      for (let r = -5; r < rows + 5; r++){
-        const ic = r >= 0 && r < rows, pr = ic ? p * .92 : p * .16 * (1 - Math.min(5, r < 0 ? -r : r - rows + 1) / 5);
+      for (let r = -4; r < rows + 4; r++){
+        const ic = r >= 0 && r < rows, pr = ic ? p * .9 : p * .16 * (1 - Math.min(4, r < 0 ? -r : r - rows + 1) / 4);
         if (hash(gx, r, it.i) >= pr) continue;
-        if (!RM && hash(gx, r, tk + 97) < .22) continue;
-        const h2 = hash(r, gx, it.i + 31);
-        g.fillStyle = d < 10 ? PAL[Math.floor(h2 * 2)] : PAL[Math.floor(h2 * h2 * 7)];
-        const s = 1.1 + h2 * 1.7, jx = RM ? 0 : (hash(gx, r, tk + 7) - .5) * 1.6, jy = RM ? 0 : (hash(r, gx, tk + 3) - .5) * 1.6;
-        g.fillRect(sx + jx, y + r * S + jy, s, s);
+        if (!RM && hash(gx, r, tk + 97) < .2) continue;
+        const h2 = hash(r, gx, it.i + 31), ci = d < 10 ? Math.floor(h2 * 2) : Math.floor(h2 * h2 * 7);
+        const sz = 1.2 + h2 * 1.8, j = RM ? 0 : (h2 - .5) * 1.4;
+        KOVA[ci].push(sx + j, y + r * S - j, sz);
       }
     }
-    if (!RM) for (let q = 0; q < 3; q++) if (Math.random() < .7) kiv.push({x: line + Math.random() * 30, y: y - 10 + Math.random() * (ch + 20), vx: -30 + Math.random() * 70 + bv * .6, vy: (Math.random() - .5) * 50, s: .8 + Math.random() * 1.8, c: PAL[Math.floor(Math.random() * 7)], l: .3 + Math.random() * .8});
+    for (let c = 0; c < KOVA.length; c++){ const k = KOVA[c]; if (!k.length) continue; g.fillStyle = PAL[c]; g.beginPath(); for (let q = 0; q < k.length; q += 3) g.rect(k[q], k[q + 1], k[q + 2], k[q + 2]); g.fill(); }
+    if (!RM && mod === 'akis' && Math.random() < .8) kiv.push({x: line + Math.random() * 30, y: y - 10 + Math.random() * (ch + 20), vx: -30 + Math.random() * 70 + bv * .6, vy: (Math.random() - .5) * 50, s: .8 + Math.random() * 1.8, c: PAL[Math.floor(Math.random() * 7)], l: .3 + Math.random() * .8});
   }
   function uygula(it, line){
-    const cut = Math.max(0, Math.min(cw, line - it.x)), tr = `translate3d(${it.x}px,${it.y}px,0)`;
-    it.c.style.transform = tr; it.d.style.transform = tr;
-    if (cut > 0){ const rad = getComputedStyle(it.c).borderTopRightRadius;
-      it.c.style.clipPath = `inset(0 0 0 ${cut}px round 0 ${rad} ${rad} 0)`;
-      const m = `linear-gradient(90deg,transparent ${cut}px,#000 ${cut + 26}px)`; it.c.style.webkitMaskImage = m; it.c.style.maskImage = m;
-      it.d.style.clipPath = `inset(0 ${cw - cut}px 0 0)`; it.d.style.visibility = 'visible';
-    } else { it.c.style.clipPath = ''; it.c.style.webkitMaskImage = ''; it.c.style.maskImage = ''; it.d.style.visibility = 'hidden'; }
+    const cut = Math.max(0, Math.min(cw, line - it.x)), cr = Math.round(cut);
+    it.c.style.transform = it.d.style.transform = `translate3d(${it.x.toFixed(1)}px,${it.y}px,0)`;
+    if (cr !== it.lc){
+      if (cr > 0){ it.c.style.clipPath = `inset(0 0 0 ${cr}px round 0 ${RAD} ${RAD} 0)`; it.d.style.clipPath = `inset(0 ${cw - cr}px 0 0)`; if (!(it.lc > 0)) it.d.style.visibility = 'visible'; }
+      else { it.c.style.clipPath = ''; it.d.style.visibility = 'hidden'; }
+      it.lc = cr;
+    }
     return cut;
   }
-  let tPrev = 0;
+  let tPrev = 0, sonCiz = 0;
   function kare(now){
     requestAnimationFrame(kare);
     if (lib.hidden || !onScreen){ tPrev = now; return; }
     if (!cw) { olc(); if (!cw) return; }
     if (ilk){ ilk = false; off = Lx - .62 * cw - (cw + gap); }
     const dt = Math.min(.05, (now - (tPrev || now)) / 1000); tPrev = now; const t = now / 1000;
-    g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, cv.width, cv.height); g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const sil = () => { g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, cv.width, cv.height); g.setTransform(dpr, 0, 0, dpr, 0, 0); };
     if (mod === 'akis'){
+      sil();
       hover += ((hovering ? 1 : 0) - hover) * Math.min(1, dt * 4);
       if (!drag || !drag.moved){ const hd = auto() * (1 - .65 * hover); vel += (hd - vel) * (1 - Math.exp(-2.2 * dt)); off += vel * dt; }
       const span = cw + gap, per = span * items.length; let cr = -1, prog = 0;
@@ -2953,14 +2956,16 @@ syncDirty = SYNC.kirli || (() => {});
         shown += (hd - shown) * Math.min(1, dt * 14); bN.textContent = `${fmt(Math.round(shown))} / ${fmt(k.b.pages)}`; }
     } else {
       const x0 = (W - cw) / 2, e = RM ? 1 : Math.min(1, (now - rafT0) / 2400), ea = 1 - Math.pow(1 - e, 3);
+      if (e >= 1 && (RM || now - sonCiz < 125) && !kiv.length) return;
+      sonCiz = now; sil();
       for (const it of items){ it.x = x0; it.y = PAD + it.i * (ch + rowGap); const line = it.x + cw * it.k.oran * ea;
         uygula(it, line); fx(it, line, t, 0);
         it.m.style.left = line + 'px'; it.m.style.top = (it.y - 8) + 'px';
         it.m.textContent = `%${Math.round(it.k.oran * 100 * ea)} · s. ${it.k.b.first + Math.round((it.k.ok - 1) * ea)}`;
-        g.save(); g.shadowColor = 'rgba(17,17,17,.35)'; g.shadowBlur = 8; g.fillStyle = '#111'; g.fillRect(line - 1.5, it.y - 6, 3, ch + 12); g.restore(); }
+        g.fillStyle = 'rgba(17,17,17,.12)'; g.fillRect(line - 5, it.y - 6, 10, ch + 12); g.fillStyle = '#111'; g.fillRect(line - 1.5, it.y - 6, 3, ch + 12); }
     }
     for (const s of kiv){ s.l -= dt; s.x += s.vx * dt; s.y += s.vy * dt; if (s.l > 0){ g.globalAlpha = Math.min(1, s.l * 2.2); g.fillStyle = s.c; g.fillRect(s.x, s.y, s.s, s.s); } }
-    g.globalAlpha = 1; kiv = kiv.filter(s => s.l > 0);
+    g.globalAlpha = 1; kiv = kiv.filter(s => s.l > 0); if (kiv.length > 160) kiv.splice(0, kiv.length - 160);
   }
   function modSec(m){
     mod = m; stage.classList.toggle('raf', m === 'raf');

@@ -771,7 +771,6 @@ body{letter-spacing:-.01em}
 .hz-belt{position:relative;width:100%;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .hz-belt.drag{cursor:grabbing}
 .hz.raf .hz-belt{cursor:pointer}
-.hz-codes,.hz-cards{position:absolute;inset:0}
 .hz:not(.raf) .hz-codes{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 24vw);mask-image:linear-gradient(90deg,transparent 0,#000 24vw)}
 .hz-fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .hz-scan{position:absolute;width:0;pointer-events:none;z-index:3}
@@ -814,11 +813,29 @@ body{letter-spacing:-.01em}
 .hz-k-mb .hz-cv{background:linear-gradient(165deg,#1F5C4A,#0E3A2F 65%,#0A2620);color:#EEDFBF}
 .hz-k-x{background:radial-gradient(120% 90% at 85% 0%,#2E3440 0,#1A1E26 60%,#111419 100%)}
 .hz-k-x .hz-cv{background:linear-gradient(165deg,#3A4150,#20252F 65%,#151920);color:#E8E3D8}
-.hz-code{white-space:pre;overflow:hidden;container-type:inline-size;pointer-events:none;contain:layout paint}
-.hz-code .h,.hz-code .m{position:absolute;top:2cqw;font-family:var(--f-mono);font-size:1.56cqw;line-height:1.42}
-.hz-code .h{left:1cqw;color:#8C8C8C}
-.hz-code .m{left:58%;color:#BDBDBD}
-.hz-code .bt{color:#111;font-weight:500}
+.hz-codes,.hz-cards{position:absolute;inset:0}
+.hz-code{overflow:hidden;container-type:inline-size;pointer-events:none;contain:layout paint}
+.hz-def{position:absolute;left:2cqw;top:3cqw;width:56cqw;color:#111;font-family:var(--f-ui)}
+.hz-def .k{font:500 1.35cqw var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:#8A8A8A;margin-top:3cqw;display:flex;justify-content:space-between;gap:2cqw}
+.hz-def .k:first-child{margin-top:0}
+.hz-def .k em{font-style:normal;letter-spacing:.04em;text-transform:none}
+.hz-def .t{font:400 4.2cqw/1.08 "Source Serif 4",Georgia,serif;letter-spacing:-.02em;margin-top:1.2cqw;text-wrap:balance}
+.hz-def .a{font:400 1.8cqw/1.45 var(--f-ui);color:#555;margin-top:.8cqw}
+.hz-def .s{font:400 1.65cqw/1.45 var(--f-ui);color:#6E6E6E;margin-top:1.4cqw}
+.hz-def .s b{color:#111;font-weight:500}
+.hz-def .nt{font:italic 400 1.6cqw var(--f-ui);color:#8A8A8A;margin-top:1cqw}
+.hz-def ol{list-style:none;margin:1.2cqw 0 0;padding:0;border-top:1px solid #E6E6E6}
+.hz-def li{display:flex;justify-content:space-between;gap:2cqw;align-items:baseline;padding:.9cqw 0;border-bottom:1px solid #F0F0F0;font:400 1.75cqw/1.3 var(--f-ui)}
+.hz-def li i{font:400 1.45cqw var(--f-mono);font-style:normal;color:#9A9A9A}
+.hz-def li.ok span{color:#111}
+.hz-def li.ok span::before{content:"✓";color:#111;margin-right:1cqw;font-size:.9em}
+.hz-def li.nx span{color:#111;font-weight:600}
+.hz-def li.nx span::before{content:"→";margin-right:1cqw}
+.hz-def li.nx i::after{content:" · sıradaki";color:#111}
+.hz-def li.no span{color:#ABABAB}
+.hz-def li.no span::before{content:"";display:inline-block;width:1.6cqw}
+.hz-def li.more span{color:#ABABAB;font-style:italic}
+.hz-def li.more span::before{content:"";display:inline-block;width:1.6cqw}
 @media (prefers-reduced-motion: reduce){ .hz-belt{cursor:default} }
 
 /* ---- okuma ve hâşiye: ana sayfa ile uyumlu sade renkler ---- */
@@ -2841,18 +2858,18 @@ syncDirty = SYNC.kirli || (() => {});
       <div class="hz-st"><div><b>${fmt(b.ad)}</b><span>ad</span></div><div><b>${fmt(b.bag)}</b><span>bağlantı</span></div><div><b>${k.done.length}</b><span>bölüm işlendi</span></div></div></div></div>`;
   };
   const kod = k => {
-    const b = k.b, L = [];
-    L.push(`&lt;kitap id="${es(b.key)}"&gt;`, `  &lt;ad&gt;${es(b.title)}&lt;/ad&gt;`, `  &lt;yazar&gt;${es(b.author)}&lt;/yazar&gt;`);
-    if (b.tr) L.push(`  &lt;ceviri&gt;${es(b.tr)}&lt;/ceviri&gt;`);
-    if (b.pub) L.push(`  &lt;yayin&gt;${es(b.pub)}&lt;/yayin&gt;`);
-    L.push(`  &lt;islenen ilk="${b.first}" son="${b.last}" toplam="${b.pages}"/&gt;`);
-    if (b.ozetsiz) L.push(`  &lt;ozet/&gt;  <span class="bt">&lt;!-- müellifin şartı: özet yok --&gt;</span>`);
-    L.push('  &lt;bolumler&gt;');
-    for (const [s, t] of k.done.slice(-6)) L.push(`    &lt;b s="${s}"&gt;${es(String(t).length > 34 ? String(t).slice(0, 33) + '…' : t)}&lt;/b&gt;`);
-    if (k.next) L.push(`    <span class="bt">&lt;b s="${k.next[0]}" sonraki&gt;${es(String(k.next[1]).length > 34 ? String(k.next[1]).slice(0, 33) + '…' : k.next[1])}&lt;/b&gt;</span>`);
-    L.push('  &lt;/bolumler&gt;', `  &lt;fihrist ad="${b.ad}" bag="${b.bag}"/&gt;`, '&lt;/kitap&gt;');
-    const M = [`&lt;!-- işlenen: ${k.ok} sayfa --&gt;`, `&lt;!-- toplam: ${fmt(b.pages)} sayfa --&gt;`, `&lt;!-- suffe/kitap/${es(b.key)} --&gt;`];
-    return `<div class="h">${L.join('\n')}</div><div class="m">${M.join('\n')}</div>`;
+    const b = k.b, bl = (b.bolumler || []), last = b.last || 0;
+    const ni = bl.findIndex(x => x[0] > last), son = ni < 0 ? bl.length : ni;
+    const bas = Math.max(0, son - 5), bit = Math.min(bl.length, son + 3);
+    const kisa = t => { t = String(t); return t.length > 46 ? t.slice(0, 45) + '…' : t; };
+    const satir = (x, n) => `<li class="${n < son ? 'ok' : n === son ? 'nx' : 'no'}"><span>${es(kisa(x[1]))}</span><i>${x[0]}</i></li>`;
+    const lst = bl.slice(bas, bit).map((x, n) => satir(x, bas + n)).join('');
+    return `<div class="hz-def"><div class="k">Künye</div><div class="t">${es(b.title)}</div>
+      <div class="a">${es(b.author)}${b.tr ? ' · ' + es(b.tr) : ''}</div><div class="a">${es(b.pub || '')} · ${fmt(b.pages)} sayfa</div>
+      <div class="s"><b>s. ${b.first}–${last}</b> işlendi · %${Math.round(k.oran * 100)} · ${fmt(b.ad)} ad · ${fmt(b.bag)} bağlantı</div>
+      ${b.ozetsiz ? '<div class="nt">Müellifin şartı gereği özet verilmez.</div>' : ''}
+      <div class="k">İçindekiler <em>${k.done.length} / ${bl.length} bölüm</em></div>
+      <ol>${bas > 0 ? `<li class="ok more"><span>… önceki ${bas} bölüm</span><i></i></li>` : ''}${lst}${bit < bl.length ? `<li class="no more"><span>… ${bl.length - bit} bölüm daha</span><i></i></li>` : ''}</ol></div>`;
   };
 
   let mod = 'akis', items = [];

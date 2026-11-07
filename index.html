@@ -692,6 +692,7 @@ body{letter-spacing:-.005em}
   --map-land:#ECECEC;--map-border:#FFFFFF;--map-sea:#FAFAFA;
   --f-display:"Inter","Helvetica Neue",Arial,sans-serif;--f-ui:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
   --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05);--rff:"Inter",-apple-system,"Segoe UI",sans-serif}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{letter-spacing:-.01em}
 #lib{background:#FFFFFF;color:#111}
 #lib .wrap{max-width:none;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
@@ -2013,6 +2014,8 @@ function geometry(){
   const ph = Math.max(380, H - pad);
   let pw = landscape ? Math.floor((W - 2*pad) / 2) : Math.floor(W - 2*pad);
   pw = Math.min(pw, Math.floor(ph * .82));
+  window.__fsk = Math.max(.78, Math.min(1, pw / 500, ph / 820));
+  reader.style.setProperty('--rfs', (fs * window.__fsk).toFixed(2) + 'px');
   return {pw, ph};
 }
 function paginate(){
@@ -2137,7 +2140,7 @@ stage.addEventListener('touchend', e => { if (tx === null) return; const dx = e.
 
 // görünüm
 function applyLook(){
-  reader.dataset.rt = rt; reader.style.setProperty('--rfs', fs + 'px'); reader.style.setProperty('--rff', FONTS[ff]);
+  reader.dataset.rt = rt; reader.style.setProperty('--rfs', (fs * (window.__fsk || 1)).toFixed(2) + 'px'); reader.style.setProperty('--rff', FONTS[ff]);
   document.querySelectorAll('#aaMenu [data-f]').forEach(b => b.setAttribute('aria-pressed', b.dataset.f === ff));
   document.querySelectorAll('#aaMenu [data-t]').forEach(b => b.setAttribute('aria-pressed', b.dataset.t === rt));
   const ptOld = $('#panel').dataset.pt, ptEff = pt === 'oto' ? PT_AUTO[rt] : pt;

@@ -1120,15 +1120,17 @@ body{letter-spacing:-.01em}
 #lib .h7{min-height:520px}
 #lib .h7::before{width:min(600px,86vw)}
 #lib .hero h1{font:400 clamp(64px,10.5vw,176px)/.9 var(--f-disp);letter-spacing:0;color:var(--lacivert);text-align:center}
-#lib .hero h1 .hl{color:var(--lacivert);padding:.16em .1em .08em;margin:-.16em -.1em -.08em}
-#lib .hero h1 .hl2{color:#B5B5B5}
-#lib .hero h1 .et{position:absolute;right:.05em;bottom:100%;margin-bottom:1.5em;font:400 clamp(15px,1.5vw,24px)/1 var(--f-disp);letter-spacing:.01em;color:var(--altin);white-space:nowrap}
+#lib .hero h1.h8{width:100%;margin:0;line-height:0}
+#lib .hero h1.h8 canvas{display:block;width:100%;height:auto}
+#lib .hero h1.h8 .gz{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@keyframes h8Gel{from{opacity:0;transform:translateY(5%);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+#lib .h7.don h1.h8{animation:h8Gel 1.1s cubic-bezier(.16,1,.3,1) .05s both}
 #lib .sechead h2,#lib .mc-bas h2{font:400 clamp(44px,5vw,76px)/.92 var(--f-disp);letter-spacing:.005em;text-transform:uppercase;color:#111}
 #lib .feature h2{font-family:var(--f-disp);font-weight:400;letter-spacing:.005em;text-transform:uppercase;line-height:.98}
 #lib .mc-k1 h3{font:400 clamp(40px,4.6vw,68px)/.95 var(--f-disp);letter-spacing:.005em;text-transform:uppercase}
 .hz-ttl{font:400 38px/.96 var(--f-disp);letter-spacing:.01em;text-transform:uppercase;text-wrap:balance}
 .hz-def .t{font:400 26px/.98 var(--f-disp);letter-spacing:.01em;text-transform:uppercase}
-@media (max-width:767px){ #lib .h7{min-height:360px} .hz-ttl{font-size:34px} #lib .hero h1 .et{right:0} }
+@media (max-width:767px){ #lib .h7{min-height:360px} .hz-ttl{font-size:34px} }
 
 /* Mu'cem ve ana sayfa kartlarında tür renkleri kısık */
 #lib .mc,#lib .cats{--t-kisi:#5B6F9E;--t-yer:#5E8C78;--t-olay:#A8665A;--t-kavram:#A88A55;--t-eser:#7D6A92;--t-kurum:#6E737B}
@@ -1162,7 +1164,7 @@ body{letter-spacing:-.01em}
   </div></header>
   <main id="top">
     <section class="hero wrap">
-      <div class="h7" id="h7"><canvas class="h7-toz" id="h7Toz" aria-hidden="true"></canvas><h1><span class="et" aria-hidden="true">DARÜLFÜNUN SUFFESİ</span><span class="hl"><b>OKU. BAĞLA.</b></span><span class="hl hl2"><b>ŞERH ET.</b></span></h1></div>
+      <div class="h7" id="h7"><canvas class="h7-toz" id="h7Toz" aria-hidden="true"></canvas><h1 class="h8"><canvas id="h7Baslik" aria-hidden="true"></canvas><span class="gz">Oku. Bağla. Şerh et.</span></h1></div>
       <div class="f7">
         <div class="t"><small>Darülfünun okuma halkası</small><p class="lead">Kitaplar, içlerindeki insanlar, yerler ve olaylarla aynı rafta; birlikte okumak için.</p>
           <div class="facts"><span id="faces" hidden></span><b id="facesN"></b> ad, hizânedeki sayfalarda</div></div>
@@ -3400,7 +3402,9 @@ syncDirty = SYNC.kirli || (() => {});
       for (let i = 0; i < s.length; i++){ if (s[i] === ' ') continue; rg.setStart(node, i); rg.setEnd(node, i + 1); const r = rg.getBoundingClientRect(); if (!r.width) continue;
         c.fillText(s[i], r.left - OX, r.top - OY + (r.height - asc - desc) / 2 + asc); }
     };
-    const w = document.createTreeWalker(h1, NodeFilter.SHOW_TEXT); let n; while ((n = w.nextNode())) if (n.textContent.trim()) yaz(n);
+    const bc = h1.querySelector('canvas');
+    if (window.__h7Ciz && bc){ const tr = bc.getBoundingClientRect(); window.__h7Ciz(c, tr.left - OX, tr.top - OY); }
+    else { const w = document.createTreeWalker(h1, NodeFilter.SHOW_TEXT); let n; while ((n = w.nextNode())) if (n.textContent.trim()) yaz(n); }
     /* örnekle */
     const d = c.getImageData(0, 0, o.width, o.height).data, S = innerWidth < 768 ? 2 : 2, L = [];
     const maxD = Math.hypot(Math.max(cx0, o.width - cx0), Math.max(cy0, o.height - cy0));
@@ -3968,6 +3972,55 @@ syncDirty = SYNC.kirli || (() => {});
   if (git && git.k === BK.key){ localStorage.removeItem('mucem.git'); setTimeout(() => openReader(() => { if (reader.classList.contains('nopanel')) setPanel(true); openDetail(git.id); if (git.p && typeof go === 'function') setTimeout(() => go(+git.p), 400); }), 60); }
   const hm = location.hash.match(/^#mucem(?:\/(.+))?$/);
   if (hm) setTimeout(() => ac({n: hm[1] ? decodeURIComponent(hm[1]) : null}), 30);
+})();
+
+/* ===== karşılama başlığı: BAĞLA, içinde OKU, altında ŞERH ET ===== */
+(() => {
+  const cv = document.getElementById('h7Baslik'); if (!cv) return;
+  const LAC = '#1F3A78', SY = 1.42, AILE = '"Anton","Oswald","Arial Narrow",Impact,sans-serif';
+  let L = null, govde = null;
+  function govdeOlc(){ /* B harfinin dikey gövdesi: em cinsinden sol ve sağ kenar */
+    const c = document.createElement('canvas'); c.width = 300; c.height = 300; const g = c.getContext('2d', {willReadFrequently: true});
+    g.font = `400 200px ${AILE}`; g.fillStyle = '#000'; g.fillText('B', 50, 260);
+    const cap = g.measureText('B').actualBoundingBoxAscent || 145, d = g.getImageData(0, 0, 300, 300).data;
+    let sol = 1e9, sag = 1e9;
+    for (const f of [.27, .32, .68, .73]){ const y = Math.round(260 - cap * f); let x = 0; while (x < 300 && d[(y * 300 + x) * 4 + 3] < 128) x++; let r = x; while (r < 300 && d[(y * 300 + r) * 4 + 3] >= 128) r++; if (x < 300){ sol = Math.min(sol, x); sag = Math.min(sag, r); } }
+    if (sol > 299) { sol = 50 + 200 * .02; sag = 50 + 200 * .16; }
+    return {sol: (sol - 50) / 200, sag: (sag - 50) / 200};
+  }
+  function yerlestir(){
+    const W = cv.clientWidth || cv.parentElement.clientWidth; if (!W) return;
+    const g = cv.getContext('2d'); g.font = `400 100px ${AILE}`;
+    const m = g.measureText('BAĞLA'), w100 = m.width, cap100 = g.measureText('BALA').actualBoundingBoxAscent || 73, ust100 = Math.max(m.actualBoundingBoxAscent || 0, cap100 * 1.3);
+    const hedef = innerWidth < 768 ? W * .9 : Math.min(W * .54, 720), fs = hedef / w100 * 100;
+    const wSE = g.measureText('ŞERH ET').width, la = (g.measureText('BAĞLA').width - g.measureText('BAĞ').width) * fs / 100, fs3 = la / wSE * 100;
+    const capH = cap100 * fs / 100 * SY, ustH = ust100 * fs / 100 * SY, cap3 = cap100 * fs3 / 100, alt3 = fs3 * .28, bos = fs * .07;
+    const top = ustH + bos + cap3 + alt3, pad = Math.max(10, fs * .05), H = Math.ceil(top + pad * 2);
+    const x0 = (W - hedef) / 2, base = pad + ustH;
+    L = {W, H, fs, fs3, x0, base, capH, laX: x0 + g.measureText('BAĞ').width * fs / 100, base3: base + bos + cap3};
+    if (!govde) govde = govdeOlc();
+    const dp = Math.min(2, devicePixelRatio || 1); cv.width = Math.round(W * dp); cv.height = Math.round(H * dp); cv.style.height = H + 'px';
+    const c = cv.getContext('2d'); c.setTransform(dp, 0, 0, dp, 0, 0); c.clearRect(0, 0, W, H); ciz(c, 0, 0);
+  }
+  function ciz(c, dx, dy){
+    if (!L) return; c.save(); c.translate(dx, dy);
+    c.fillStyle = LAC; c.font = `400 ${L.fs}px ${AILE}`; c.textBaseline = 'alphabetic'; c.textAlign = 'left';
+    c.save(); c.translate(L.x0, L.base); c.scale(1, SY); c.fillText('BAĞLA', 0, 0); c.restore();
+    /* OKU: B'nin gövdesinde, aşağıdan yukarı */
+    const gw = (govde.sag - govde.sol) * L.fs, gx = L.x0 + (govde.sol + govde.sag) / 2 * L.fs, gy = L.base - L.capH / 2;
+    const f2 = gw * .84; c.font = `400 ${f2}px ${AILE}`; c.fillStyle = '#fff'; c.textAlign = 'center'; c.textBaseline = 'middle';
+    c.save(); c.translate(gx + f2 * .04, gy); c.rotate(-Math.PI / 2); try { c.letterSpacing = (f2 * .12) + 'px'; } catch {} c.fillText('OKU', 0, 0); c.restore();
+    /* ŞERH ET: LA'nın altında, aynı genişlikte */
+    c.font = `400 ${L.fs3}px ${AILE}`; c.fillStyle = '#111'; c.textAlign = 'left'; c.textBaseline = 'alphabetic'; try { c.letterSpacing = '0px'; } catch {}
+    c.fillText('ŞERH ET', L.laX, L.base3);
+    c.restore();
+  }
+  window.__h7Ciz = ciz;
+  const hazir = () => { govde = null; yerlestir(); };
+  if (document.fonts && document.fonts.load) document.fonts.load('400 100px Anton').then(hazir, hazir); else hazir();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(hazir);
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(yerlestir, 120); });
+  requestAnimationFrame(yerlestir);
 })();
 
 

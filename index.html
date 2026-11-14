@@ -3978,45 +3978,43 @@ syncDirty = SYNC.kirli || (() => {});
 (() => {
   const cv = document.getElementById('h7Baslik'); if (!cv) return;
   const LAC = '#1F3A78', SY = 1.42, AILE = '"Anton","Oswald","Arial Narrow",Impact,sans-serif';
-  let L = null, govde = null;
-  function govdeOlc(){ /* B harfinin dikey gövdesi: em cinsinden sol ve sağ kenar */
-    const c = document.createElement('canvas'); c.width = 300; c.height = 300; const g = c.getContext('2d', {willReadFrequently: true});
-    g.font = `400 200px ${AILE}`; g.fillStyle = '#000'; g.fillText('B', 50, 260);
-    const cap = g.measureText('B').actualBoundingBoxAscent || 145, d = g.getImageData(0, 0, 300, 300).data;
-    let sol = 1e9, sag = 1e9;
-    for (const f of [.27, .32, .68, .73]){ const y = Math.round(260 - cap * f); let x = 0; while (x < 300 && d[(y * 300 + x) * 4 + 3] < 128) x++; let r = x; while (r < 300 && d[(y * 300 + r) * 4 + 3] >= 128) r++; if (x < 300){ sol = Math.min(sol, x); sag = Math.min(sag, r); } }
-    if (sol > 299) { sol = 50 + 200 * .02; sag = 50 + 200 * .16; }
-    return {sol: (sol - 50) / 200, sag: (sag - 50) / 200};
+  let L = null;
+  const SIKI = .045;  /* harfler arası sıkıştırma, em */
+  function harfler(g, fs){ /* BAĞLA harflerinin x konumları, sıkıştırılmış */
+    g.font = `400 ${fs}px ${AILE}`; const xs = []; let x = 0;
+    const ch5 = [...'BAĞLA'], CIFT = {LA: .005};  /* L'nin ayağı A'ya değmesin */
+    ch5.forEach((ch, i) => { xs.push(x); const s = i < 4 ? (CIFT[ch + ch5[i + 1]] ?? SIKI) : SIKI; x += g.measureText(ch).width - s * fs; });
+    return {xs, w: x + SIKI * fs};
   }
   function yerlestir(){
     const W = cv.clientWidth || cv.parentElement.clientWidth; if (!W) return;
     const g = cv.getContext('2d'); g.font = `400 100px ${AILE}`;
-    const m = g.measureText('BAĞLA'), w100 = m.width, cap100 = g.measureText('BALA').actualBoundingBoxAscent || 73, ust100 = Math.max(m.actualBoundingBoxAscent || 0, cap100 * 1.3);
-    const hedef = innerWidth < 768 ? W * .9 : Math.min(W * .54, 720), fs = hedef / w100 * 100;
-    const wSE = g.measureText('ŞERH ET').width, la = (g.measureText('BAĞLA').width - g.measureText('BAĞ').width) * fs / 100, fs3 = la / wSE * 100;
-    const capH = cap100 * fs / 100 * SY, ustH = ust100 * fs / 100 * SY, cap3 = cap100 * fs3 / 100, alt3 = fs3 * .28, bos = fs * .07;
-    const top = ustH + bos + cap3 + alt3, pad = Math.max(10, fs * .05), H = Math.ceil(top + pad * 2);
-    const x0 = (W - hedef) / 2, base = pad + ustH;
-    L = {W, H, fs, fs3, x0, base, capH, laX: x0 + g.measureText('BAĞ').width * fs / 100, base3: base + bos + cap3};
-    if (!govde) govde = govdeOlc();
+    const cap100 = g.measureText('BALA').actualBoundingBoxAscent || 73, ust100 = Math.max(g.measureText('Ğ').actualBoundingBoxAscent || 0, cap100 * 1.3);
+    const h100 = harfler(g, 100), hedef = innerWidth < 768 ? W * .9 : Math.min(W * .5, 660), fs = hedef / h100.w * 100, H5 = harfler(g, fs);
+    g.font = `400 100px ${AILE}`;
+    const wOKU = g.measureText('OKU').width, wSE = g.measureText('ŞERH ET').width;
+    const ba = H5.xs[2] - SIKI * fs * .0, la = H5.w - H5.xs[3];
+    const fsO = ba * .9 / wOKU * 100, fs3 = la / wSE * 100;
+    const capH = cap100 * fs / 100 * SY, ustH = ust100 * fs / 100 * SY, capO = cap100 * fsO / 100, cap3 = cap100 * fs3 / 100, bos = fs * .07;
+    const ust = Math.max(ustH, capH + bos + capO), pad = Math.max(10, fs * .05);
+    const base = pad + ust, H = Math.ceil(base + bos + cap3 + fs3 * .28 + pad), x0 = (W - H5.w) / 2;
+    L = {W, H, fs, fsO, fs3, x0, base, xs: H5.xs, baseO: base - capH - bos, laX: x0 + H5.xs[3], base3: base + bos + cap3};
     const dp = Math.min(2, devicePixelRatio || 1); cv.width = Math.round(W * dp); cv.height = Math.round(H * dp); cv.style.height = H + 'px';
     const c = cv.getContext('2d'); c.setTransform(dp, 0, 0, dp, 0, 0); c.clearRect(0, 0, W, H); ciz(c, 0, 0);
   }
   function ciz(c, dx, dy){
-    if (!L) return; c.save(); c.translate(dx, dy);
-    c.fillStyle = LAC; c.font = `400 ${L.fs}px ${AILE}`; c.textBaseline = 'alphabetic'; c.textAlign = 'left';
-    c.save(); c.translate(L.x0, L.base); c.scale(1, SY); c.fillText('BAĞLA', 0, 0); c.restore();
-    /* OKU: B'nin gövdesinde, aşağıdan yukarı */
-    const gw = (govde.sag - govde.sol) * L.fs, gx = L.x0 + (govde.sol + govde.sag) / 2 * L.fs, gy = L.base - L.capH / 2;
-    const f2 = gw * .84; c.font = `400 ${f2}px ${AILE}`; c.fillStyle = '#fff'; c.textAlign = 'center'; c.textBaseline = 'middle';
-    c.save(); c.translate(gx + f2 * .04, gy); c.rotate(-Math.PI / 2); try { c.letterSpacing = (f2 * .12) + 'px'; } catch {} c.fillText('OKU', 0, 0); c.restore();
-    /* ŞERH ET: LA'nın altında, aynı genişlikte */
-    c.font = `400 ${L.fs3}px ${AILE}`; c.fillStyle = '#111'; c.textAlign = 'left'; c.textBaseline = 'alphabetic'; try { c.letterSpacing = '0px'; } catch {}
-    c.fillText('ŞERH ET', L.laX, L.base3);
+    if (!L) return; c.save(); c.translate(dx, dy); c.textBaseline = 'alphabetic'; c.textAlign = 'left';
+    /* BAĞLA: lacivert, uzun ve ince, sıkışık */
+    c.fillStyle = LAC; c.font = `400 ${L.fs}px ${AILE}`;
+    c.save(); c.translate(L.x0, L.base); c.scale(1, SY); [...'BAĞLA'].forEach((ch, i) => c.fillText(ch, L.xs[i], 0)); c.restore();
+    /* OKU: BA'nın üstünde; ŞERH ET: LA'nın altında */
+    c.fillStyle = '#111';
+    c.font = `400 ${L.fsO}px ${AILE}`; c.fillText('OKU', L.x0, L.baseO);
+    c.font = `400 ${L.fs3}px ${AILE}`; c.fillText('ŞERH ET', L.laX, L.base3);
     c.restore();
   }
   window.__h7Ciz = ciz;
-  const hazir = () => { govde = null; yerlestir(); };
+  const hazir = () => yerlestir();
   if (document.fonts && document.fonts.load) document.fonts.load('400 100px Anton').then(hazir, hazir); else hazir();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(hazir);
   let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(yerlestir, 120); });

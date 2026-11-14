@@ -960,7 +960,7 @@ body{letter-spacing:-.01em}
 
 
 /* ===== karşılama: toz ===== */
-#lib .h7{cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+#lib .h7{-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 .h7-toz{position:absolute;left:0;right:0;top:-90px;bottom:-90px;width:100%;height:calc(100% + 180px);pointer-events:none;z-index:2}
 #lib .hero h1 .hl{display:block;overflow:hidden;color:#111;padding:.06em .15em .16em;margin:-.06em -.15em -.16em}
 #lib .hero h1 .hl2{color:#B5B5B5}
@@ -3377,85 +3377,77 @@ syncDirty = SYNC.kirli || (() => {});
 (() => { try { if (localStorage.getItem('suffe.gece') === '1'){ localStorage.removeItem('suffe.gece'); const t = document.querySelector('#aaMenu [data-t="beyaz"]'); if (t) t.click(); } } catch {} })();
 
 
-/* ===== karşılama: toz gibi dağılma ===== */
+/* ===== karşılama: fare yaklaşınca toz gibi dağılır, mıknatıs gibi geri toplanır ===== */
 (() => {
   const h7 = document.getElementById('h7'), cv = document.getElementById('h7Toz'); if (!h7 || !cv) return;
-  const h1 = h7.querySelector('h1'), g = cv.getContext('2d'), RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let P = null, t0 = 0, calis = false, dp = 1, CW = 0, CH = 0, OX = 0, OY = 0, faz = 0;
-  const DAG = 2.3; let OFS = null, MAXD = 1, CX0 = 0, CY0 = 0;
-  function ornekle(cx0, cy0){
-    const hr = h7.getBoundingClientRect(), cr = cv.getBoundingClientRect();
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches; if (RM) return;
+  const g = cv.getContext('2d');
+  let N = 0, HX, HY, X, Y, VX, VY, GR = [], RENK = [], dp = 1, CW = 0, CH = 0, OX = 0, OY = 0, aktif = false, mx = -1e5, my = -1e5, sakin = 0, son = 0, R = 110;
+  const baslik = () => document.getElementById('h7Baslik');
+  function ornekle(){
+    const bc = baslik(); if (!bc || !window.__h7Ciz) return false;
+    const cr = cv.getBoundingClientRect(), br = bc.getBoundingClientRect();
     dp = Math.min(2, devicePixelRatio || 1); CW = cr.width; CH = cr.height; OX = cr.left; OY = cr.top;
     cv.width = Math.round(CW * dp); cv.height = Math.round(CH * dp);
-    const o = document.createElement('canvas'); o.width = Math.ceil(CW); o.height = Math.ceil(CH); const c = o.getContext('2d', {willReadFrequently: true});
-    /* daire */
-    const R = Math.min(600, innerWidth * .86) / 2, mx = hr.left + hr.width / 2 - OX, my = hr.top + hr.height / 2 - OY;
-    const gr = c.createRadialGradient(mx, my, 0, mx, my, R * 1.0001);
-    gr.addColorStop(0, '#ECECEC'); gr.addColorStop(.45, 'rgba(245,245,245,.6)'); gr.addColorStop(.7, 'rgba(255,255,255,0)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
-    c.fillStyle = gr; c.beginPath(); c.arc(mx, my, R, 0, 6.2832); c.fill();
-    c.strokeStyle = '#E8E8E8'; c.lineWidth = 1; c.beginPath(); c.arc(mx, my, R - .5, 0, 6.2832); c.stroke();
-    /* yazı: her harf DOM'daki yerine */
-    const yaz = (node) => {
-      const cs = getComputedStyle(node.parentElement); c.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`; c.fillStyle = cs.color; c.textBaseline = 'alphabetic';
-      const m = c.measureText('Hg'), asc = m.fontBoundingBoxAscent || parseFloat(cs.fontSize) * .9, desc = m.fontBoundingBoxDescent || parseFloat(cs.fontSize) * .25;
-      const rg = document.createRange(), s = node.textContent;
-      for (let i = 0; i < s.length; i++){ if (s[i] === ' ') continue; rg.setStart(node, i); rg.setEnd(node, i + 1); const r = rg.getBoundingClientRect(); if (!r.width) continue;
-        c.fillText(s[i], r.left - OX, r.top - OY + (r.height - asc - desc) / 2 + asc); }
-    };
-    const bc = h1.querySelector('canvas');
-    if (window.__h7Ciz && bc){ const tr = bc.getBoundingClientRect(); window.__h7Ciz(c, tr.left - OX, tr.top - OY); }
-    else { const w = document.createTreeWalker(h1, NodeFilter.SHOW_TEXT); let n; while ((n = w.nextNode())) if (n.textContent.trim()) yaz(n); }
-    /* örnekle */
-    const d = c.getImageData(0, 0, o.width, o.height).data, S = innerWidth < 768 ? 2 : 2, L = [];
-    const maxD = Math.hypot(Math.max(cx0, o.width - cx0), Math.max(cy0, o.height - cy0));
-    let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-    RENK = []; const RI = new Map(); const renkNo = (r, g2, b) => { const key = [r, g2, b].map(v => Math.min(255, Math.round(v / 20) * 20)).join(','); if (!RI.has(key)){ RI.set(key, RENK.length); RENK.push(key); } return RI.get(key); };
+    const o = document.createElement('canvas'); o.width = Math.ceil(CW); o.height = Math.ceil(CH);
+    const c = o.getContext('2d', {willReadFrequently: true}); window.__h7Ciz(c, br.left - OX, br.top - OY);
+    const d = c.getImageData(0, 0, o.width, o.height).data, S = 2, ix = new Map(), hx = [], hy = [], ci = [];
+    RENK = [];
     for (let y = 0; y < o.height; y += S) for (let x = 0; x < o.width; x += S){
-      const k = (y * o.width + x) * 4, a = d[k + 3] / 255; if (a < .08) continue;
-      const lum = (d[k] + d[k + 1] + d[k + 2]) / 3, koyu = lum < 215;
-      if (!koyu && rnd() > a * .55) continue; /* daire seyrek */
-      const dist = Math.hypot(x - cx0, y - cy0), ang = Math.atan2(y - cy0, x - cx0);
-      const hz = 18 + rnd() * 70;
-      L.push({x, y, dist, c: renkNo(d[k], d[k + 1], d[k + 2]), a: koyu ? Math.min(1, a * 1.1) : Math.min(1, a * 1.6),
-        d: dist / maxD * .75 + rnd() * .22, vx: Math.cos(ang) * hz + 40 + rnd() * 90, vy: Math.sin(ang) * hz - 20 - rnd() * 50,
-        ax: 30 + rnd() * 60, ay: -30 - rnd() * 40, sw: 6 + rnd() * 16, f: 1.5 + rnd() * 3, ph: rnd() * 6.28, s: koyu ? .9 + rnd() * .9 : .8 + rnd() * .7, life: 1.1 + rnd() * .8});
+      const k = (y * o.width + x) * 4; if (d[k + 3] < 110) continue;
+      const key = [d[k], d[k + 1], d[k + 2]].map(v => Math.min(255, Math.round(v / 24) * 24)).join(',');
+      if (!ix.has(key)){ ix.set(key, RENK.length); RENK.push('rgb(' + key + ')'); }
+      hx.push(x); hy.push(y); ci.push(ix.get(key));
     }
-    KOVA = Array.from({length: RENK.length * 6}, () => []);
-    OFS = o; MAXD = maxD; CX0 = cx0; CY0 = cy0;
-    return L;
+    /* renge göre sırala: çizimde her renk bir kez seçilsin */
+    const sira = ci.map((v, i) => i).sort((a, b) => ci[a] - ci[b]);
+    N = sira.length; HX = new Float32Array(N); HY = new Float32Array(N); X = new Float32Array(N); Y = new Float32Array(N); VX = new Float32Array(N); VY = new Float32Array(N);
+    GR = []; let onc = -1;
+    sira.forEach((s, i) => { HX[i] = X[i] = hx[s]; HY[i] = Y[i] = hy[s]; if (ci[s] !== onc){ GR.push([i, RENK[ci[s]]]); onc = ci[s]; } });
+    GR.push([N, null]);
+    R = innerWidth < 768 ? 64 : 104;
+    return N > 0;
   }
-  let RENK = [], KOVA = [];
-  function ciz(P, f, rK){ /* f: parçacık zamanı (sn); rK: bu yarıçapın dışı henüz dağılmadı, keskin çizilir */
-    g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, cv.width, cv.height); g.setTransform(dp, 0, 0, dp, 0, 0);
-    if (OFS && rK < MAXD * 1.5){ g.save(); g.beginPath(); g.rect(0, 0, CW, CH); g.arc(CX0, CY0, Math.max(0, rK), 0, 6.2832, true); g.clip('evenodd'); g.drawImage(OFS, 0, 0); g.restore(); }
-    for (const k of KOVA) k.length = 0;
-    for (const p of P){
-      if (p.dist > rK) continue;
-      const tau = f(p); if (tau <= 0){ KOVA[p.c * 6 + 5].push(p.x, p.y, p.s); continue; }
-      const u = tau / p.life; if (u >= 1) continue;
-      const x = p.x + p.vx * tau + .5 * p.ax * tau * tau + Math.sin(tau * p.f + p.ph) * p.sw * tau;
-      const y = p.y + p.vy * tau + .5 * p.ay * tau * tau + Math.cos(tau * p.f * .8 + p.ph) * p.sw * .5 * tau;
-      const al = (1 - u) * (1 - u), q = Math.min(5, Math.floor(al * 6));
-      KOVA[p.c * 6 + q].push(x, y, p.s * (1 - u * .4));
-    }
-    for (let c = 0; c < RENK.length; c++) for (let q = 0; q < 6; q++){ const k = KOVA[c * 6 + q]; if (!k.length) continue;
-      g.fillStyle = `rgba(${RENK[c]},${q === 5 ? 1 : (q + .5) / 6})`; g.beginPath(); for (let i = 0; i < k.length; i += 3) g.rect(k[i], k[i + 1], k[i + 2], k[i + 2]); g.fill(); }
-  }
-  function kare(now){
-    if (!calis) return;
-    const t = (now - t0) / 1000;
-    if (t < DAG + .6){ ciz(P, p => Math.max(0, t - p.d), t / .75 * MAXD); }
-    else if (t < DAG + .95){ g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, cv.width, cv.height); }
-    else { h7.classList.remove('toz'); h7.classList.add('don'); calis = false; P = null; OFS = null; setTimeout(() => h7.classList.remove('don'), 1700); return; }
+  function baslat(){
+    if (aktif) return;
+    if (!N && !ornekle()) return;
+    aktif = true; sakin = 0; son = performance.now();
+    const bc = baslik(); if (bc) bc.style.opacity = 0;
     requestAnimationFrame(kare);
   }
-  h7.addEventListener('click', e => {
-    if (calis || h7.classList.contains('don')) return;
-    if (RM) return;
-    const cr = cv.getBoundingClientRect();
-    P = ornekle(e.clientX - cr.left, e.clientY - cr.top); if (!P.length) return;
-    calis = true; h7.classList.add('toz'); t0 = performance.now(); requestAnimationFrame(kare);
-  });
+  function bitir(){
+    aktif = false; for (let i = 0; i < N; i++){ X[i] = HX[i]; Y[i] = HY[i]; VX[i] = VY[i] = 0; }
+    g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, cv.width, cv.height);
+    const bc = baslik(); if (bc) bc.style.opacity = 1;
+  }
+  function kare(now){
+    if (!aktif) return;
+    const f = Math.min(2.5, (now - son) / 16.67); son = now;
+    const R2 = R * R, sur = Math.pow(.88, f), yay = .045 * f;
+    let enCok = 0;
+    for (let i = 0; i < N; i++){
+      let ax = (HX[i] - X[i]) * yay, ay = (HY[i] - Y[i]) * yay;
+      const dx = X[i] - mx, dy = Y[i] - my, d2 = dx * dx + dy * dy;
+      if (d2 < R2){ const dd = Math.sqrt(d2) || 1, k = (1 - dd / R), p = k * k * 7 * f / dd;
+        ax += dx * p - dy * p * .35; ay += dy * p + dx * p * .35;               /* itme + manyetik dönüş */
+        ax += (Math.random() - .5) * k * 1.2 * f; ay += (Math.random() - .5) * k * 1.2 * f; }
+      VX[i] = VX[i] * sur + ax; VY[i] = VY[i] * sur + ay; X[i] += VX[i] * f; Y[i] += VY[i] * f;
+      const ux = X[i] - HX[i], uy = Y[i] - HY[i], u = ux * ux + uy * uy; if (u > enCok) enCok = u;
+    }
+    g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, cv.width, cv.height); g.setTransform(dp, 0, 0, dp, 0, 0);
+    for (let k = 0; k < GR.length - 1; k++){ g.fillStyle = GR[k][1]; for (let i = GR[k][0]; i < GR[k + 1][0]; i++) g.fillRect(X[i], Y[i], 2.3, 2.3); }
+    const uzak = mx < -1e4;
+    if (uzak && enCok < .09){ if (++sakin > 8){ bitir(); return; } } else sakin = 0;
+    requestAnimationFrame(kare);
+  }
+  const konum = e => { const cr = cv.getBoundingClientRect(); mx = e.clientX - cr.left; my = e.clientY - cr.top; };
+  h7.addEventListener('pointermove', e => { konum(e); baslat(); });
+  h7.addEventListener('pointerdown', e => { konum(e); baslat(); });
+  h7.addEventListener('pointerleave', () => { mx = my = -1e5; });
+  h7.addEventListener('pointerup', e => { if (e.pointerType !== 'mouse'){ mx = my = -1e5; } });
+  h7.addEventListener('pointercancel', () => { mx = my = -1e5; });
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (aktif) bitir(); N = 0; }, 150); });
+  window.__h7Yenile = () => { if (aktif) bitir(); N = 0; };
 })();
 
 /* ===== Hizâne bandı ===== */
@@ -3996,11 +3988,12 @@ syncDirty = SYNC.kirli || (() => {});
     const ba = H5.xs[2] - SIKI * fs * .0, la = H5.w - H5.xs[3];
     const fsO = ba * .9 / wOKU * 100, fs3 = la / wSE * 100;
     const capH = cap100 * fs / 100 * SY, ustH = ust100 * fs / 100 * SY, capO = cap100 * fsO / 100, cap3 = cap100 * fs3 / 100, bos = fs * .07;
-    const ust = Math.max(ustH, capH + bos + capO), pad = Math.max(10, fs * .05);
-    const base = pad + ust, H = Math.ceil(base + bos + cap3 + fs3 * .28 + pad), x0 = (W - H5.w) / 2;
-    L = {W, H, fs, fsO, fs3, x0, base, xs: H5.xs, baseO: base - capH - bos, laX: x0 + H5.xs[3], base3: base + bos + cap3};
+    const ustO = capO * .82, ust = Math.max(ustH, capH + ustO), pad = Math.max(10, fs * .05);  /* OKU ve ŞERH ET kelimeye biraz biner */
+    const base = pad + ust, H = Math.ceil(base + cap3 * .82 + fs3 * .28 + pad), x0 = (W - H5.w) / 2;
+    L = {W, H, fs, fsO, fs3, x0, base, xs: H5.xs, baseO: base - capH + capO * .18, laX: x0 + H5.xs[3], base3: base + cap3 * .82};
     const dp = Math.min(2, devicePixelRatio || 1); cv.width = Math.round(W * dp); cv.height = Math.round(H * dp); cv.style.height = H + 'px';
     const c = cv.getContext('2d'); c.setTransform(dp, 0, 0, dp, 0, 0); c.clearRect(0, 0, W, H); ciz(c, 0, 0);
+    if (window.__h7Yenile) window.__h7Yenile();
   }
   function ciz(c, dx, dy){
     if (!L) return; c.save(); c.translate(dx, dy); c.textBaseline = 'alphabetic'; c.textAlign = 'left';
@@ -4008,7 +4001,7 @@ syncDirty = SYNC.kirli || (() => {});
     c.fillStyle = LAC; c.font = `400 ${L.fs}px ${AILE}`;
     c.save(); c.translate(L.x0, L.base); c.scale(1, SY); [...'BAĞLA'].forEach((ch, i) => c.fillText(ch, L.xs[i], 0)); c.restore();
     /* OKU: BA'nın üstünde; ŞERH ET: LA'nın altında */
-    c.fillStyle = '#111';
+    c.fillStyle = '#A3A3A3';
     c.font = `400 ${L.fsO}px ${AILE}`; c.fillText('OKU', L.x0, L.baseO);
     c.font = `400 ${L.fs3}px ${AILE}`; c.fillText('ŞERH ET', L.laX, L.base3);
     c.restore();

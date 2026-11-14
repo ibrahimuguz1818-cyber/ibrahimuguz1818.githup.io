@@ -917,7 +917,6 @@ body{letter-spacing:-.01em}
 .hz-cv.m{padding:0;overflow:hidden;container-type:inline-size;background:none!important}
 .hz-cv.m::before{display:none}
 .hz-cv.m .cvi{--d:100cqw;border-radius:inherit}
-.hz-k-ad{background:radial-gradient(120% 90% at 85% 0%,#2E4470 0,#17233D 60%,#0F1729 100%)}
 @media (prefers-reduced-motion: reduce){ .h3-shelf{cursor:default} }
 
 </style>
@@ -3102,7 +3101,7 @@ syncDirty = SYNC.kirli || (() => {});
 
   const kart = (k, i) => {
     const b = k.b, c = b.cover || {}, long = (String(c.ct || '').match(/<br>/g) || []).length >= 2;
-    return `<div class="in">${window.__suffeKapak && __suffeKapak(b.key) ? `<div class="hz-cv m">${__suffeKapak(b.key)}</div>` : `<div class="hz-cv${long ? ' long' : ''}"><div><div class="ct">${c.ct || es(b.title)}</div><div class="cs">${c.cs || ''}</div><hr></div><div class="ca">${c.ca || es(b.author)}</div></div>`}
+    return `<div class="in"><div class="hz-cv${long ? ' long' : ''}"><div><div class="ct">${c.ct || es(b.title)}</div><div class="cs">${c.cs || ''}</div><hr></div><div class="ca">${c.ca || es(b.author)}</div></div>
       <div class="hz-info"><div class="hz-kick">Hizâne · ${String(i % KIT.length + 1).padStart(2, '0')}${b.key === cur ? ' · okunuyor' : ''}</div><div class="hz-ttl">${es(b.title)}</div>
       <div class="hz-by">${es(b.author)}${b.tr ? ' · ' + es(b.tr) : ''}</div><div class="hz-pub">${es(b.pub || '')} · ${b.pages} s.</div>
       <div class="hz-bar"><i style="width:${(k.oran * 100).toFixed(1)}%"></i></div>

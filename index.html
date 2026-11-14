@@ -974,6 +974,116 @@ body{letter-spacing:-.01em}
 #lib .h7.don .hl b{animation:h7Mask 1.05s cubic-bezier(.16,1,.3,1) .12s both}
 #lib .h7.don .hl2 b{animation:h7Mask 1.05s cubic-bezier(.16,1,.3,1) .32s both,h7Em 1.2s ease .42s both}
 @media (prefers-reduced-motion: reduce){ #lib .h7.don::before,#lib .h7.don .hl b{animation:none} }
+
+/* ===== Mu'cem ===== */
+#lib.mc-acik main#top{display:none}
+#lib .mc{padding-bottom:60px;min-height:70vh}
+#lib .mc-bas{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:28px}
+#lib .mc-bas h2{font:500 44px var(--f-ui);letter-spacing:-.035em;margin:0;color:#111}
+#lib .mc-bas span{display:block;margin-top:6px;font:400 14px var(--f-ui);color:#6E6E6E}
+#lib .mc-ara{display:flex;align-items:center;gap:10px;border:1px solid #E4E4E4;border-radius:999px;padding:0 18px;height:46px;min-width:min(420px,100%);color:#9A9A9A;background:#fff}
+#lib .mc-ara:focus-within{border-color:#111;color:#111}
+#lib .mc-ara input{border:0;outline:0;flex:1;min-width:0;font:400 15px var(--f-ui);color:#111;background:none}
+#lib .mc-fl{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding-top:20px}
+#lib .mc-fl button{font:500 13.5px var(--f-ui);border:1px solid #E4E4E4;background:#fff;color:#333;border-radius:999px;padding:9px 15px;cursor:pointer;display:inline-flex;gap:7px;align-items:center}
+#lib .mc-fl button i{font:400 11.5px var(--f-mono);font-style:normal;color:#9A9A9A}
+#lib .mc-fl button .d{width:7px;height:7px;border-radius:50%;background:var(--c)}
+#lib .mc-fl button:hover{border-color:#111}
+#lib .mc-fl button[aria-pressed="true"]{background:#111;border-color:#111;color:#fff}#lib .mc-fl button[aria-pressed="true"] i{color:#BBB}
+#lib .mc-fl .sep{width:1px;height:22px;background:#E4E4E4;margin:0 4px}
+#lib .mc-fl select{font:500 13.5px var(--f-ui);border:1px solid #E4E4E4;border-radius:999px;padding:9px 12px;background:#fff;color:#333;margin-left:auto}
+#lib .mc-not{margin-top:14px;font:400 13px/1.5 var(--f-ui);color:#6E6E6E}
+#lib .mc-govde{display:grid;grid-template-columns:minmax(300px,400px) 1fr;gap:28px;padding-top:22px;align-items:start}
+#lib .mc-liste{display:flex;flex-direction:column;border-top:1px solid #EDEDED;max-height:calc(100vh - 120px);overflow:auto;position:sticky;top:96px;scrollbar-width:thin}
+#lib .mc-sat{display:grid;grid-template-columns:10px 1fr auto;gap:4px 12px;align-items:center;text-align:left;background:none;border:0;border-bottom:1px solid #EDEDED;padding:13px 10px 13px 4px;cursor:pointer;color:#111;width:100%}
+#lib .mc-sat:hover{background:#F7F7F7}
+#lib .mc-sat[aria-current="true"]{background:#F1F1F1}
+#lib .mc-sat .d{width:8px;height:8px;border-radius:50%;background:var(--c)}
+#lib .mc-sat b{font:500 15px var(--f-ui);letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#lib .mc-sat small{grid-column:2;font:400 12px var(--f-ui);color:#8A8A8A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#lib .mc-sat .kb{grid-row:1 / span 2;grid-column:3;display:flex;gap:3px}
+#lib .kod{font:500 10px var(--f-mono);letter-spacing:.06em;border-radius:5px;padding:3px 5px;background:#EFEFEF;color:#555}
+#lib .mc-sat .kb .kod.on{background:#111;color:#fff}
+#lib .mc-daha{margin:14px auto;font:500 13px var(--f-ui);border:1px solid #E4E4E4;background:#fff;border-radius:999px;padding:9px 16px;cursor:pointer}
+#lib .mc-bos{padding:40px 6px;font:400 14px/1.5 var(--f-ui);color:#6E6E6E}
+#lib .mc-kart{min-width:0}
+#lib .mc-geri{display:none}
+#lib .mc-k1{background:#F4F4F4;border-radius:22px;padding:28px 30px}
+#lib .mc-chip{display:inline-flex;align-items:center;gap:8px;font:500 12px var(--f-ui);letter-spacing:.06em;text-transform:uppercase;color:#555}
+#lib .mc-chip i{width:8px;height:8px;border-radius:50%;background:var(--c)}
+#lib .mc-k1 h3{margin:12px 0 0;font:500 clamp(30px,3.4vw,44px)/1.05 var(--f-ui);letter-spacing:-.035em;color:#111}
+#lib .mc-yil{margin-top:8px;font:400 14px var(--f-mono);color:#555}
+#lib .mc-diger{margin-top:8px;font:400 13px var(--f-ui);color:#8A8A8A}
+#lib .mc-temel{margin-top:18px;padding-top:16px;border-top:1px solid #E2E2E2}
+#lib .mc-temel p{margin:6px 0 0;font:400 17px/1.55 "Source Serif 4",Georgia,serif;color:#222;max-width:68ch}
+#lib .mc-et{font:500 11px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#8A8A8A;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#lib .mc-et button{font:500 11px var(--f-ui);letter-spacing:0;text-transform:none;border:1px solid #DADADA;background:#fff;border-radius:99px;padding:4px 10px;cursor:pointer;color:#333}
+#lib .mc-sayi{display:flex;gap:28px;margin-top:18px;flex-wrap:wrap}
+#lib .mc-sayi div b{display:block;font:400 30px var(--f-ui);letter-spacing:-.03em}
+#lib .mc-sayi div span{font:400 12.5px var(--f-ui);color:#6E6E6E}
+#lib .mc-bolum{margin-top:30px}
+#lib .mc-bolum > h4{margin:0 0 12px;font:500 22px var(--f-ui);letter-spacing:-.02em;color:#111;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+#lib .mc-bolum > h4 small{font:400 13px var(--f-ui);color:#8A8A8A;letter-spacing:0}
+#lib .mc-kit{border:1px solid #E6E6E6;border-radius:18px;padding:20px 22px;margin-bottom:12px}
+#lib .mc-kit-bas{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+#lib .mc-kit-bas .kod{background:#111;color:#fff}
+#lib .mc-kit-bas b{font:500 16px var(--f-ui);letter-spacing:-.01em}
+#lib .mc-kit-bas span{font:400 13px var(--f-ui);color:#8A8A8A}
+#lib .mc-kit-bas .pill{margin-left:auto;padding:7px 14px;font-size:13px}
+#lib .mc-kit .td{margin:12px 0 0;font:400 15.5px/1.55 "Source Serif 4",Georgia,serif;color:#222}
+#lib .mc-yer{margin-top:12px;border-top:1px solid #EFEFEF}
+#lib .mc-yer button{display:grid;grid-template-columns:56px 1fr;gap:10px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid #F2F2F2;padding:9px 0;cursor:pointer;color:#333;font:400 13.5px/1.45 var(--f-ui)}
+#lib .mc-yer button:hover{color:#111}
+#lib .mc-yer button i{font:500 12px var(--f-mono);font-style:normal;color:#111}
+#lib .mc-yer .tum{display:block;grid-template-columns:none;color:#6E6E6E;font-size:12.5px}
+#lib .mc-bag{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+#lib .mc-bag button{font:400 12.5px var(--f-ui);border:0;background:#F1F1F1;color:#222;border-radius:99px;padding:6px 11px;cursor:pointer}
+#lib .mc-bag button:hover{background:#E6E6E6}
+#lib .mc-bag button em{font-style:normal;color:#8A8A8A}
+#lib .mc-bag button.ort{background:#111;color:#fff}#lib .mc-bag button.ort em{color:#AAA}
+#lib .mc-isnad{margin-top:14px;padding:12px 14px;background:#FAFAF8;border-radius:12px;font:400 13px/1.5 var(--f-ui);color:#444}
+#lib .mc-isnad .et{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;font:500 10.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:#8A8A8A;margin-bottom:4px}
+#lib .mc-isnad button{font:500 11.5px var(--f-ui);letter-spacing:0;text-transform:none;border:1px solid #DADADA;background:#fff;border-radius:99px;padding:4px 10px;cursor:pointer}
+#lib .mc-isnad p{margin:4px 0 0}
+#lib .mc-tablo{width:100%;border-collapse:collapse;font:400 13.5px/1.5 var(--f-ui)}
+#lib .mc-tablo th,#lib .mc-tablo td{border-bottom:1px solid #EDEDED;padding:10px 12px 10px 0;text-align:left;vertical-align:top}
+#lib .mc-tablo th{font:500 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:#8A8A8A;white-space:nowrap}
+#lib .mc-tablo td.e{font:500 12px var(--f-ui);color:#6E6E6E;white-space:nowrap;width:1%}
+#lib .mc-tablo-w{overflow-x:auto}
+#lib .mc-ek{border-top:1px solid #EDEDED;padding:12px 0}
+#lib .mc-ek p{margin:0;font:400 15px/1.55 "Source Serif 4",Georgia,serif;color:#222;white-space:pre-wrap}
+#lib .mc-ek small{display:block;margin-top:6px;font:400 12px var(--f-ui);color:#8A8A8A}
+#lib .mc-ek small button{border:0;background:none;color:#8A8A8A;text-decoration:underline;cursor:pointer;font:inherit}
+#lib .mc-form{display:grid;gap:8px;margin-top:10px}
+#lib .mc-form textarea,#lib .mc-form input{font:400 14px/1.5 var(--f-ui);border:1px solid #DADADA;border-radius:12px;padding:10px 12px;background:#fff;color:#111;width:100%}
+#lib .mc-form textarea{min-height:84px;resize:vertical}
+#lib .mc-form .sat{display:grid;grid-template-columns:1fr 120px auto;gap:8px}
+#lib .mc-yon{margin-top:30px;padding:16px 18px;border:1px dashed #D0D0D0;border-radius:16px}
+#lib .mc-yon .mc-et{margin-bottom:8px}
+#lib .mc-yon .sec{display:flex;flex-direction:column;max-height:220px;overflow:auto;margin-top:8px}
+#lib .mc-yon .sec button{text-align:left;border:0;border-bottom:1px solid #EFEFEF;background:none;padding:8px 2px;cursor:pointer;font:400 13.5px var(--f-ui)}
+#lib .mc-yon .sec button:hover{background:#F7F7F7}
+#lib .mc-yon .dugmeler{display:flex;gap:8px;flex-wrap:wrap}
+#lib .mc-yon .dugmeler button,#lib .mc-yon .tanim button{font:500 12.5px var(--f-ui);border:1px solid #DADADA;background:#fff;border-radius:99px;padding:7px 12px;cursor:pointer}
+#lib .mc-yon .tanim{display:grid;gap:8px;margin-top:10px}
+#lib .mc-yon textarea{font:400 14px/1.5 var(--f-ui);border:1px solid #DADADA;border-radius:12px;padding:10px 12px;min-height:90px}
+#lib .mc-ipucu{font:400 12.5px/1.5 var(--f-ui);color:#8A8A8A;margin-top:8px}
+#lib .mc-bilgi{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111;color:#fff;font:500 13px var(--f-ui);padding:10px 16px;border-radius:99px;z-index:90;opacity:0;transition:opacity .2s;pointer-events:none}
+#lib .mc-bilgi.on{opacity:1}
+#detail .mcgit{display:block;margin:14px 0 4px;font:500 13px var(--f-ui);border:1px solid #DADADA;background:#fff;color:#111;border-radius:99px;padding:8px 14px;cursor:pointer}
+#detail .mcgit:hover{border-color:#111}
+#lib .sechead #mcAcBtn{align-self:flex-end}
+@media (max-width:900px){
+  #lib .mc-govde{grid-template-columns:1fr}
+  #lib .mc-liste{position:static;max-height:none}
+  #lib .mc.kartta .mc-liste,#lib .mc.kartta .mc-fl,#lib .mc.kartta .mc-bas,#lib .mc.kartta .mc-not{display:none}
+  #lib .mc:not(.kartta) .mc-kart{display:none}
+  #lib .mc-geri{display:inline-flex;margin:16px 0 14px;font:500 14px var(--f-ui);border:1px solid #E4E4E4;background:#fff;border-radius:99px;padding:9px 15px;cursor:pointer}
+  #lib .mc-k1{padding:22px 20px}
+  #lib .mc-fl select{margin-left:0}
+  #lib .mc-form .sat{grid-template-columns:1fr 90px}
+  #lib .mc-form .sat button{grid-column:1 / -1}
+}
 </style>
 </head>
 <body>
@@ -984,10 +1094,10 @@ body{letter-spacing:-.01em}
     <a class="logo" href="#kutuphane" aria-label="Darülfünun Suffe"><span class="wm">DARÜLFÜNUN</span><span class="sep" aria-hidden="true"></span><span class="ar" lang="ar" dir="rtl">الصُّفَّة</span></a>
     <nav class="links" aria-label="Bölümler">
       <button class="on" data-go="top"><i aria-hidden="true"></i>Suffe</button>
-      <span class="grp"><button data-go="raf">Hizâne</button><button data-go="adlar">Fihrist</button><button data-go="oku">Kıraat</button></span>
+      <span class="grp"><button data-go="raf">Hizâne</button><button data-go="mucem">Mu'cem</button><button data-go="oku">Kıraat</button></span>
     </nav>
     <div class="tools">
-      <button class="ib" id="lSearch" aria-label="Fihristte ara"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="ib" id="lSearch" aria-label="Mu'cemde ara"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
     </div>
   </div></header>
   <main id="top">
@@ -1014,7 +1124,7 @@ body{letter-spacing:-.01em}
     <div class="hzrow wrap"><span id="shelfN"></span><span>Yeni kitap için PDF'ini sohbete gönder; hazırlanıp bu rafa eklenir.</span></div>
     <section class="shelf" id="shelf" hidden></section>
 
-    <div class="sechead wrap" id="adlar"><div><h2>Fihrist</h2><span id="adlarSub">dokunursan fihristte açılır</span></div></div>
+    <div class="sechead wrap" id="adlar"><div><h2>Mu'cem</h2><span id="adlarSub">Kitaplar arası sözlük · dokununca açılır</span></div><button class="pill" id="mcAcBtn">Mu'cemi aç</button></div>
     <section class="cats wrap" id="cats"></section>
     <section class="feature" id="feature">
       <div class="txt">
@@ -1027,6 +1137,18 @@ body{letter-spacing:-.01em}
     </section>
     <footer class="wrap"><b>Darülfünun Suffesi</b> · Kitap sayfaları yalnız halka üyelerine açıktır ve cihazında saklanır; vurgular, notlar ve hâşiyeler halkayla anında paylaşılır. Açıklamalar bu çalışma için yazıldı; kesikli çizgili bağlantılar kitapta geçmeyen genel bilgilerdir.</footer>
   </main>
+  <section class="mc" id="mucem" hidden aria-label="Mu'cem">
+    <div class="mc-bas wrap">
+      <div><h2>Mu'cem</h2><span id="mcSub">Kitaplar arası sözlük</span></div>
+      <label class="mc-ara"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="mcQ" placeholder="Kişi, yer, olay, kavram ara" autocomplete="off" aria-label="Mu'cemde ara"></label>
+    </div>
+    <div class="mc-fl wrap" id="mcFl"></div>
+    <div class="mc-not wrap" id="mcNot" hidden></div>
+    <div class="mc-govde wrap">
+      <div class="mc-liste" id="mcListe" role="list"></div>
+      <article class="mc-kart" id="mcKart" aria-live="polite"></article>
+    </div>
+  </section>
 </div>
 
 <!-- ===================== OKUMA ===================== -->
@@ -1264,6 +1386,7 @@ window.BULUT = (() => {
     if (error) throw error;
     if (eski && eski.dosya) B.sb.storage.from('kitaplar').remove([eski.dosya]).catch(() => {});
     await paketYaz(p.key, {surum, paket: p});
+    try { const mi = mucemCikar(p, surum); await mucemYolla(mi); await paketYaz('mucem:' + p.key, {surum, mi}); } catch (e){ console.warn('mucem dizini', e); }
     durum(`“${p.meta.title}” yüklendi (sürüm ${surum}). Grup üyeleri uygulamayı açınca yeni hali gelir.`);
     return {key: p.key, surum};
   }
@@ -1327,6 +1450,53 @@ window.BULUT = (() => {
     if (ekran) ekran.hidden = true;
     window.__START();
   }
+  // ---------- 6) Mu'cem: kitaplar arası fihrist ----------
+  // Her kitap için küçük bir dizin (adlar, geçtikleri sayfalar, bağlantılar) ayrıca saklanır;
+  // böylece Mu'cem, kitapların tamamını indirmeden bütün kitaplardaki adları birlikte gösterir.
+  function mucemCikar(p, surum){
+    const d = p.d || {}, k = d.kitap || {}, m = {};
+    Object.entries(d.sayfalar || {}).forEach(([sf, o]) => (o.v || []).forEach(e => (m[e[0]] = m[e[0]] || []).push([+sf, e[1] || ''])));
+    Object.values(m).forEach(a => a.sort((x, y) => x[0] - y[0]));
+    return {tur: 'suffe-mucem', key: p.key, surum: surum || 0,
+      kitap: {ad: p.meta.title, alt: k.altbaslik || '', yazar: p.meta.author || k.yazar || '', cev: k.cevirmen || '', yay: k.yayinevi || '', yil: k.yil || '', sayfa: p.meta.pages || k.sayfa || 0, ilk: p.meta.first, son: p.meta.last},
+      v: d.varliklar || [], r: d.iliskiler || [], m, b: p.meta.bolumler || []};
+  }
+  async function mucemYolla(mi){
+    const blob = new Blob([JSON.stringify(mi)], {type: 'application/json'});
+    const {error} = await B.sb.storage.from('kitaplar').upload(mi.key + '/mucem.json', blob, {contentType: 'application/json', upsert: true});
+    if (error) throw error;
+  }
+  async function mucemIndir(yol){
+    const {data, error} = await B.sb.storage.from('kitaplar').download(yol);
+    if (error) throw error;
+    return JSON.parse(await data.text());
+  }
+  B.mucemGetir = async function(){
+    const out = [], eksik = [];
+    for (const row of B.katalog){
+      const ck = 'mucem:' + row.key, c = await paketOku(ck);
+      if (c && c.surum === row.surum && c.mi){ out.push(c.mi); continue; }
+      let mi = null;
+      const kp = await paketOku(row.key);
+      if (kp && kp.paket && kp.surum === row.surum){ mi = mucemCikar(kp.paket, row.surum); if (B.yonetici() && !B.cevrimdisi) mucemYolla(mi).catch(e => console.warn('mucem yolla', e)); }
+      else if (!B.cevrimdisi){ try { const j = await mucemIndir(row.key + '/mucem.json'); if (j && j.tur === 'suffe-mucem') mi = j; } catch {} }
+      if (mi){ out.push(mi); if (mi.surum === row.surum) await paketYaz(ck, {surum: row.surum, mi}); }
+      else if (c && c.mi) out.push(c.mi);
+      else eksik.push(row.key);
+    }
+    return {kitaplar: out, eksik};
+  };
+  // yöneticinin birleştir / ayır / temel tanım kararları: herkese açık tek dosya
+  B.mucemEsle = async function(){
+    let e = LSG('suffe.mucemEsle', null);
+    if (!B.cevrimdisi){ try { const j = await mucemIndir('_mucem/esle.json'); if (j && j.tur === 'suffe-esle'){ e = j; LSS('suffe.mucemEsle', e); } } catch {} }
+    return e || {tur: 'suffe-esle', birlestir: [], ayir: [], tanim: {}};
+  };
+  B.mucemEsleKaydet = async function(e){
+    e.tur = 'suffe-esle'; e.guncellendi = new Date().toISOString(); LSS('suffe.mucemEsle', e);
+    const {error} = await B.sb.storage.from('kitaplar').upload('_mucem/esle.json', new Blob([JSON.stringify(e)], {type: 'application/json'}), {contentType: 'application/json', upsert: true});
+    if (error) throw error;
+  };
   B.basla = basla;
   B.cikis = async () => { try { await B.sb.auth.signOut(); } catch {} localStorage.removeItem('suffe.ben'); location.reload(); };
   B.paketOku = paketOku;
@@ -1675,6 +1845,7 @@ function openDetail(id, push = true){
     <p class="ddesc">${esc(e.d)}</p>`;
   if (e.alt && e.alt.length) html += `<div class="dyear">Diğer adları: ${e.alt.map(esc).join(', ')}</div>`;
   herePages.forEach(p => { const x = PAGES[p].v.find(x => x[0] === id); html += `<div class="here"><span class="eyebrow-s">s. ${p}'de</span><br>${esc(x[1])}</div>`; });
+  html += `<button class="mcgit" data-mc="${BK.key}:${id}">Mu'cem'de aç: bütün kitaplarda →</button>`;
   html += '<div id="ekBox"></div>';
   html += `<div class="sec"><h4>Geçtiği sayfalar · ${e.sayfalar.length}</h4><div class="pages">${e.sayfalar.map(p => `<button data-go="${p}" class="${visible.includes(p) ? 'on' : ''}">${p}</button>`).join('') || '<span class="dyear">İşlenen sayfalarda doğrudan geçmiyor.</span>'}</div></div>`;
   if (e.bag.length){
@@ -2711,6 +2882,7 @@ const SYNC = (() => {
       (vk || []).forEach(h => { if (mine(h)) out.push({id: h.id, kitap: b.key, tur: 'vurgu', o: h}); });
       (LSG(b.prefix + 'fihrist', []) || []).forEach(u => { if (mine(u)) out.push({id: u.id, kitap: b.key, tur: 'fihrist', o: u}); });
     });
+    (LSG('_mucem.fihrist', []) || []).forEach(u => { if (mine(u)) out.push({id: u.id, kitap: '_mucem', tur: 'fihrist', o: u}); });
     (await EK.everything()).forEach(r => { if (mine(r)) out.push({id: r.id, kitap: r.book, tur: 'hasiye', o: r}); });
     return out;
   }
@@ -2836,6 +3008,7 @@ const SYNC = (() => {
         if (r.kitap === BK.key) tazele.hasiye = true;
       }
     }
+    if (rows.some(r => r.kitap === '_mucem')) dispatchEvent(new Event('mucem-ek'));
     // ekranı tazele
     if (tazele.vurgu){ $('#cntHl').textContent = HL.filter(mine).length || ''; if (typeof WIDX !== 'undefined' && WIDX.size) applyMarks(); refreshNoteViews(); }
     if (tazele.hasiye) await EK.reload();
@@ -3450,6 +3623,289 @@ syncDirty = SYNC.kirli || (() => {});
   const hf = document.getElementById('heroFih'); if (hf) hf.onclick = () => document.getElementById('adlar').scrollIntoView({behavior: 'smooth'});
   let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(olc, 120); });
   modSec('akis'); requestAnimationFrame(kare);
+})();
+
+
+/* ===== Mu'cem: kitaplar arası sözlük ===== */
+(() => {
+  const BU = window.BULUT, kok = document.getElementById('mucem'), libEl = document.getElementById('lib'); if (!kok || !BU) return;
+  const $m = s => kok.querySelector(s), es = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+  const LSG = (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch { return d; } };
+  const LSS = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
+  const fmt = n => Number(n).toLocaleString('tr-TR');
+  const TUR = {kisi: ['Kişi', 'Kişiler'], yer: ['Yer', 'Yerler'], olay: ['Olay', 'Olaylar'], kavram: ['Kavram', 'Kavramlar'], kurum: ['Kurum', 'Kurumlar'], eser: ['Eser', 'Eserler']};
+  const GRP = {kisi: 'k', eser: 'e', yer: 'yk', kurum: 'yk', olay: 'ok', kavram: 'ok'};
+  const renk = t => `var(--t-${t})`;
+  const norm = s => { s = String(s || '').replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase().replace(/ı/g, 'i').normalize('NFKD').replace(/[̀-ͯ]/g, '');
+    s = s.replace(/\(.*?\)/g, '').replace(/['’]/g, ' ').replace(/^(hz|hazreti)\.?\s+/, '').replace(/[^a-z0-9 ]/g, ' '); return s.split(/\s+/).filter(Boolean).join(' '); };
+  const yillar = y => (String(y || '').match(/\d{3,4}/g) || []);
+  const ilkYil = y => { const m = String(y || '').match(/\d{3,4}/); if (!m) return null; return /M[ÖO]/.test(String(y).slice(0, m.index + 1)) ? -m[0] : +m[0]; };
+  const kodOf = ad => { const w = String(ad).split(/\s+/).filter(x => !/^(ve|ile|bir|the|of|and)$/i.test(x)); return ((w[0] || '?')[0] + ((w[1] || w[0] || '?')[w[1] ? 0 : 1] || '')).toLocaleUpperCase('tr'); };
+
+  let K = [], KB = {}, N = new Map(), G = [], GN = new Map(), ESLE = null, hazir = null, eksik = [];
+  let suz = {t: '', q: '', ortak: false, sira: 'ortak'}, secili = null, goster = 80;
+
+  /* ---- veri: dizinleri al, adları kitaplar arası birleştir ---- */
+  function kur(){
+    N = new Map();
+    K.forEach(mi => {
+      const rel = {};
+      (mi.r || []).forEach(r => { (rel[r[0]] = rel[r[0]] || []).push([r[1], r[2], r[3]]); (rel[r[1]] = rel[r[1]] || []).push([r[0], r[2], r[3]]); });
+      (mi.v || []).forEach(x => N.set(mi.key + ':' + x.id, {n: mi.key + ':' + x.id, k: mi.key, x, m: (mi.m || {})[x.id] || [], rel: rel[x.id] || []}));
+    });
+    const par = new Map(), kit = new Map();
+    for (const n of N.keys()){ par.set(n, n); kit.set(n, new Set([N.get(n).k])); }
+    const bul = a => { while (par.get(a) !== a){ par.set(a, par.get(par.get(a))); a = par.get(a); } return a; };
+    const birles = (a, b, zorla) => { const ra = bul(a), rb = bul(b); if (ra === rb) return; const ka = kit.get(ra), kb = kit.get(rb);
+      if (!zorla) for (const k of kb) if (ka.has(k)) return; par.set(rb, ra); kb.forEach(k => ka.add(k)); };
+    const uyum = (x, y) => { if (GRP[x.t] !== GRP[y.t]) return false; const a = ilkYil(x.y), b = ilkYil(y.y); return a == null || b == null || Math.abs(a - b) <= 3; };
+    const tam = new Map(), alt = new Map(), ekle = (m, k, v) => { if (!k) return; if (!m.has(k)) m.set(k, []); m.get(k).push(v); };
+    for (const [n, o] of N){ ekle(tam, norm(o.x.ad), n); (o.x.alt || []).forEach(a => ekle(alt, norm(a), n)); }
+    for (const [nm, ns] of tam){
+      for (let i = 1; i < ns.length; i++) if (N.get(ns[0]).k !== N.get(ns[i]).k && uyum(N.get(ns[0]).x, N.get(ns[i]).x)) birles(ns[0], ns[i]);
+      for (const a of ns) for (const b of (alt.get(nm) || [])) if (N.get(a).k !== N.get(b).k && uyum(N.get(a).x, N.get(b).x)) birles(a, b);
+    }
+    for (const [nm, ns] of alt){ const hep = [...new Set(ns.concat(tam.get(nm) || []))];
+      for (let i = 0; i < hep.length; i++) for (let j = i + 1; j < hep.length; j++){ const x = N.get(hep[i]), y = N.get(hep[j]);
+        const yx = yillar(x.x.y).join('-'); if (x.k !== y.k && GRP[x.x.t] === GRP[y.x.t] && yx && yx === yillar(y.x.y).join('-')) birles(hep[i], hep[j]); } }
+    const son = new Map();
+    for (const [n, o] of N){ const t = norm(o.x.ad).split(' '), yy = yillar(o.x.y); if (t[0] && yy.length >= 2) ekle(son, t[t.length - 1] + '|' + yy.join('-') + '|' + GRP[o.x.t], n); }
+    for (const ns of son.values()) for (let i = 1; i < ns.length; i++) if (N.get(ns[0]).k !== N.get(ns[i]).k) birles(ns[0], ns[i]);
+    (ESLE.birlestir || []).forEach(([a, b]) => { if (N.has(a) && N.has(b)) birles(a, b, true); });
+    const ayri = new Set(ESLE.ayir || []);
+    const gr = new Map();
+    for (const n of N.keys()){ const r = ayri.has(n) ? n : bul(n); const key = ayri.has(n) ? n : (ayri.has(r) ? '§' + r : r); if (!gr.has(key)) gr.set(key, []); gr.get(key).push(n); }
+    const sira = Object.fromEntries(K.map((mi, i) => [mi.key, i]));
+    G = []; GN = new Map();
+    for (const ns of gr.values()){
+      ns.sort((a, b) => sira[N.get(a).k] - sira[N.get(b).k] || (a < b ? -1 : 1));
+      const os = ns.map(n => N.get(n));
+      const ad = os.map(o => o.x.ad).sort((a, b) => b.length - a.length)[0];
+      const yil = os.map(o => o.x.y || '').sort((a, b) => yillar(b).length - yillar(a).length || b.length - a.length)[0];
+      const tc = {}; os.forEach(o => tc[o.x.t] = (tc[o.x.t] || 0) + o.m.length + 1); const t = Object.keys(tc).sort((a, b) => tc[b] - tc[a])[0];
+      const adlar = new Set(); os.forEach(o => { adlar.add(o.x.ad); (o.x.alt || []).forEach(a => adlar.add(a)); }); adlar.delete(ad);
+      const sayfa = os.reduce((s, o) => s + new Set(o.m.map(x => x[0])).size, 0);
+      const g = {id: ns.slice().sort()[0], ns, os, ad, y: yil, t, alt: [...adlar], kit: [...new Set(os.map(o => o.k))], sayfa,
+        ara: norm([ad, ...adlar].join(' '))};
+      G.push(g); ns.forEach(n => GN.set(n, g));
+    }
+  }
+  const temel = g => {
+    for (const n of g.ns) if (ESLE.tanim && ESLE.tanim[n]) return {d: ESLE.tanim[n], kaynak: 'yönetici', n};
+    const o = g.os.slice().sort((a, b) => (b.x.d || '').length - (a.x.d || '').length)[0];
+    return {d: o.x.d || '', kaynak: KB[o.k] ? KB[o.k].kitap.ad : o.k, n: g.ns[0]};
+  };
+
+  async function yukle(){
+    if (hazir) return hazir;
+    hazir = (async () => {
+      ESLE = await BU.mucemEsle();
+      const r = await BU.mucemGetir(); K = r.kitaplar; eksik = r.eksik;
+      const sira = Object.fromEntries(BOOKS.map((b, i) => [b.key, i])); K.sort((a, b) => (sira[a.key] ?? 99) - (sira[b.key] ?? 99));
+      KB = Object.fromEntries(K.map(mi => [mi.key, mi]));
+      const kods = {}; K.forEach(mi => { let c = kodOf(mi.kitap.ad); while (Object.values(kods).includes(c)) c = c[0] + String.fromCharCode(c.charCodeAt(1) + 1); kods[mi.key] = c; }); K.forEach(mi => mi.kod = kods[mi.key]);
+      kur(); return true;
+    })();
+    return hazir;
+  }
+  async function yeniden(){ kur(); liste(); if (secili) kart(GN.get(secili.ns[0]) || G.find(g => g.ns.some(n => secili.ns.includes(n)))); cats(); }
+
+  /* ---- liste ---- */
+  function suzgecCiz(){
+    const say = t => G.filter(g => (!t || g.t === t) && (!suz.ortak || g.kit.length > 1)).length;
+    $m('#mcFl').innerHTML = `<button data-t="" aria-pressed="${!suz.t}">Tümü <i>${fmt(say(''))}</i></button>` +
+      Object.keys(TUR).map(t => `<button data-t="${t}" aria-pressed="${suz.t === t}" style="--c:${renk(t)}"><span class="d"></span>${TUR[t][1]} <i>${fmt(say(t))}</i></button>`).join('') +
+      `<span class="sep"></span><button data-o="1" aria-pressed="${suz.ortak}">Birden çok kitapta <i>${fmt(G.filter(g => g.kit.length > 1 && (!suz.t || g.t === suz.t)).length)}</i></button>` +
+      `<select id="mcSira" aria-label="Sıralama"><option value="ortak">Önce ortak adlar</option><option value="cok">En çok geçen</option><option value="az">A–Z</option></select>`;
+    $m('#mcSira').value = suz.sira;
+  }
+  function suzulmus(){
+    const q = norm(suz.q);
+    let L = G.filter(g => (!suz.t || g.t === suz.t) && (!suz.ortak || g.kit.length > 1) && (!q || g.ara.includes(q)));
+    const tr = (a, b) => a.ad.localeCompare(b.ad, 'tr');
+    if (suz.sira === 'az') L.sort(tr);
+    else if (suz.sira === 'cok') L.sort((a, b) => b.sayfa - a.sayfa || tr(a, b));
+    else L.sort((a, b) => b.kit.length - a.kit.length || b.sayfa - a.sayfa || tr(a, b));
+    if (q){ const puan = g => { const n = norm(g.ad); return n === q ? 3 : (' ' + g.ara + ' ').includes(' ' + q + ' ') ? 2 : n.startsWith(q) ? 1 : 0; };
+      L.sort((a, b) => puan(b) - puan(a) || b.kit.length - a.kit.length || b.sayfa - a.sayfa); }
+    return L;
+  }
+  function liste(){
+    suzgecCiz();
+    const L = suzulmus(), el = $m('#mcListe');
+    $m('#mcSub').textContent = `Kitaplar arası sözlük · ${fmt(G.length)} ad · ${K.length} kitap · ${fmt(G.filter(g => g.kit.length > 1).length)} ad birden çok kitapta`;
+    if (!L.length){ el.innerHTML = `<div class="mc-bos">Bu aramada ad bulunamadı.</div>`; return; }
+    el.innerHTML = L.slice(0, goster).map(g => `<button class="mc-sat" role="listitem" data-g="${es(g.id)}" style="--c:${renk(g.t)}" aria-current="${secili && secili.id === g.id}"><span class="d"></span><b>${es(g.ad)}</b>
+      <span class="kb">${K.map(mi => g.kit.includes(mi.key) ? `<span class="kod on" title="${es(mi.kitap.ad)}">${mi.kod}</span>` : '').join('')}</span>
+      <small>${TUR[g.t][0]}${g.y ? ' · ' + es(g.y) : ''} · ${g.sayfa} sayfa</small></button>`).join('') +
+      (L.length > goster ? `<button class="mc-daha" id="mcDaha">${fmt(L.length - goster)} ad daha göster</button>` : '');
+  }
+
+  /* ---- kaynak gösterme (İSNAD) ---- */
+  const aralik = ps => { ps = [...new Set(ps)].sort((a, b) => a - b); const o = []; for (let i = 0; i < ps.length; i++){ let j = i; while (j + 1 < ps.length && ps[j + 1] === ps[j] + 1) j++; o.push(j > i ? ps[i] + '-' + ps[j] : '' + ps[i]); i = j; } return o.join(', '); };
+  function isnad(mi, ps){
+    const k = mi.kitap, cev = k.cev && !/terc[üu]me/i.test(k.cev) ? k.cev : '', cilt = /cilt/i.test(k.alt) ? k.alt : '', alt = !cilt && k.alt ? ': ' + k.alt : '';
+    const dip = `${k.yazar}, ${k.ad}${alt}${cilt ? ', ' + cilt : ''}${cev ? ', çev. ' + cev : ''} (${k.yay}${k.yil ? ', ' + k.yil : ''}), ${aralik(ps)}.`;
+    const ad = String(k.yazar).trim().split(/\s+/), soy = ad.pop();
+    const kay = `${soy}, ${ad.join(' ')}. ${k.ad}${alt}${cilt ? '. ' + cilt : ''}.${cev ? ' çev. ' + cev + '.' : ''} ${k.yay}${k.yil ? ', ' + k.yil : ''}.`;
+    return {dip, kay};
+  }
+
+  /* ---- kart ---- */
+  function ekler(g){ return (LSG('_mucem.fihrist', []) || []).filter(e => e.ref && e.ref.some(n => g.ns.includes(n))).sort((a, b) => (a.t || 0) - (b.t || 0)); }
+  function kart(g){
+    if (!g) return; secili = g;
+    kok.classList.add('kartta');
+    kok.querySelectorAll('.mc-sat').forEach(b => b.setAttribute('aria-current', b.dataset.g === g.id));
+    const tm = temel(g), cok = g.kit.length > 1;
+    let h = `<button class="mc-geri" id="mcGeri">← Liste</button>
+      <div class="mc-k1"><span class="mc-chip" style="--c:${renk(g.t)}"><i></i>${TUR[g.t][0]}${cok ? ` · ${g.kit.length} kitapta` : ''}</span>
+      <h3>${es(g.ad)}</h3>${g.y ? `<div class="mc-yil">${es(g.y)}</div>` : ''}${g.alt.length ? `<div class="mc-diger">Diğer adları: ${g.alt.map(es).join(', ')}</div>` : ''}
+      <div class="mc-temel"><div class="mc-et">Temel tanım <span>· kaynak: ${es(tm.kaynak)}</span></div><p>${es(tm.d)}</p></div>
+      <div class="mc-sayi"><div><b>${g.kit.length}</b><span>kitap</span></div><div><b>${g.sayfa}</b><span>sayfada geçiyor</span></div><div><b>${new Set(g.os.flatMap(o => o.rel.map(r => (GN.get(o.k + ':' + r[0]) || {}).id))).size}</b><span>bağlantılı ad</span></div></div></div>`;
+    // kitaplarda
+    const bagG = o => { const m = new Map(); o.rel.forEach(r => { const og = GN.get(o.k + ':' + r[0]); if (og && og !== g && !m.has(og.id)) m.set(og.id, {g: og, l: r[1]}); }); return m; };
+    const BG = g.os.map(bagG), ortak = new Set();
+    if (cok){ const say = {}; BG.forEach(m => m.forEach((v, id) => say[id] = (say[id] || 0) + 1)); Object.keys(say).forEach(id => { if (say[id] > 1) ortak.add(id); }); }
+    h += `<section class="mc-bolum"><h4>Kitaplarda <small>her kitabın bu ad hakkında söyledikleri</small></h4>`;
+    g.os.forEach((o, i) => {
+      const mi = KB[o.k], ps = [...new Set(o.m.map(x => x[0]))], is = isnad(mi, ps.length ? ps : []);
+      const yer = o.m.filter(x => x[1]);
+      h += `<div class="mc-kit"><div class="mc-kit-bas"><span class="kod">${mi.kod}</span><b>${es(mi.kitap.ad)}</b><span>${es(mi.kitap.yazar)} · ${ps.length} sayfada</span><button class="pill" data-ac="${es(o.n)}">Kitapta aç →</button></div>
+        ${o.x.d ? `<p class="td">${es(o.x.d)}</p>` : ''}
+        ${yer.length ? `<div class="mc-yer">${yer.slice(0, 4).map(x => `<button data-ac="${es(o.n)}" data-p="${x[0]}"><i>s. ${x[0]}</i><span>${es(x[1])}</span></button>`).join('')}${yer.length > 4 ? `<button class="tum" data-tum="${i}">${yer.length - 4} sayfa daha →</button>` : ''}</div>` : ''}
+        ${BG[i].size ? `<div class="mc-bag">${[...BG[i].values()].slice(0, 14).map(v => `<button data-g="${es(v.g.id)}" class="${ortak.has(v.g.id) ? 'ort' : ''}" title="${es(v.l || '')}">${es(v.g.ad)}${v.l ? ` <em>· ${es(v.l)}</em>` : ''}</button>`).join('')}</div>` : ''}
+        ${ps.length ? `<div class="mc-isnad"><div class="et"><span>Kaynak gösterme · İSNAD</span><span><button data-kop="d${i}">Dipnotu kopyala</button> <button data-kop="k${i}">Kaynakçayı kopyala</button></span></div><p id="mcD${i}">${es(is.dip)}</p><p id="mcK${i}" style="color:#6E6E6E">${es(is.kay)}</p></div>` : ''}
+      </div>`;
+    });
+    h += `</section>`;
+    // karşılaştırma
+    if (cok){
+      const col = g.os.map(o => KB[o.k]);
+      const sat = (et, f) => `<tr><td class="e">${et}</td>${g.os.map((o, i) => `<td>${f(o, i)}</td>`).join('')}</tr>`;
+      h += `<section class="mc-bolum"><h4>Karşılaştırma <small>siyah bağlantılar birden çok kitapta ortak</small></h4><div class="mc-tablo-w"><table class="mc-tablo"><thead><tr><th></th>${col.map(mi => `<th>${mi.kod} · ${es(mi.kitap.ad)}</th>`).join('')}</tr></thead><tbody>
+        ${sat('Adı', o => es(o.x.ad))}${sat('Tarih', o => es(o.x.y || '—'))}${sat('Tanım', o => es(o.x.d || '—'))}
+        ${sat('Sayfa', o => { const ps = [...new Set(o.m.map(x => x[0]))]; return ps.length ? `${ps.length} sayfa · ilk s. ${Math.min(...ps)}` : '—'; })}
+        ${sat('Ortak bağlantı', (o, i) => [...BG[i].keys()].filter(id => ortak.has(id)).map(id => es(BG[i].get(id).g.ad)).join(', ') || '—')}
+        ${sat('Yalnız bu kitapta', (o, i) => { const a = [...BG[i].keys()].filter(id => !ortak.has(id)); return a.slice(0, 8).map(id => es(BG[i].get(id).g.ad)).join(', ') + (a.length > 8 ? ` +${a.length - 8}` : '') || '—'; })}
+      </tbody></table></div></section>`;
+    }
+    // ekler
+    const E2 = ekler(g), ben = BU.me && BU.me.uid;
+    h += `<section class="mc-bolum"><h4>Ekler <small>halkanın bu ada eklediği bilgi ve kaynaklar</small></h4>
+      ${E2.length ? E2.map(e => `<div class="mc-ek"><p>${es(e.metin)}</p><small>${es(BU.ad(e.u))}${e.kaynak ? ' · ' + es(e.kaynak) : ''}${e.sayfa ? ', s. ' + es(e.sayfa) : ''} · ${new Date(e.t || 0).toLocaleDateString('tr-TR')}${e.u === ben ? ` · <button data-sil="${es(e.id)}">sil</button>` : ''}</small></div>`).join('') : '<p class="mc-ipucu">Henüz ek yok. Başka bir kitaptan, makaleden ya da kendi okumandan bir bilgi ekleyebilirsin.</p>'}
+      <form class="mc-form" id="mcForm"><textarea id="mcEkM" placeholder="Bu ad hakkında bir bilgi, not ya da alıntı ekle" required></textarea>
+        <div class="sat"><input id="mcEkK" placeholder="Kaynak (eser, yazar)"><input id="mcEkS" placeholder="Sayfa"><button class="pill fill">Ekle</button></div></form></section>`;
+    // yönetici
+    if (BU.yonetici()){
+      h += `<section class="mc-yon"><div class="mc-et">Yönetici</div>
+        <div class="dugmeler"><button id="mcBir">Başka bir adla birleştir</button>${g.ns.length > 1 ? g.ns.map(n => `<button data-ayir="${es(n)}">${KB[N.get(n).k].kod} kaydını ayır</button>`).join('') : ''}<button id="mcTan">Temel tanımı düzenle</button></div>
+        <div id="mcYonAlan"></div><p class="mc-ipucu">Birleştirme ve ayırma bütün halka için geçerlidir. Aynı kişi farklı adlarla geçiyorsa birleştir; yanlış birleşmişse ayır.</p></section>`;
+    }
+    $m('#mcKart').innerHTML = h;
+    try { history.replaceState(null, '', '#mucem/' + encodeURIComponent(g.ns[0])); } catch {}
+    if (innerWidth <= 900) scrollTo(0, 0);
+  }
+
+  let bilgiT; function bilgi(t){ let b = libEl.querySelector('.mc-bilgi'); if (!b){ b = document.createElement('div'); b.className = 'mc-bilgi'; libEl.appendChild(b); } b.textContent = t; b.classList.add('on'); clearTimeout(bilgiT); bilgiT = setTimeout(() => b.classList.remove('on'), 1800); }
+
+  /* ---- olaylar ---- */
+  $m('#mcFl').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (b.dataset.o){ suz.ortak = !suz.ortak; } else suz.t = b.dataset.t; goster = 80; liste(); });
+  $m('#mcFl').addEventListener('change', e => { if (e.target.id === 'mcSira'){ suz.sira = e.target.value; liste(); } });
+  let qt; $m('#mcQ').addEventListener('input', e => { clearTimeout(qt); qt = setTimeout(() => { suz.q = e.target.value; goster = 80; liste(); }, 120); });
+  $m('#mcListe').addEventListener('click', e => { if (e.target.id === 'mcDaha'){ goster += 120; liste(); return; } const b = e.target.closest('.mc-sat'); if (b) kart(G.find(g => g.id === b.dataset.g)); });
+  $m('#mcKart').addEventListener('click', async e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.id === 'mcGeri'){ kok.classList.remove('kartta'); return; }
+    if (b.dataset.g){ kart(G.find(g => g.id === b.dataset.g)); return; }
+    if (b.dataset.tum != null){ const o = secili.os[+b.dataset.tum], box = b.parentElement; box.innerHTML = o.m.filter(x => x[1]).map(x => `<button data-ac="${es(o.n)}" data-p="${x[0]}"><i>s. ${x[0]}</i><span>${es(x[1])}</span></button>`).join(''); return; }
+    if (b.dataset.ac){ kitaptaAc(b.dataset.ac, b.dataset.p); return; }
+    if (b.dataset.kop){ const p = $m('#mc' + (b.dataset.kop[0] === 'd' ? 'D' : 'K') + b.dataset.kop.slice(1)); try { await navigator.clipboard.writeText(p.textContent); bilgi('Kopyalandı'); } catch { bilgi('Kopyalanamadı'); } return; }
+    if (b.dataset.sil){ const a = (LSG('_mucem.fihrist', []) || []).filter(x => x.id !== b.dataset.sil); LSS('_mucem.fihrist', a); if (typeof SYNC !== 'undefined' && SYNC.kirli) SYNC.kirli(); kart(secili); return; }
+    if (b.dataset.ayir){ const n = b.dataset.ayir; ESLE.ayir = [...new Set([...(ESLE.ayir || []), n])]; ESLE.birlestir = (ESLE.birlestir || []).filter(p => !p.includes(n)); await esleKaydet('Ayrıldı'); return; }
+    if (b.id === 'mcBir'){
+      const al = $m('#mcYonAlan'); al.innerHTML = `<div class="tanim"><input id="mcBirQ" placeholder="Birleştirilecek adı ara" style="font:400 14px var(--f-ui);border:1px solid #DADADA;border-radius:12px;padding:10px 12px"></div><div class="sec" id="mcBirL"></div>`;
+      const q = al.querySelector('#mcBirQ'); q.focus();
+      q.oninput = () => { const s = norm(q.value); al.querySelector('#mcBirL').innerHTML = s.length < 2 ? '' : G.filter(x => x !== secili && x.ara.includes(s)).slice(0, 30).map(x => `<button data-bir="${es(x.id)}">${es(x.ad)} <span style="color:#8A8A8A">· ${TUR[x.t][0]}${x.y ? ' · ' + es(x.y) : ''} · ${x.kit.map(k => KB[k].kod).join(' ')}</span></button>`).join(''); };
+      return;
+    }
+    if (b.dataset.bir){ const o = G.find(x => x.id === b.dataset.bir); if (!o) return; ESLE.birlestir = (ESLE.birlestir || []).concat([[secili.ns[0], o.ns[0]]]); const hep = new Set([...secili.ns, ...o.ns]); ESLE.ayir = (ESLE.ayir || []).filter(n => !hep.has(n)); await esleKaydet('Birleştirildi'); return; }
+    if (b.id === 'mcTan'){ const tm = temel(secili), al = $m('#mcYonAlan'); al.innerHTML = `<div class="tanim"><textarea id="mcTanT">${es(tm.d)}</textarea><div class="dugmeler"><button id="mcTanK">Kaydet</button>${tm.kaynak === 'yönetici' ? '<button id="mcTanS">Kitaptaki tanıma dön</button>' : ''}</div></div>`; return; }
+    if (b.id === 'mcTanK'){ ESLE.tanim = ESLE.tanim || {}; secili.ns.forEach(n => delete ESLE.tanim[n]); ESLE.tanim[secili.ns[0]] = $m('#mcTanT').value.trim(); await esleKaydet('Temel tanım kaydedildi'); return; }
+    if (b.id === 'mcTanS'){ secili.ns.forEach(n => delete ESLE.tanim[n]); await esleKaydet('Kitaptaki tanıma dönüldü'); return; }
+  });
+  $m('#mcKart').addEventListener('submit', e => {
+    if (e.target.id !== 'mcForm') return; e.preventDefault();
+    const metin = $m('#mcEkM').value.trim(); if (!metin || !secili) return;
+    const a = LSG('_mucem.fihrist', []) || [];
+    a.push({id: 'mc' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), u: BU.me && BU.me.uid, ref: secili.ns.slice(), ad: secili.ad, metin, kaynak: $m('#mcEkK').value.trim(), sayfa: $m('#mcEkS').value.trim(), t: Date.now()});
+    LSS('_mucem.fihrist', a); if (typeof SYNC !== 'undefined' && SYNC.kirli) SYNC.kirli();
+    kart(secili); bilgi('Ek kaydedildi; halkayla paylaşılıyor');
+  });
+  addEventListener('mucem-ek', () => { if (secili && !kok.hidden) kart(secili); });
+  async function esleKaydet(msg){
+    try { await BU.mucemEsleKaydet(ESLE); bilgi(msg); } catch (err){ bilgi('Kaydedilemedi: ' + (err.message || err)); }
+    const ilk = secili && secili.ns[0]; kur(); liste(); const g = GN.get(ilk); if (g) kart(g); cats();
+  }
+
+  function kitaptaAc(n, p){
+    const [k, ...r] = n.split(':'), id = r.join(':');
+    const ac = () => openReader(() => { if (reader.classList.contains('nopanel')) setPanel(true); openDetail(id); if (p && typeof go === 'function') setTimeout(() => go(+p), 300); });
+    if (k === BK.key){ kapat(); ac(); }
+    else { LSS('mucem.git', {k, id, p: p || ''}); switchBook(k, true); }
+  }
+
+  /* ---- açma / kapama ---- */
+  async function ac(o){
+    o = o || {};
+    libEl.classList.add('mc-acik'); kok.hidden = false;
+    libEl.querySelectorAll('.links button').forEach(b => b.classList.toggle('on', b.dataset.go === 'mucem'));
+    if (o.t != null){ suz.t = o.t; suz.ortak = false; }
+    if (!kok.dataset.kuruldu){ $m('#mcListe').innerHTML = '<div class="mc-bos">Mu\'cem hazırlanıyor…</div>'; $m('#mcKart').innerHTML = ''; }
+    scrollTo(0, 0);
+    await yukle(); kok.dataset.kuruldu = 1;
+    const nt = $m('#mcNot');
+    if (eksik.length){ nt.hidden = false; nt.textContent = `${eksik.map(k => (BOOKS.find(b => b.key === k) || {}).title || k).join(', ')} için dizin henüz yok. ${BU.yonetici() ? 'Bu kitabı bir kez açman ya da paketini yeniden yüklemen yeter.' : 'Yönetici kitabı bir kez açınca eklenir.'}`; } else nt.hidden = true;
+    liste();
+    let g = null;
+    if (o.n) g = GN.get(o.n) || null;
+    if (!g && !o.t && innerWidth > 900) g = suzulmus()[0];
+    if (g) kart(g); else { kok.classList.remove('kartta'); if (innerWidth > 900 && !secili) { const f = suzulmus()[0]; if (f) kart(f); } }
+    if (o.ara) setTimeout(() => $m('#mcQ').focus(), 50);
+    if (!g) try { history.replaceState(null, '', '#mucem'); } catch {}
+  }
+  function kapat(){
+    if (kok.hidden) return; kok.hidden = true; libEl.classList.remove('mc-acik');
+    libEl.querySelectorAll('.links button').forEach(b => b.classList.toggle('on', b.dataset.go === 'top'));
+    try { history.replaceState(null, '', '#kitap-' + BK.key); } catch {}
+  }
+  window.__mucem = {ac, kapat};
+
+  // gezinme çubuğu: Mu'cem açar; diğerleri önce Mu'cem'i kapatır
+  libEl.querySelectorAll('.links button').forEach(b => { const eski = b.onclick; b.onclick = ev => { if (b.dataset.go === 'mucem') return ac(); kapat(); if (eski) eski.call(b, ev); }; });
+  const ls = document.getElementById('lSearch'); if (ls) ls.onclick = () => ac({ara: true});
+  const acB = document.getElementById('mcAcBtn'); if (acB) acB.onclick = () => ac();
+  document.querySelector('#lib .logo') && document.querySelector('#lib .logo').addEventListener('click', () => kapat());
+  // okuma ekranındaki ayrıntıdan
+  document.addEventListener('click', e => { const b = e.target.closest('.mcgit'); if (!b) return; openLib(); ac({n: b.dataset.mc}); });
+
+  // ana sayfadaki kartlar: bütün kitapların toplamı
+  function cats(){
+    const el = document.getElementById('cats'); if (!el || !G.length) return;
+    const T4 = ['kisi', 'yer', 'olay', 'kavram'];
+    el.innerHTML = T4.map(t => { const L = G.filter(g => g.t === t).sort((a, b) => b.kit.length - a.kit.length || b.sayfa - a.sayfa);
+      return `<button class="cat" data-t="${t}" style="--c:${renk(t)}"><span class="t">${TUR[t][1]}</span><span class="n">${fmt(L.length)}</span><span class="s">${L.slice(0, 2).map(g => es(g.ad)).join(', ')}…</span><span class="arrow">→</span></button>`; }).join('');
+    el.querySelectorAll('.cat').forEach(b => b.onclick = () => ac({t: b.dataset.t}));
+    const sub = document.getElementById('adlarSub'); if (sub) sub.textContent = `Kitaplar arası sözlük · ${K.length} kitap · ${fmt(G.length)} ad · ${fmt(G.filter(g => g.kit.length > 1).length)} ortak ad · dokununca açılır`;
+  }
+  const _lr = libRefresh; libRefresh = function(){ _lr.apply(this, arguments); if (G.length) cats(); };
+  yukle().then(() => { cats(); }).catch(e => console.warn('mucem', e));
+
+  // açılışta: başka kitaptan "kitapta aç" ile gelindiyse, ya da adres #mucem ise
+  const git = LSG('mucem.git', null);
+  if (git && git.k === BK.key){ localStorage.removeItem('mucem.git'); setTimeout(() => openReader(() => { if (reader.classList.contains('nopanel')) setPanel(true); openDetail(git.id); if (git.p && typeof go === 'function') setTimeout(() => go(+git.p), 400); }), 60); }
+  const hm = location.hash.match(/^#mucem(?:\/(.+))?$/);
+  if (hm) setTimeout(() => ac({n: hm[1] ? decodeURIComponent(hm[1]) : null}), 30);
 })();
 
 

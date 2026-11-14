@@ -3382,7 +3382,7 @@ syncDirty = SYNC.kirli || (() => {});
   const h7 = document.getElementById('h7'), cv = document.getElementById('h7Toz'); if (!h7 || !cv) return;
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches; if (RM) return;
   const g = cv.getContext('2d');
-  let N = 0, HX, HY, X, Y, VX, VY, GR = [], RENK = [], dp = 1, CW = 0, CH = 0, OX = 0, OY = 0, aktif = false, mx = -1e5, my = -1e5, sakin = 0, son = 0, R = 110;
+  let vmx = 0, vmy = 0, sonM = 0, N = 0, HX, HY, X, Y, VX, VY, GR = [], RENK = [], dp = 1, CW = 0, CH = 0, OX = 0, OY = 0, aktif = false, mx = -1e5, my = -1e5, sakin = 0, son = 0, R = 110;
   const baslik = () => document.getElementById('h7Baslik');
   function ornekle(){
     const bc = baslik(); if (!bc || !window.__h7Ciz) return false;
@@ -3405,7 +3405,7 @@ syncDirty = SYNC.kirli || (() => {});
     GR = []; let onc = -1;
     sira.forEach((s, i) => { HX[i] = X[i] = hx[s]; HY[i] = Y[i] = hy[s]; if (ci[s] !== onc){ GR.push([i, RENK[ci[s]]]); onc = ci[s]; } });
     GR.push([N, null]);
-    R = innerWidth < 768 ? 64 : 104;
+    R = innerWidth < 768 ? 100 : 170;
     return N > 0;
   }
   function baslat(){
@@ -3423,14 +3423,15 @@ syncDirty = SYNC.kirli || (() => {});
   function kare(now){
     if (!aktif) return;
     const f = Math.min(2.5, (now - son) / 16.67); son = now;
-    const R2 = R * R, sur = Math.pow(.88, f), yay = .045 * f;
+    const R2 = R * R, sur = Math.pow(.92, f), yay = .012 * f;
+    vmx *= Math.pow(.86, f); vmy *= Math.pow(.86, f);
     let enCok = 0;
     for (let i = 0; i < N; i++){
       let ax = (HX[i] - X[i]) * yay, ay = (HY[i] - Y[i]) * yay;
       const dx = X[i] - mx, dy = Y[i] - my, d2 = dx * dx + dy * dy;
-      if (d2 < R2){ const dd = Math.sqrt(d2) || 1, k = (1 - dd / R), p = k * k * 7 * f / dd;
-        ax += dx * p - dy * p * .35; ay += dy * p + dx * p * .35;               /* itme + manyetik dönüş */
-        ax += (Math.random() - .5) * k * 1.2 * f; ay += (Math.random() - .5) * k * 1.2 * f; }
+      if (d2 < R2){ const dd = Math.sqrt(d2) || 1, k = (1 - dd / R), k2 = k * k, p = k2 * 2.2 * f / dd;
+        ax += dx * p - dy * p * .25 + vmx * k2 * .55 * f; ay += dy * p + dx * p * .25 + vmy * k2 * .55 * f;   /* hareket yönünde sürükle + hafif itme ve dönüş */
+        ax += (Math.random() - .5) * k * 1.4 * f; ay += (Math.random() - .5) * k * 1.4 * f; }
       VX[i] = VX[i] * sur + ax; VY[i] = VY[i] * sur + ay; X[i] += VX[i] * f; Y[i] += VY[i] * f;
       const ux = X[i] - HX[i], uy = Y[i] - HY[i], u = ux * ux + uy * uy; if (u > enCok) enCok = u;
     }
@@ -3440,7 +3441,9 @@ syncDirty = SYNC.kirli || (() => {});
     if (uzak && enCok < .09){ if (++sakin > 8){ bitir(); return; } } else sakin = 0;
     requestAnimationFrame(kare);
   }
-  const konum = e => { const cr = cv.getBoundingClientRect(); mx = e.clientX - cr.left; my = e.clientY - cr.top; };
+  const konum = e => { const cr = cv.getBoundingClientRect(), nx = e.clientX - cr.left, ny = e.clientY - cr.top, t = performance.now();
+    if (mx > -1e4 && t - sonM < 120){ const s = 16.67 / Math.max(8, t - sonM); vmx = vmx * .5 + (nx - mx) * s * .5; vmy = vmy * .5 + (ny - my) * s * .5; }
+    mx = nx; my = ny; sonM = t; };
   h7.addEventListener('pointermove', e => { konum(e); baslat(); });
   h7.addEventListener('pointerdown', e => { konum(e); baslat(); });
   h7.addEventListener('pointerleave', () => { mx = my = -1e5; });
@@ -3986,25 +3989,33 @@ syncDirty = SYNC.kirli || (() => {});
     g.font = `400 100px ${AILE}`;
     const wOKU = g.measureText('OKU').width, wSE = g.measureText('ŞERH ET').width;
     const ba = H5.xs[2] - SIKI * fs * .0, la = H5.w - H5.xs[3];
-    const fsO = ba * .9 / wOKU * 100, fs3 = la / wSE * 100;
-    const capH = cap100 * fs / 100 * SY, ustH = ust100 * fs / 100 * SY, capO = cap100 * fsO / 100, cap3 = cap100 * fs3 / 100, bos = fs * .07;
-    const ustO = capO * .82, ust = Math.max(ustH, capH + ustO), pad = Math.max(10, fs * .05);  /* OKU ve ŞERH ET kelimeye biraz biner */
-    const base = pad + ust, H = Math.ceil(base + cap3 * .82 + fs3 * .28 + pad), x0 = (W - H5.w) / 2;
-    L = {W, H, fs, fsO, fs3, x0, base, xs: H5.xs, baseO: base - capH + capO * .18, laX: x0 + H5.xs[3], base3: base + cap3 * .82};
+    const fsO = ba * 1.12 / wOKU * 100, fs3 = la * 1.05 / wSE * 100;
+    const capH = cap100 * fs / 100 * SY, ustH = ust100 * fs / 100 * SY, capO = cap100 * fsO / 100, cap3 = cap100 * fs3 / 100;
+    const ust = Math.max(ustH, capH + capO * .7), pad = Math.max(10, fs * .05);   /* OKU'nun alt üçte biri kelimeye biner */
+    const base = pad + ust, H = Math.ceil(base + cap3 * .5 + fs3 * .28 + pad), x0 = (W - H5.w) / 2;
+    /* harf konumları: OKU'nun U'su A'nın ortasına gelsin (OKU kelimeden biraz önce başlar); ŞERH ET LA'nın altına yaslı */
+    g.font = `400 ${fs}px ${AILE}`; const aOrta = x0 + H5.xs[1] + g.measureText('A').width / 2;
+    g.font = `400 ${fsO}px ${AILE}`; const aO = g.measureText('O').width, aK = g.measureText('K').width, aU = g.measureText('U').width;
+    const xO = aOrta - aU / 2 - aK - aO, oku = [['O', xO, 0], ['K', xO + aO, 0], ['U', xO + aO + aK, 1]];
+    g.font = `400 ${fs3}px ${AILE}`; const xS = x0 + H5.w - g.measureText('ŞERH ET').width; let sx = xS; const ARKA = {1: 1, 3: 1, 6: 1};
+    const serh = [...'ŞERH ET'].map((ch, i) => { const r = [ch, sx, ARKA[i] ? 1 : 0]; sx += g.measureText(ch).width; return r; });
+    L = {W, H, fs, fsO, fs3, x0, base, xs: H5.xs, baseO: base - capH + capO * .3, base3: base + cap3 * .5, oku, serh};
     const dp = Math.min(2, devicePixelRatio || 1); cv.width = Math.round(W * dp); cv.height = Math.round(H * dp); cv.style.height = H + 'px';
     const c = cv.getContext('2d'); c.setTransform(dp, 0, 0, dp, 0, 0); c.clearRect(0, 0, W, H); ciz(c, 0, 0);
     if (window.__h7Yenile) window.__h7Yenile();
   }
+  function gri(c, arka){ /* OKU ve ŞERH ET: harf harf; bazıları BAĞLA'nın arkasında */
+    c.fillStyle = '#A3A3A3';
+    c.font = `400 ${L.fsO}px ${AILE}`; L.oku.forEach(([ch, x, a]) => { if (a === arka) c.fillText(ch, x, L.baseO); });
+    c.font = `400 ${L.fs3}px ${AILE}`; L.serh.forEach(([ch, x, a]) => { if (a === arka && ch !== ' ') c.fillText(ch, x, L.base3); });
+  }
   function ciz(c, dx, dy){
     if (!L) return; c.save(); c.translate(dx, dy); c.textBaseline = 'alphabetic'; c.textAlign = 'left';
+    gri(c, 1);   /* önce BAĞLA'nın arkasında kalan gri harfler */
     /* BAĞLA: lacivert, uzun ve ince, sıkışık */
     c.fillStyle = LAC; c.font = `400 ${L.fs}px ${AILE}`;
     c.save(); c.translate(L.x0, L.base); c.scale(1, SY); [...'BAĞLA'].forEach((ch, i) => c.fillText(ch, L.xs[i], 0)); c.restore();
-    /* OKU: BA'nın üstünde; ŞERH ET: LA'nın altında */
-    c.fillStyle = '#A3A3A3';
-    c.font = `400 ${L.fsO}px ${AILE}`; c.fillText('OKU', L.x0, L.baseO);
-    c.font = `400 ${L.fs3}px ${AILE}`; c.fillText('ŞERH ET', L.laX, L.base3);
-    c.restore();
+    gri(c, 0); c.restore();
   }
   window.__h7Ciz = ciz;
   const hazir = () => yerlestir();

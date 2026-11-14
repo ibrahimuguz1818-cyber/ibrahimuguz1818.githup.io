@@ -958,6 +958,22 @@ body{letter-spacing:-.01em}
   .hztc{width:6px}.hzgrp .tk{gap:2px}
 }
 
+
+/* ===== karşılama: toz ===== */
+#lib .h7{cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.h7-toz{position:absolute;left:0;right:0;top:-90px;bottom:-90px;width:100%;height:calc(100% + 180px);pointer-events:none;z-index:2}
+#lib .hero h1 .hl{display:block;overflow:hidden;color:#111;padding:.06em .15em .16em;margin:-.06em -.15em -.16em}
+#lib .hero h1 .hl2{color:#B5B5B5}
+#lib .hero h1 .hl b{display:inline-block;font-weight:inherit}
+#lib .h7.toz h1,#lib .h7.toz::before{opacity:0}
+/* geri geliş: Vesper girişleri (maskeli satır, ölçekle daire, bulanıktan nete) */
+@keyframes h7Mask{from{opacity:0;transform:translateY(40%)}to{opacity:1;transform:none}}
+@keyframes h7Scale{from{opacity:0;transform:scale(.84)}to{opacity:1;transform:none}}
+@keyframes h7Em{from{opacity:.35;filter:blur(4px)}to{opacity:1;filter:none}}
+#lib .h7.don::before{animation:h7Scale 1.05s cubic-bezier(.16,1,.3,1) both}
+#lib .h7.don .hl b{animation:h7Mask 1.05s cubic-bezier(.16,1,.3,1) .12s both}
+#lib .h7.don .hl2 b{animation:h7Mask 1.05s cubic-bezier(.16,1,.3,1) .32s both,h7Em 1.2s ease .42s both}
+@media (prefers-reduced-motion: reduce){ #lib .h7.don::before,#lib .h7.don .hl b{animation:none} }
 </style>
 </head>
 <body>
@@ -976,7 +992,7 @@ body{letter-spacing:-.01em}
   </div></header>
   <main id="top">
     <section class="hero wrap">
-      <div class="h7"><h1>Oku. Bağla.<br><span>Şerh et.</span></h1></div>
+      <div class="h7" id="h7"><canvas class="h7-toz" id="h7Toz" aria-hidden="true"></canvas><h1><span class="hl"><b>Oku. Bağla.</b></span><span class="hl hl2"><b>Şerh et.</b></span></h1></div>
       <div class="f7">
         <div class="t"><small>Darülfünun okuma halkası</small><p class="lead">Kitaplar, içlerindeki insanlar, yerler ve olaylarla aynı rafta; birlikte okumak için.</p>
           <div class="facts"><span id="faces" hidden></span><b id="facesN"></b> ad, hizânedeki sayfalarda</div></div>
@@ -3124,6 +3140,85 @@ syncDirty = SYNC.kirli || (() => {});
 
 /* gece modu kaldırıldı: açmış olanlarda eski ayarı temizle, okumayı beyaza döndür */
 (() => { try { if (localStorage.getItem('suffe.gece') === '1'){ localStorage.removeItem('suffe.gece'); const t = document.querySelector('#aaMenu [data-t="beyaz"]'); if (t) t.click(); } } catch {} })();
+
+
+/* ===== karşılama: toz gibi dağılma ===== */
+(() => {
+  const h7 = document.getElementById('h7'), cv = document.getElementById('h7Toz'); if (!h7 || !cv) return;
+  const h1 = h7.querySelector('h1'), g = cv.getContext('2d'), RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let P = null, t0 = 0, calis = false, dp = 1, CW = 0, CH = 0, OX = 0, OY = 0, faz = 0;
+  const DAG = 2.3; let OFS = null, MAXD = 1, CX0 = 0, CY0 = 0;
+  function ornekle(cx0, cy0){
+    const hr = h7.getBoundingClientRect(), cr = cv.getBoundingClientRect();
+    dp = Math.min(2, devicePixelRatio || 1); CW = cr.width; CH = cr.height; OX = cr.left; OY = cr.top;
+    cv.width = Math.round(CW * dp); cv.height = Math.round(CH * dp);
+    const o = document.createElement('canvas'); o.width = Math.ceil(CW); o.height = Math.ceil(CH); const c = o.getContext('2d', {willReadFrequently: true});
+    /* daire */
+    const R = Math.min(420, innerWidth * .72) / 2, mx = hr.left + hr.width / 2 - OX, my = hr.top + hr.height / 2 - OY;
+    const gr = c.createRadialGradient(mx, my, 0, mx, my, R * 1.0001);
+    gr.addColorStop(0, '#ECECEC'); gr.addColorStop(.45, 'rgba(245,245,245,.6)'); gr.addColorStop(.7, 'rgba(255,255,255,0)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+    c.fillStyle = gr; c.beginPath(); c.arc(mx, my, R, 0, 6.2832); c.fill();
+    c.strokeStyle = '#E8E8E8'; c.lineWidth = 1; c.beginPath(); c.arc(mx, my, R - .5, 0, 6.2832); c.stroke();
+    /* yazı: her harf DOM'daki yerine */
+    const yaz = (node) => {
+      const cs = getComputedStyle(node.parentElement); c.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`; c.fillStyle = cs.color; c.textBaseline = 'alphabetic';
+      const m = c.measureText('Hg'), asc = m.fontBoundingBoxAscent || parseFloat(cs.fontSize) * .9, desc = m.fontBoundingBoxDescent || parseFloat(cs.fontSize) * .25;
+      const rg = document.createRange(), s = node.textContent;
+      for (let i = 0; i < s.length; i++){ if (s[i] === ' ') continue; rg.setStart(node, i); rg.setEnd(node, i + 1); const r = rg.getBoundingClientRect(); if (!r.width) continue;
+        c.fillText(s[i], r.left - OX, r.top - OY + (r.height - asc - desc) / 2 + asc); }
+    };
+    const w = document.createTreeWalker(h1, NodeFilter.SHOW_TEXT); let n; while ((n = w.nextNode())) if (n.textContent.trim()) yaz(n);
+    /* örnekle */
+    const d = c.getImageData(0, 0, o.width, o.height).data, S = innerWidth < 768 ? 2 : 2, L = [];
+    const maxD = Math.hypot(Math.max(cx0, o.width - cx0), Math.max(cy0, o.height - cy0));
+    let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    for (let y = 0; y < o.height; y += S) for (let x = 0; x < o.width; x += S){
+      const k = (y * o.width + x) * 4, a = d[k + 3] / 255; if (a < .08) continue;
+      const lum = (d[k] + d[k + 1] + d[k + 2]) / 3, koyu = lum < 200;
+      if (!koyu && rnd() > a * .55) continue; /* daire seyrek */
+      const dist = Math.hypot(x - cx0, y - cy0), ang = Math.atan2(y - cy0, x - cx0);
+      const hz = 18 + rnd() * 70;
+      L.push({x, y, dist, c: koyu ? (lum < 90 ? 0 : 1) : (lum < 232 ? 2 : 3), a: koyu ? Math.min(1, a * 1.1) : Math.min(1, a * 1.6),
+        d: dist / maxD * .75 + rnd() * .22, vx: Math.cos(ang) * hz + 40 + rnd() * 90, vy: Math.sin(ang) * hz - 20 - rnd() * 50,
+        ax: 30 + rnd() * 60, ay: -30 - rnd() * 40, sw: 6 + rnd() * 16, f: 1.5 + rnd() * 3, ph: rnd() * 6.28, s: koyu ? .9 + rnd() * .9 : .8 + rnd() * .7, life: 1.1 + rnd() * .8});
+    }
+    OFS = o; MAXD = maxD; CX0 = cx0; CY0 = cy0;
+    return L;
+  }
+  const RENK = ['17,17,17', '181,181,181', '214,214,214', '232,232,232'];
+  const KOVA = Array.from({length: 4 * 6}, () => []);
+  function ciz(P, f, rK){ /* f: parçacık zamanı (sn); rK: bu yarıçapın dışı henüz dağılmadı, keskin çizilir */
+    g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, cv.width, cv.height); g.setTransform(dp, 0, 0, dp, 0, 0);
+    if (OFS && rK < MAXD * 1.5){ g.save(); g.beginPath(); g.rect(0, 0, CW, CH); g.arc(CX0, CY0, Math.max(0, rK), 0, 6.2832, true); g.clip('evenodd'); g.drawImage(OFS, 0, 0); g.restore(); }
+    for (const k of KOVA) k.length = 0;
+    for (const p of P){
+      if (p.dist > rK) continue;
+      const tau = f(p); if (tau <= 0){ KOVA[p.c * 6 + 5].push(p.x, p.y, p.s); continue; }
+      const u = tau / p.life; if (u >= 1) continue;
+      const x = p.x + p.vx * tau + .5 * p.ax * tau * tau + Math.sin(tau * p.f + p.ph) * p.sw * tau;
+      const y = p.y + p.vy * tau + .5 * p.ay * tau * tau + Math.cos(tau * p.f * .8 + p.ph) * p.sw * .5 * tau;
+      const al = (1 - u) * (1 - u), q = Math.min(5, Math.floor(al * 6));
+      KOVA[p.c * 6 + q].push(x, y, p.s * (1 - u * .4));
+    }
+    for (let c = 0; c < 4; c++) for (let q = 0; q < 6; q++){ const k = KOVA[c * 6 + q]; if (!k.length) continue;
+      g.fillStyle = `rgba(${RENK[c]},${q === 5 ? 1 : (q + .5) / 6})`; g.beginPath(); for (let i = 0; i < k.length; i += 3) g.rect(k[i], k[i + 1], k[i + 2], k[i + 2]); g.fill(); }
+  }
+  function kare(now){
+    if (!calis) return;
+    const t = (now - t0) / 1000;
+    if (t < DAG + .6){ ciz(P, p => Math.max(0, t - p.d), t / .75 * MAXD); }
+    else if (t < DAG + .95){ g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, cv.width, cv.height); }
+    else { h7.classList.remove('toz'); h7.classList.add('don'); calis = false; P = null; OFS = null; setTimeout(() => h7.classList.remove('don'), 1700); return; }
+    requestAnimationFrame(kare);
+  }
+  h7.addEventListener('click', e => {
+    if (calis || h7.classList.contains('don')) return;
+    if (RM) return;
+    const cr = cv.getBoundingClientRect();
+    P = ornekle(e.clientX - cr.left, e.clientY - cr.top); if (!P.length) return;
+    calis = true; h7.classList.add('toz'); t0 = performance.now(); requestAnimationFrame(kare);
+  });
+})();
 
 /* ===== Hizâne bandı ===== */
 (() => {

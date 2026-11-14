@@ -919,7 +919,114 @@ body{letter-spacing:-.01em}
 .hz-cv.m .cvi{--d:100cqw;border-radius:inherit}
 @media (prefers-reduced-motion: reduce){ .h3-shelf{cursor:default} }
 
+
+/* ===== 100 kitap: süzgeç ve şerit ===== */
+.hzfl{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-top:22px}
+.hzfl .fp{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hzfl button{font:500 13.5px var(--f-ui);border:1px solid #E4E4E4;background:#fff;color:#333;border-radius:999px;padding:9px 15px;cursor:pointer;display:inline-flex;gap:7px;align-items:center;flex:0 0 auto}
+.hzfl button i{font:400 11.5px var(--f-mono);font-style:normal;color:#9A9A9A}
+.hzfl button:hover{border-color:#111}
+.hzfl button[aria-pressed="true"]{background:#111;border-color:#111;color:#fff}.hzfl button[aria-pressed="true"] i{color:#BBB}
+.hzfl .sep{width:1px;height:22px;background:#E4E4E4;margin:0 4px}
+.hzfl .ara{margin-left:auto;display:flex;align-items:center;gap:8px;border:1px solid #E4E4E4;border-radius:999px;padding:0 15px;height:40px;min-width:220px;color:#9A9A9A}
+.hzfl .ara input{border:0;outline:0;font:400 14px var(--f-ui);flex:1;min-width:0;background:none;color:#111}
+.hzfl .ara:focus-within{border-color:#111}
+.hzbos{position:absolute;inset:0;display:grid;place-items:center;font:400 15px var(--f-ui);color:#6E6E6E}
+.hzsrt{position:relative;padding-block:4px 18px}
+.hzsrt-in{display:flex;align-items:flex-end;gap:14px;overflow-x:auto;scrollbar-width:none;padding:12px 0 4px}
+.hzsrt-in::-webkit-scrollbar{display:none}
+.hzgrp{display:flex;flex-direction:column;gap:8px;flex:0 0 auto}
+.hzgrp .tk{display:flex;align-items:flex-end;gap:3px;height:40px}
+.hzgrp b{font:500 10.5px var(--f-mono);letter-spacing:.12em;color:#9A9A9A;cursor:pointer;white-space:nowrap}
+.hzgrp b:hover{color:#111}
+.hztc{position:relative;width:7px;height:26px;border-radius:2px;background:#DCDCDC;cursor:pointer;padding:0;border:0;transition:height .2s,background .2s,opacity .2s}
+.hztc.s{background:#BDBDBD}
+.hztc.o{background:linear-gradient(0deg,#111 var(--p),#BDBDBD var(--p))}
+.hztc.gor{height:34px}
+.hztc.cur{height:40px;background:#111}
+.hztc.cur::after{content:"";position:absolute;left:50%;top:-8px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:#111}
+.hztc.sn{opacity:.22}
+.hztc:hover{height:40px}
+.hztip{position:absolute;transform:translate(-50%,-100%);background:#111;color:#fff;font:500 12px var(--f-ui);padding:6px 10px;border-radius:8px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .15s;z-index:9}
+.hzleg{display:flex;gap:16px;flex-wrap:wrap;font:400 12px var(--f-ui);color:#6E6E6E;margin-top:6px}
+.hzleg span{display:inline-flex;align-items:center;gap:6px}.hzleg i{width:7px;height:14px;border-radius:2px;background:#DCDCDC}
+.hzleg i.s{background:#BDBDBD}.hzleg i.o{background:linear-gradient(0deg,#111 50%,#BDBDBD 50%)}
+@media (max-width:767px){
+  .hzfl .ara{margin-left:0;width:100%}
+  .hzfl .fp{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;width:calc(100% + 24px);margin-right:-24px;padding-right:24px}
+  .hzfl .fp::-webkit-scrollbar{display:none}
+  .hztc{width:6px}.hzgrp .tk{gap:2px}
+}
+/* ===== gece düğmesi ===== */
+#lGece .gn{display:none}
+html.gm #lGece .ay{display:none} html.gm #lGece .gn{display:block}
+.h7-ab{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;display:none}
+html.gm .h7-ab{display:block}
+/* ===== gece modu ===== */
+html.gm,html.gm body{background:#0E0F11;color-scheme:dark}
+html.gm #lib{background:#0E0F11;color:#ECEAE4}
+html.gm #lib .nav{background:rgba(14,15,17,.92)}
+html.gm #lib .logo{color:#ECEAE4}html.gm #lib .logo .sep{background:#ECEAE4}
+html.gm #lib .links button{color:#B9B6AE}
+html.gm #lib .links button:hover{background:#1F2226;color:#fff}
+html.gm #lib .links > button.on,html.gm #lib .links > button[data-go="top"]{background:#ECEAE4;color:#111}
+html.gm #lib .links > button[data-go="top"] i{background:#111}
+html.gm #lib .links > button[data-go="top"] i::after{background:#ECEAE4}
+html.gm #lib .links .grp,html.gm #lib .tools{background:#1A1C20}
+html.gm #lib .links .grp button.on{background:#2A2D32;color:#fff}
+html.gm #lib .tools .ib{background:#2A2D32;color:#ECEAE4}
+html.gm #lib .h7::before{background:radial-gradient(circle,rgba(246,226,122,.10) 0,rgba(246,226,122,.035) 42%,rgba(14,15,17,0) 70%);box-shadow:inset 0 0 0 1px rgba(246,226,122,.08)}
+html.gm #lib .hero h1{color:#F2EFE8}
+html.gm #lib .hero h1 span{color:#55534E}
+html.gm #lib .f7 small,html.gm #lib .f7 .facts{color:#8F8C85}
+html.gm #lib .f7 .lead,html.gm #lib .f7 .facts b{color:#ECEAE4}
+html.gm #lib .f7 .rule{background:#3A3D42}
+html.gm #lib .pill{color:#ECEAE4;border-color:#34373C}
+html.gm #lib .pill:hover{border-color:#ECEAE4;color:#fff}
+html.gm #lib .pill.fill{background:#ECEAE4;color:#111;border-color:#ECEAE4}
+html.gm #lib .pill.fill:hover{background:#fff;border-color:#fff;color:#111}
+html.gm #lib .sechead{border-top-color:#1F2226}
+html.gm #lib .sechead h2{color:#F2EFE8}
+html.gm #lib .sechead span{color:#8F8C85}
+html.gm .hzseg{background:#1A1C20}html.gm .hzseg button{color:#B9B6AE}
+html.gm .hzseg button[aria-pressed="true"]{background:#ECEAE4;color:#111}
+html.gm .hzrow{color:#8F8C85}html.gm .hzrow span:first-child{color:#ECEAE4}
+html.gm .hz-def{color:#ECEAE4}
+html.gm .hz-def .k{color:#7E7B74}html.gm .hz-def .a{color:#B0ADA5}html.gm .hz-def .s{color:#8F8C85}html.gm .hz-def .s b{color:#F2EFE8}
+html.gm .hz-def ol{border-top-color:#2A2D32}html.gm .hz-def li{border-bottom-color:#1F2226}
+html.gm .hz-def li.ok span,html.gm .hz-def li.ok span::before,html.gm .hz-def li.nx span{color:#ECEAE4}
+html.gm .hz-def li.nx i::after{color:#F6E27A}
+html.gm .hz-def li.no span,html.gm .hz-def li.more span{color:#5E5B55}
+html.gm .hz-scan i{background:#F6E9B8;box-shadow:0 0 10px 2px rgba(246,226,122,.45),0 0 32px 8px rgba(246,226,122,.16)}
+html.gm .hz-scan b{background:linear-gradient(90deg,rgba(246,226,122,.16),transparent)}
+html.gm .hz-badge .lb{color:#8F8C85}
+html.gm .hz-pill .n{background:#ECEAE4;color:#111}html.gm .hz-pill .p{background:#1F2226;color:#ECEAE4}
+html.gm .hz-mini{background:#ECEAE4;color:#111}
+html.gm .hz-card{box-shadow:0 0 0 1px rgba(255,255,255,.06)}
+html.gm .hzfl button{background:#141619;border-color:#2A2D32;color:#C9C6BE}
+html.gm .hzfl button:hover{border-color:#ECEAE4}
+html.gm .hzfl button[aria-pressed="true"]{background:#ECEAE4;border-color:#ECEAE4;color:#111}html.gm .hzfl button[aria-pressed="true"] i{color:#555}
+html.gm .hzfl .sep{background:#2A2D32}
+html.gm .hzfl .ara{border-color:#2A2D32}html.gm .hzfl .ara input{color:#ECEAE4}html.gm .hzfl .ara:focus-within{border-color:#ECEAE4}
+html.gm .hztc{background:#2A2D32}html.gm .hztc.s{background:#55534E}
+html.gm .hztc.o{background:linear-gradient(0deg,#F6E27A var(--p),#55534E var(--p))}
+html.gm .hztc.cur{background:#F6E27A;box-shadow:0 0 10px rgba(246,226,122,.5)}html.gm .hztc.cur::after{background:#F6E27A}
+html.gm .hzgrp b{color:#6E6B65}html.gm .hzgrp b:hover{color:#ECEAE4}
+html.gm .hztip{background:#ECEAE4;color:#111}
+html.gm .hzleg{color:#8F8C85}html.gm .hzleg i{background:#2A2D32}html.gm .hzleg i.s{background:#55534E}html.gm .hzleg i.o{background:linear-gradient(0deg,#F6E27A 50%,#55534E 50%)}
+html.gm #lib .cat{background:#17191C;color:#ECEAE4}
+html.gm #lib .cat:hover{background:#1F2226}
+html.gm #lib .cat .n{color:#F2EFE8}html.gm #lib .cat .t{color:#8F8C85}html.gm #lib .cat .s{color:#6E6B65}
+html.gm #lib .cat .arrow{background:#2A2D32;color:#ECEAE4}
+html.gm #lib .feature{background:#17191C;color:#ECEAE4}
+html.gm #lib .feature h2{color:#F2EFE8}html.gm #lib .feature small,html.gm #lib .feature p{color:#8F8C85}
+html.gm #lib .fcard{background:#0E0F11;color:#ECEAE4}
+html.gm #lib .fcard small,html.gm #lib .fcard p,html.gm #lib .fcard .k{color:#8F8C85}
+html.gm #lib .fcard .tags button{background:#1F2226;color:#ECEAE4}
+html.gm #lib footer{border-top-color:#1F2226;color:#8F8C85}html.gm #lib footer b{color:#ECEAE4}
+
 </style>
+<script>try{if(localStorage.getItem("suffe.gece")==="1")document.documentElement.classList.add("gm")}catch(e){}</script>
 </head>
 <body>
 
@@ -932,12 +1039,13 @@ body{letter-spacing:-.01em}
       <span class="grp"><button data-go="raf">Hizâne</button><button data-go="adlar">Fihrist</button><button data-go="oku">Kıraat</button></span>
     </nav>
     <div class="tools">
+      <button class="ib" id="lGece" aria-label="Gece modu" aria-pressed="false"><svg class="ay" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="gn" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
       <button class="ib" id="lSearch" aria-label="Fihristte ara"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
     </div>
   </div></header>
   <main id="top">
     <section class="hero wrap">
-      <div class="h7"><h1>Oku. Bağla.<br><span>Şerh et.</span></h1></div>
+      <div class="h7"><canvas class="h7-ab" id="h7Ab" aria-hidden="true"></canvas><h1>Oku. Bağla.<br><span>Şerh et.</span></h1></div>
       <div class="f7">
         <div class="t"><small>Darülfünun okuma halkası</small><p class="lead">Kitaplar, içlerindeki insanlar, yerler ve olaylarla aynı rafta; birlikte okumak için.</p>
           <div class="facts"><span id="faces" hidden></span><b id="facesN"></b> ad, hizânedeki sayfalarda</div></div>
@@ -948,12 +1056,14 @@ body{letter-spacing:-.01em}
 
     <div class="sechead wrap" id="raf"><div><h2>Hizâne</h2><span id="hzSub">Kitaplar çizgiden geçerken künyelerine döner · dokun, aç · sürükle, geri sar</span></div>
       <div class="hzseg" role="group" aria-label="Hizâne görünümü"><button id="hzAkis" aria-pressed="true">Akış</button><button id="hzRaf" aria-pressed="false">İlerleme rafı</button></div></div>
+    <div class="hzfl wrap" id="hzFl" hidden></div>
     <section class="hz" id="hz" aria-label="Hizâne">
       <div class="hz-belt" id="hzBelt"><div class="hz-codes" id="hzCodes" aria-hidden="true"></div><div class="hz-cards" id="hzCards"></div><canvas class="hz-fx" id="hzFx" aria-hidden="true"></canvas></div>
       <div class="hz-scan" id="hzScan" aria-hidden="true"><b></b><i></i></div>
       <div class="hz-badge" id="hzBadge" aria-hidden="true"><div class="lb" id="hzLb">İşlenen sayfa</div><div class="hz-pill"><span class="n" id="hzN">0</span><span class="p" id="hzP">%0 işlendi</span></div></div>
       <div id="hzMinis" aria-hidden="true"></div>
     </section>
+    <div class="hzsrt wrap" id="hzSrtW" hidden><div class="hzsrt-in" id="hzSrt"></div><div class="hztip" id="hzTip" aria-hidden="true"></div><div class="hzleg"><span><i class="o"></i>okunuyor · dolu kısım işlenen</span><span><i class="s"></i>sırada</span><span><i></i>rafta</span><span>şeride dokun: kitap çizgiye gelir</span></div></div>
     <div class="hzrow wrap"><span id="shelfN"></span><span>Yeni kitap için PDF'ini sohbete gönder; hazırlanıp bu rafa eklenir.</span></div>
     <section class="shelf" id="shelf" hidden></section>
 
@@ -3080,6 +3190,47 @@ syncDirty = SYNC.kirli || (() => {});
   requestAnimationFrame(kare);
 })();
 
+
+/* ===== gece modu ===== */
+(() => {
+  const H = document.documentElement, KEY = 'suffe.gece';
+  let on = false; try { on = localStorage.getItem(KEY) === '1'; } catch {}
+  const uygula = () => { H.classList.toggle('gm', on); const b = document.getElementById('lGece'); if (b){ b.setAttribute('aria-pressed', on); b.setAttribute('aria-label', on ? 'Gündüz modu' : 'Gece modu'); } };
+  uygula();
+  const b = document.getElementById('lGece');
+  if (b) b.onclick = () => { on = !on; try { localStorage.setItem(KEY, on ? '1' : '0'); } catch {} uygula();
+    const t = document.querySelector(`#aaMenu [data-t="${on ? 'gece' : 'beyaz'}"]`); if (t) t.click(); };
+  /* karşılamadaki dairede ateş böcekleri */
+  const cv = document.getElementById('h7Ab'); if (!cv) return;
+  const g = cv.getContext('2d'), lib = document.getElementById('lib'), RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const spr = document.createElement('canvas'); spr.width = spr.height = 64;
+  { const s = spr.getContext('2d'), gr = s.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gr.addColorStop(0, 'rgba(255,250,215,1)'); gr.addColorStop(.18, 'rgba(250,232,140,.95)'); gr.addColorStop(.45, 'rgba(214,226,110,.28)'); gr.addColorStop(1, 'rgba(200,220,100,0)');
+    s.fillStyle = gr; s.fillRect(0, 0, 64, 64); }
+  window.__atesSprite = spr;
+  const B = Array.from({length: 18}, (_, i) => ({a: Math.random() * 6.283, r: Math.sqrt(Math.random()) * .85, f1: .13 + Math.random() * .22, f2: .17 + Math.random() * .25, ph: Math.random() * 6.283, bf: .6 + Math.random() * 1.1, s: .7 + Math.random() * .7}));
+  let gor = true, W = 0, Hh = 0, dp = 1;
+  if ('IntersectionObserver' in window) new IntersectionObserver(x => gor = x[0].isIntersecting).observe(cv);
+  const olc = () => { const r = cv.getBoundingClientRect(); dp = Math.min(2, devicePixelRatio || 1); W = r.width; Hh = r.height; cv.width = Math.round(W * dp); cv.height = Math.round(Hh * dp); };
+  addEventListener('resize', olc);
+  function kare(now){
+    requestAnimationFrame(kare);
+    if (!on || !gor || lib.hidden) return;
+    if (!W || cv.width !== Math.round(cv.getBoundingClientRect().width * dp)) olc(); if (!W) return;
+    const t = RM ? 0 : now / 1000, R = Math.min(420, innerWidth * .72) / 2, cx = W / 2, cy = Hh / 2;
+    g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, cv.width, cv.height); g.setTransform(dp, 0, 0, dp, 0, 0);
+    g.globalCompositeOperation = 'lighter';
+    for (const b of B){
+      const a = b.a + Math.sin(t * b.f1 + b.ph) * 1.1 + t * .03, rr = R * (b.r + Math.sin(t * b.f2 + b.ph * 2) * .12);
+      const x = cx + Math.cos(a) * rr, y = cy + Math.sin(a) * rr * .92 + Math.sin(t * .9 + b.ph) * 6;
+      const bl = RM ? .6 : Math.pow(Math.max(0, Math.sin(t * b.bf + b.ph)), 3) * .9 + .1, z = 9 * b.s + bl * 6;
+      g.globalAlpha = bl; g.drawImage(spr, x - z, y - z, z * 2, z * 2);
+    }
+    g.globalAlpha = 1; g.globalCompositeOperation = 'source-over';
+  }
+  requestAnimationFrame(kare);
+})();
+
 /* ===== Hizâne bandı ===== */
 (() => {
   const stage = document.getElementById('hz'); if (!stage) return;
@@ -3097,12 +3248,63 @@ syncDirty = SYNC.kirli || (() => {});
     return {b, ok, oran: Math.min(1, (b.last || 0) / (b.pages || 1)), done, next, cls: ['ad', 'hs', 'mb'].includes(cls) ? cls : (cls ? 'x' : 'ad')};
   });
   if (!KIT.length) { stage.hidden = true; return; }
+  /* ---- 100 kitap: konu, durum, süzgeç, şerit ---- */
+  const KONU = {tarih: ['Tarih', 'TAR'], felsefe: ['Felsefe', 'FEL'], islam: ['İslâm', 'İSL'], bilim: ['Bilim', 'BİL'], edebiyat: ['Edebiyat', 'EDB'], siyaset: ['Siyaset', 'SİY']};
+  const SIRA = Object.keys(KONU), VARS = {ad: 'felsefe', hs: 'tarih', mb: 'islam'};
+  KIT.forEach((k, n) => { k.no = n + 1; k.konu = KONU[k.b.konu] ? k.b.konu : (VARS[k.b.cover && k.b.cover.cls] || VARS[k.b.key] || 'bilim');
+    k.durum = k.b.durum || ((k.b.last || 0) > 0 ? 'okunuyor' : 'raf'); });
+  const DUR = {okunuyor: 0, sirada: 1, raf: 2};
+  const SIRALI = SIRA.flatMap(t => KIT.filter(k => k.konu === t).sort((a, b) => DUR[a.durum] - DUR[b.durum] || a.no - b.no));
+  const say = f => KIT.filter(f).length;
+  let suz = say(k => k.durum === 'okunuyor') ? 'okunuyor' : 'tumu', ara = '', LS = SIRALI;
+  const uyar = k => (suz === 'tumu' || k.durum === suz || k.konu === suz) && (!ara || (k.b.title + ' ' + k.b.author).toLocaleLowerCase('tr').includes(ara));
+  const flEl = document.getElementById('hzFl'), srtW = document.getElementById('hzSrtW'), srt = document.getElementById('hzSrt'), tip = document.getElementById('hzTip'), TK = new Map();
+  if (KIT.length > 1 && flEl){
+    const kon = SIRA.filter(t => say(k => k.konu === t));
+    flEl.innerHTML = '<div class="fp">' + [['okunuyor', 'Okunuyor'], ['sirada', 'Sırada'], ['tumu', 'Tümü']].filter(([k]) => k === 'tumu' || say(x => x.durum === k))
+      .map(([k, t]) => `<button data-s="${k}">${t} <i>${k === 'tumu' ? KIT.length : say(x => x.durum === k)}</i></button>`).join('')
+      + (kon.length > 1 ? '<span class="sep"></span>' + kon.map(t => `<button data-s="${t}">${KONU[t][0]} <i>${say(k => k.konu === t)}</i></button>`).join('') : '') + '</div>'
+      + (KIT.length >= 8 ? '<label class="ara"><input id="hzAra" placeholder="Kitap ya da yazar ara" aria-label="Hizânede kitap ara" autocomplete="off"><span aria-hidden="true">⌕</span></label>' : '');
+    flEl.hidden = false;
+    flEl.addEventListener('click', e => { const b = e.target.closest('button[data-s]'); if (b){ suz = b.dataset.s; suzgec(); } });
+    const ai = document.getElementById('hzAra'); if (ai) ai.addEventListener('input', () => { ara = ai.value.trim().toLocaleLowerCase('tr'); if (ara) suz = 'tumu'; suzgec(); });
+    srt.innerHTML = SIRA.filter(t => say(k => k.konu === t)).map(t => `<div class="hzgrp"><div class="tk">${SIRALI.filter(k => k.konu === t).map(k => `<button class="hztc${k.durum === 'okunuyor' ? ' o' : k.durum === 'sirada' ? ' s' : ''}" data-k="${es(k.b.key)}" style="--p:${(k.oran * 100).toFixed(0)}%" aria-label="${es(k.b.title)}"></button>`).join('')}</div><b data-s="${t}">${KONU[t][1]}</b></div>`).join('');
+    srt.querySelectorAll('.hztc').forEach(t => TK.set(t.dataset.k, t));
+    srtW.hidden = false;
+    srt.addEventListener('pointerover', e => { const t = e.target.closest('.hztc'); if (!t) return; const k = KIT.find(x => x.b.key === t.dataset.k), r = t.getBoundingClientRect(), pr = srtW.getBoundingClientRect();
+      tip.textContent = k.b.title + (k.durum === 'okunuyor' ? ' · %' + Math.round(k.oran * 100) : k.durum === 'sirada' ? ' · sırada' : ''); tip.style.left = (r.left + r.width / 2 - pr.left) + 'px'; tip.style.top = (r.top - pr.top - 8) + 'px'; tip.style.opacity = 1; });
+    srt.addEventListener('pointerout', () => tip.style.opacity = 0);
+    srt.addEventListener('click', e => { const gb = e.target.closest('b[data-s]'); if (gb){ suz = gb.dataset.s; suzgec(); return; }
+      const t = e.target.closest('.hztc'); if (!t) return; const k = KIT.find(x => x.b.key === t.dataset.k);
+      if (!uyar(k)){ suz = 'tumu'; ara = ''; const ai = document.getElementById('hzAra'); if (ai) ai.value = ''; suzgec(); }
+      if (mod !== 'akis') modSec('akis'); getir(k); });
+  }
+  function suzgec(){
+    if (flEl) flEl.querySelectorAll('button[data-s]').forEach(b => b.setAttribute('aria-pressed', b.dataset.s === suz));
+    LS = SIRALI.filter(uyar);
+    for (const [key, t] of TK) t.classList.toggle('sn', !LS.some(k => k.b.key === key));
+    kiv = []; crossing = -1; ilk = mod === 'akis'; kur();
+  }
+  let hedef = null, bekle = 0, gorS = new Set(), curK = null, NIGHT = false;
+  function getir(k){
+    if (!items.length || !cw) return; const span = cw + gap, per = span * items.length; let best = null;
+    for (const it of items){ if (it.k !== k) continue; const want = Lx - .62 * cw, now = md(off + it.i * span + span, per) - span; let dx = md(want - now + per / 2, per) - per / 2; if (best === null || Math.abs(dx) < Math.abs(best)) best = dx; }
+    if (best === null) return; hedef = off + best; vel = 0; bekle = 4; stage.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+  }
+  function serit(cr){
+    if (!TK.size) return; const yeni = new Set();
+    for (const it of items) if (it.x > -cw && it.x < W) yeni.add(it.k.b.key);
+    if (yeni.size !== gorS.size || [...yeni].some(x => !gorS.has(x))){ for (const x of gorS) TK.get(x) && TK.get(x).classList.remove('gor'); for (const x of yeni) TK.get(x) && TK.get(x).classList.add('gor'); gorS = yeni; }
+    const ck = cr >= 0 ? items[cr].k.b.key : null;
+    if (ck !== curK){ if (curK && TK.get(curK)) TK.get(curK).classList.remove('cur'); curK = ck;
+      const tt = ck && TK.get(ck); if (tt){ tt.classList.add('cur'); const L = tt.offsetLeft - srt.offsetLeft; if (L < srt.scrollLeft + 20 || L > srt.scrollLeft + srt.clientWidth - 20) srt.scrollTo({left: L - srt.clientWidth / 2, behavior: 'smooth'}); } }
+  }
   document.getElementById('shelfN').textContent = KIT.length + ' kitap · yenileri kendiliğinden gelir';
 
   const kart = (k, i) => {
     const b = k.b, c = b.cover || {}, long = (String(c.ct || '').match(/<br>/g) || []).length >= 2;
     return `<div class="in"><div class="hz-cv${long ? ' long' : ''}"><div><div class="ct">${c.ct || es(b.title)}</div><div class="cs">${c.cs || ''}</div><hr></div><div class="ca">${c.ca || es(b.author)}</div></div>
-      <div class="hz-info"><div class="hz-kick">Hizâne · ${String(i % KIT.length + 1).padStart(2, '0')}${b.key === cur ? ' · okunuyor' : ''}</div><div class="hz-ttl">${es(b.title)}</div>
+      <div class="hz-info"><div class="hz-kick">Hizâne · ${String(k.no).padStart(2, '0')}${b.key === cur ? ' · okunuyor' : ''}</div><div class="hz-ttl">${es(b.title)}</div>
       <div class="hz-by">${es(b.author)}${b.tr ? ' · ' + es(b.tr) : ''}</div><div class="hz-pub">${es(b.pub || '')} · ${b.pages} s.</div>
       <div class="hz-bar"><i style="width:${(k.oran * 100).toFixed(1)}%"></i></div>
       <div class="hz-pl"><span>s. ${b.first}–${b.last}</span><span>%${Math.round(k.oran * 100)}</span></div>
@@ -3125,12 +3327,14 @@ syncDirty = SYNC.kirli || (() => {});
 
   let mod = 'akis', items = [];
   function kur(){
+    if (flEl) flEl.querySelectorAll('button[data-s]').forEach(b => b.setAttribute('aria-pressed', b.dataset.s === suz));
     cardsEl.innerHTML = ''; codesEl.innerHTML = ''; minis.innerHTML = ''; items = [];
-    const n = mod === 'akis' ? Math.max(6, Math.ceil(6 / KIT.length) * KIT.length) : KIT.length;
+    if (!LS.length){ cardsEl.innerHTML = '<div class="hzbos">Bu süzgeçte kitap yok.</div>'; belt.style.height = '180px'; scan.hidden = badge.hidden = true; cw = 0; g.clearRect(0, 0, cv.width, cv.height); return; }
+    const n = mod === 'akis' ? Math.max(6, Math.ceil(6 / LS.length) * LS.length) : LS.length;
     for (let i = 0; i < n; i++){
-      const k = KIT[i % KIT.length];
+      const k = LS[i % LS.length];
       const c = document.createElement('div'); c.className = 'hz-card hz-k-' + k.cls; c.dataset.k = k.b.key; c.innerHTML = kart(k, i);
-      c.setAttribute('role', 'button'); c.setAttribute('tabindex', i < KIT.length ? '0' : '-1'); c.setAttribute('aria-label', k.b.title + ' kitabını aç');
+      c.setAttribute('role', 'button'); c.setAttribute('tabindex', i < LS.length ? '0' : '-1'); c.setAttribute('aria-label', k.b.title + ' kitabını aç');
       cardsEl.appendChild(c);
       const d = document.createElement('div'); d.className = 'hz-code'; d.innerHTML = kod(k); codesEl.appendChild(d);
       const it = {k, c, d, i, x: 0, y: 0};
@@ -3156,7 +3360,7 @@ syncDirty = SYNC.kirli || (() => {});
   const md = (a, b) => ((a % b) + b) % b;
   belt.addEventListener('pointerenter', () => hovering = true);
   belt.addEventListener('pointerleave', () => hovering = false);
-  belt.addEventListener('pointerdown', e => { if (e.button) return; drag = {x: e.clientX, x0: e.clientX, t: performance.now(), v: 0, moved: false}; if (mod === 'akis') belt.setPointerCapture(e.pointerId); });
+  belt.addEventListener('pointerdown', e => { if (e.button) return; hedef = null; drag = {x: e.clientX, x0: e.clientX, t: performance.now(), v: 0, moved: false}; if (mod === 'akis') belt.setPointerCapture(e.pointerId); });
   belt.addEventListener('pointermove', e => { if (!drag) return; const now = performance.now(), dx = e.clientX - drag.x; if (Math.abs(e.clientX - drag.x0) > 6){ drag.moved = true; belt.classList.add('drag'); }
     if (mod === 'akis' && drag.moved){ off += dx; drag.v = dx / Math.max(8, now - drag.t) * 1000 * .8 + drag.v * .2; } drag.x = e.clientX; drag.t = now; });
   const ac = key => { if (!window.AD) return; if (key === AD.BK.key) AD.openReader(); else AD.switchBook(key, true); };
@@ -3166,18 +3370,19 @@ syncDirty = SYNC.kirli || (() => {});
     const el = document.elementFromPoint(e.clientX, e.clientY), c = el && el.closest('.hz-card'); if (c) ac(c.dataset.k); };
   belt.addEventListener('pointerup', birak); belt.addEventListener('pointercancel', () => { drag = null; belt.classList.remove('drag'); });
   belt.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('hz-card')){ e.preventDefault(); ac(e.target.dataset.k); } });
-  belt.addEventListener('wheel', e => { if (mod !== 'akis') return; if (Math.abs(e.deltaX) > Math.abs(e.deltaY)){ e.preventDefault(); vel += -e.deltaX * 6; } }, {passive: false});
+  belt.addEventListener('wheel', e => { if (mod !== 'akis') return; if (Math.abs(e.deltaX) > Math.abs(e.deltaY)){ e.preventDefault(); hedef = null; vel += -e.deltaX * 6; } }, {passive: false});
   if ('IntersectionObserver' in window) new IntersectionObserver(es_ => { onScreen = es_[0].isIntersecting; }).observe(stage);
 
   function hash(a, b, c){ let h = (Math.imul(a, 374761393) + Math.imul(b, 668265263) + Math.imul(c, 2147483647)) | 0; h = Math.imul(h ^ (h >>> 13), 1274126177) | 0; return ((h ^ (h >>> 16)) >>> 0) / 4294967296; }
   const PAL = ['#1F2227', '#25282E', '#30343B', '#3D424B', '#4A4F58', '#5D626B', '#7A7F88'];
+  const PALN = ['#FFF6C8', '#F6E27A', '#EBCB62', '#C9B458', '#9FB060', '#6E7A3C', '#3E4428'];
   let kiv = [];
   const KOVA = PAL.map(() => []);
   function fx(it, line, t, bv){
     const x = it.x, y = it.y, cut = Math.max(0, Math.min(cw, line - x));
     if (cut <= 0 || x + cw <= line) return;
     const hw = Math.min(140, x + cw - line);
-    if (hw > 0){ const gr = g.createLinearGradient(line, 0, line + 140, 0); gr.addColorStop(0, 'rgba(48,52,59,.2)'); gr.addColorStop(1, 'rgba(48,52,59,0)'); g.fillStyle = gr; g.fillRect(line, y, hw, ch); }
+    if (hw > 0){ const gr = g.createLinearGradient(line, 0, line + 140, 0); gr.addColorStop(0, NIGHT ? 'rgba(246,226,122,.13)' : 'rgba(48,52,59,.2)'); gr.addColorStop(1, NIGHT ? 'rgba(246,226,122,0)' : 'rgba(48,52,59,0)'); g.fillStyle = gr; g.fillRect(line, y, hw, ch); }
     const R = .22 * cw, S = 4, rows = Math.ceil(ch / S), gx0 = Math.floor(cut / S), gx1 = Math.min(Math.ceil(cw / S), Math.ceil((cut + R) / S)), tk = Math.floor(t * 8);
     for (const k of KOVA) k.length = 0;
     for (let gx = gx0; gx < gx1; gx++){
@@ -3186,14 +3391,14 @@ syncDirty = SYNC.kirli || (() => {});
       for (let r = -4; r < rows + 4; r++){
         const ic = r >= 0 && r < rows, pr = ic ? p * .9 : p * .16 * (1 - Math.min(4, r < 0 ? -r : r - rows + 1) / 4);
         if (hash(gx, r, it.i) >= pr) continue;
-        if (!RM && hash(gx, r, tk + 97) < .2) continue;
+        if (!RM && hash(gx, r, tk + 97) < (NIGHT ? .6 : .2)) continue;
         const h2 = hash(r, gx, it.i + 31), ci = d < 10 ? Math.floor(h2 * 2) : Math.floor(h2 * h2 * 7);
         const sz = 1.2 + h2 * 1.8, j = RM ? 0 : (h2 - .5) * 1.4;
         KOVA[ci].push(sx + j, y + r * S - j, sz);
       }
     }
-    for (let c = 0; c < KOVA.length; c++){ const k = KOVA[c]; if (!k.length) continue; g.fillStyle = PAL[c]; g.beginPath(); for (let q = 0; q < k.length; q += 3) g.rect(k[q], k[q + 1], k[q + 2], k[q + 2]); g.fill(); }
-    if (!RM && mod === 'akis' && Math.random() < .8) kiv.push({x: line + Math.random() * 30, y: y - 10 + Math.random() * (ch + 20), vx: -30 + Math.random() * 70 + bv * .6, vy: (Math.random() - .5) * 50, s: .8 + Math.random() * 1.8, c: PAL[Math.floor(Math.random() * 7)], l: .3 + Math.random() * .8});
+    for (let c = 0; c < KOVA.length; c++){ const k = KOVA[c]; if (!k.length) continue; g.fillStyle = (NIGHT ? PALN : PAL)[c]; g.beginPath(); for (let q = 0; q < k.length; q += 3) g.rect(k[q], k[q + 1], k[q + 2], k[q + 2]); g.fill(); }
+    if (!RM && mod === 'akis' && Math.random() < .8) kiv.push({x: line + Math.random() * 30, y: y - 10 + Math.random() * (ch + 20), vx: -30 + Math.random() * 70 + bv * .6, vy: (Math.random() - .5) * 50, s: .8 + Math.random() * 1.8, c: PAL[Math.floor(Math.random() * 7)], l: .3 + Math.random() * .8, ph: Math.random() * 6.3, f: 2 + Math.random() * 4});
   }
   function uygula(it, line){
     const cut = Math.max(0, Math.min(cw, line - it.x)), cr = Math.round(cut);
@@ -3205,34 +3410,43 @@ syncDirty = SYNC.kirli || (() => {});
     }
     return cut;
   }
-  let tPrev = 0, sonCiz = 0;
+  let tPrev = 0, sonCiz = 0, sonGece = false;
   function kare(now){
     requestAnimationFrame(kare);
     if (lib.hidden || !onScreen){ tPrev = now; return; }
     if (!cw) { olc(); if (!cw) return; }
     if (ilk){ ilk = false; off = Lx - .62 * cw - (cw + gap); }
-    const dt = Math.min(.05, (now - (tPrev || now)) / 1000); tPrev = now; const t = now / 1000;
+    const dt = Math.min(.05, (now - (tPrev || now)) / 1000); tPrev = now; const t = now / 1000; NIGHT = document.documentElement.classList.contains('gm');
     const sil = () => { g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, cv.width, cv.height); g.setTransform(dpr, 0, 0, dpr, 0, 0); };
     if (mod === 'akis'){
       sil();
       hover += ((hovering ? 1 : 0) - hover) * Math.min(1, dt * 4);
-      if (!drag || !drag.moved){ const hd = auto() * (1 - .65 * hover); vel += (hd - vel) * (1 - Math.exp(-2.2 * dt)); off += vel * dt; }
+      if (hedef !== null){ const o0 = off; off += (hedef - off) * (RM ? 1 : 1 - Math.exp(-4.5 * dt)); vel = (off - o0) / Math.max(dt, .001); if (Math.abs(hedef - off) < .5){ off = hedef; hedef = null; vel = 0; } }
+      else if (!drag || !drag.moved){ bekle = Math.max(0, bekle - dt); const hd = bekle > 0 ? 0 : auto() * (1 - .65 * hover); vel += (hd - vel) * (1 - Math.exp(-2.2 * dt)); off += vel * dt; }
       const span = cw + gap, per = span * items.length; let cr = -1, prog = 0;
-      for (const it of items){ it.x = md(off + it.i * span + span, per) - span; it.y = PAD + 40; const cut = uygula(it, Lx); if (cut > 0 && cut < cw){ cr = it.i; prog = cut / cw; } fx(it, Lx, t, drag && drag.moved ? drag.v : vel); }
+      for (const it of items){ it.x = md(off + it.i * span + span, per) - span; it.y = PAD + 40;
+        if (it.x < -cw - 20 || it.x > W + 20){ if (!it.gz){ it.gz = true; it.c.style.visibility = 'hidden'; it.d.style.visibility = 'hidden'; it.lc = -1; } continue; }
+        if (it.gz){ it.gz = false; it.c.style.visibility = ''; }
+        const cut = uygula(it, Lx); if (cut > 0 && cut < cw){ cr = it.i; prog = cut / cw; } fx(it, Lx, t, drag && drag.moved ? drag.v : vel); }
+      serit(cr);
       if (cr >= 0){ const k = items[cr].k, hd = Math.round(k.ok * prog);
         if (cr !== crossing){ crossing = cr; shown = hd; bP.textContent = `%${Math.round(k.oran * 100)} işlendi`; bLb.textContent = k.b.title.length > 24 ? 'İşlenen sayfa' : k.b.title + ' · işlenen'; }
         shown += (hd - shown) * Math.min(1, dt * 14); bN.textContent = `${fmt(Math.round(shown))} / ${fmt(k.b.pages)}`; }
     } else {
       const x0 = (W - cw) / 2, e = RM ? 1 : Math.min(1, (now - rafT0) / 2400), ea = 1 - Math.pow(1 - e, 3);
-      if (e >= 1 && (RM || now - sonCiz < 125) && !kiv.length) return;
+      if (e >= 1 && (RM || now - sonCiz < 125) && !kiv.length && NIGHT === sonGece) return; sonGece = NIGHT;
       sonCiz = now; sil();
       for (const it of items){ it.x = x0; it.y = PAD + it.i * (ch + rowGap); const line = it.x + cw * it.k.oran * ea;
         uygula(it, line); fx(it, line, t, 0);
         it.m.style.left = line + 'px'; it.m.style.top = (it.y - 8) + 'px';
         it.m.textContent = `%${Math.round(it.k.oran * 100 * ea)} · s. ${it.k.b.first + Math.round((it.k.ok - 1) * ea)}`;
-        g.fillStyle = 'rgba(17,17,17,.12)'; g.fillRect(line - 5, it.y - 6, 10, ch + 12); g.fillStyle = '#111'; g.fillRect(line - 1.5, it.y - 6, 3, ch + 12); }
+        g.fillStyle = NIGHT ? 'rgba(246,226,122,.16)' : 'rgba(17,17,17,.12)'; g.fillRect(line - 5, it.y - 6, 10, ch + 12); g.fillStyle = NIGHT ? '#F6E9B8' : '#111'; g.fillRect(line - 1.5, it.y - 6, 3, ch + 12); }
     }
-    for (const s of kiv){ s.l -= dt; s.x += s.vx * dt; s.y += s.vy * dt; if (s.l > 0){ g.globalAlpha = Math.min(1, s.l * 2.2); g.fillStyle = s.c; g.fillRect(s.x, s.y, s.s, s.s); } }
+    if (NIGHT && window.__atesSprite){ const SP = window.__atesSprite; g.globalCompositeOperation = 'lighter';
+      for (const s of kiv){ s.l -= dt * .45; s.x += s.vx * dt * .8; s.y += (s.vy * .4 + Math.sin(t * 1.7 + s.ph) * 16) * dt;
+        if (s.l > 0){ const bl = .25 + .75 * Math.pow(Math.max(0, Math.sin(t * s.f + s.ph)), 2); g.globalAlpha = Math.min(1, s.l * 1.6) * bl; const z = 3 + s.s * 2.4; g.drawImage(SP, s.x - z, s.y - z, z * 2, z * 2); } }
+      g.globalCompositeOperation = 'source-over'; }
+    else for (const s of kiv){ s.l -= dt; s.x += s.vx * dt; s.y += s.vy * dt; if (s.l > 0){ g.globalAlpha = Math.min(1, s.l * 2.2); g.fillStyle = s.c; g.fillRect(s.x, s.y, s.s, s.s); } }
     g.globalAlpha = 1; kiv = kiv.filter(s => s.l > 0); if (kiv.length > 160) kiv.splice(0, kiv.length - 160);
   }
   function modSec(m){

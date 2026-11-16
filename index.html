@@ -1170,6 +1170,39 @@ body{letter-spacing:-.01em}
 .h7-harita{position:absolute;left:0;right:0;top:-90px;bottom:-90px;width:100%;height:calc(100% + 180px);pointer-events:none;z-index:3}
 #lib .h7{touch-action:manipulation}
 #lib .h7.harita::before{box-shadow:none}
+
+/* ===== karşılama: tam sayfa yapraklar ===== */
+#top{position:relative}
+#top > .pn{position:sticky;top:var(--navh,77px);min-height:calc(100vh - var(--navh,77px));min-height:calc(100dvh - var(--navh,77px));
+  display:flex;flex-direction:column;justify-content:center;background:#fff;transform-origin:50% 0;isolation:isolate}
+#top > .pn[data-pn="1"],#top > .pn[data-pn="2"]{border-radius:var(--pr,28px) var(--pr,28px) 0 0;box-shadow:0 -28px 70px -34px rgba(0,0,0,calc(var(--pg,1) * .35))}
+#top > .pn[data-pn="1"]{z-index:2}
+#top > .pn[data-pn="2"]{z-index:3}
+#top > .pn > .pn-perde{position:absolute;inset:0;background:#0c0c0d;opacity:var(--po,0);pointer-events:none;z-index:60;border-radius:inherit}
+#top > .pn[data-pn="2"] > .sechead{margin-top:auto}
+#top > .pn[data-pn="2"] > .feature{margin-bottom:auto}
+#top > .pn-son{position:relative;z-index:4;background:#fff}
+#top > .pn .sechead{padding-top:clamp(6px,2.2vh,28px);border-top:0}
+#top > .pn .hzrow{padding-block:0 clamp(8px,2vh,24px)}
+@media (min-width:901px){#top > .pn[data-pn="1"] .hz{--ch:clamp(260px,calc(100vh - var(--navh,77px) - 520px),400px)}}
+#top > .pn > *:not(.pn-perde){flex-shrink:0;align-self:stretch}
+#top > .pn > .wrap{width:100%;box-sizing:border-box}
+#top > .pn .sechead h2 .pn-m,#top > .pn .sechead h2 .pn-m > span{font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;margin-top:0}
+#top > .pn .sechead h2 .pn-m{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.04em;margin-bottom:-.04em}
+#top > .pn .sechead h2 .pn-m > span{display:inline-block}
+.pn-gost{position:fixed;right:max(18px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:6px;
+  font:500 10.5px/1 ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.14em;text-transform:uppercase}
+.pn-gost[hidden]{display:none}
+.pn-gost button{all:unset;cursor:pointer;display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:6px 0;color:#9a9a9a;transition:color .3s}
+.pn-gost button i{display:block;width:18px;height:2px;border-radius:2px;background:currentColor;transition:width .45s cubic-bezier(.2,.8,.2,1)}
+.pn-gost button span{opacity:0;transform:translateX(6px);transition:opacity .3s,transform .45s cubic-bezier(.2,.8,.2,1)}
+.pn-gost button.on{color:#111}
+.pn-gost button.on i{width:34px}
+.pn-gost button.on span,.pn-gost:hover button span{opacity:1;transform:none}
+.pn-gost button:focus-visible{outline:2px solid #111;outline-offset:4px}
+#lib .links .grp button.pn-on{background:#fff;color:#111;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+@media (max-width:900px),(hover:none){.pn-gost{display:none}}
+@media (prefers-reduced-motion:reduce){#top > .pn{transform:none!important}}
 </style>
 </head>
 <body>
@@ -1187,6 +1220,7 @@ body{letter-spacing:-.01em}
     </div>
   </div></header>
   <main id="top">
+    <div class="pn" data-pn="0" data-ad="Suffe"><div class="pn-perde" aria-hidden="true"></div>
     <section class="hero wrap">
       <div class="h7" id="h7"><canvas class="h7-toz" id="h7Toz" aria-hidden="true"></canvas><canvas class="h7-harita" id="h7Harita" aria-hidden="true"></canvas><h1 class="h8"><canvas id="h7Baslik" aria-hidden="true"></canvas><span class="gz">Oku. Bağla. Şerh et.</span></h1></div>
       <div class="f7">
@@ -1196,7 +1230,9 @@ body{letter-spacing:-.01em}
         <div class="cta"><button class="pill fill" id="heroRead">Okumaya devam et</button><button class="pill" id="heroShelf">Hizâne</button><button class="pill" id="heroFih">Mu'cem</button></div>
       </div>
     </section>
+    </div>
 
+    <div class="pn" data-pn="1" data-ad="Hizâne"><div class="pn-perde" aria-hidden="true"></div>
     <div class="sechead wrap" id="raf"><div><h2>Hizâne</h2><span id="hzSub">Kitaplar çizgiden geçerken künyelerine döner · dokun, aç · sürükle, geri sar</span></div>
       <div class="hzseg" role="group" aria-label="Hizâne görünümü"><button id="hzAkis" aria-pressed="true">Akış</button><button id="hzRaf" aria-pressed="false">İlerleme rafı</button></div></div>
     <div class="hzfl wrap" id="hzFl" hidden></div>
@@ -1209,7 +1245,9 @@ body{letter-spacing:-.01em}
     <div class="hzsrt wrap" id="hzSrtW" hidden><div class="hzsrt-in" id="hzSrt"></div><div class="hztip" id="hzTip" aria-hidden="true"></div><div class="hzleg"><span><i class="o"></i>okunuyor · dolu kısım işlenen</span><span><i class="s"></i>sırada</span><span><i></i>rafta</span><span>şeride dokun: kitap çizgiye gelir</span></div></div>
     <div class="hzrow wrap"><span id="shelfN"></span><span>Yeni kitap için PDF'ini sohbete gönder; hazırlanıp bu rafa eklenir.</span></div>
     <section class="shelf" id="shelf" hidden></section>
+    </div>
 
+    <div class="pn" data-pn="2" data-ad="Mu'cem"><div class="pn-perde" aria-hidden="true"></div>
     <div class="sechead wrap" id="adlar"><div><h2>Mu'cem</h2><span id="adlarSub">Kitaplar arası sözlük · dokununca açılır</span></div><button class="pill" id="mcAcBtn">Mu'cemi aç</button></div>
     <section class="cats wrap" id="cats"></section>
     <section class="feature" id="feature">
@@ -1221,8 +1259,10 @@ body{letter-spacing:-.01em}
       </div>
       <div class="art"><div class="fcard" id="fCard"></div></div>
     </section>
-    <footer class="wrap"><b>Darülfünun Suffesi</b> · Kitap sayfaları yalnız halka üyelerine açıktır ve cihazında saklanır; vurgular, notlar ve hâşiyeler halkayla anında paylaşılır. Açıklamalar bu çalışma için yazıldı; kesikli çizgili bağlantılar kitapta geçmeyen genel bilgilerdir.</footer>
+    </div>
+    <footer class="wrap pn-son"><b>Darülfünun Suffesi</b> · Kitap sayfaları yalnız halka üyelerine açıktır ve cihazında saklanır; vurgular, notlar ve hâşiyeler halkayla anında paylaşılır. Açıklamalar bu çalışma için yazıldı; kesikli çizgili bağlantılar kitapta geçmeyen genel bilgilerdir.</footer>
   </main>
+  <nav class="pn-gost" id="pnGost" aria-label="Sayfalar"></nav>
   <section class="mc" id="mucem" hidden aria-label="Mu'cem">
     <div class="mc-bas wrap">
       <div><h2>Mu'cem</h2><span id="mcSub">Kitaplar arası sözlük</span></div>
@@ -4213,6 +4253,190 @@ const KARA = [[239,355,240,355,241,356,242,356,242,355,241,355,242,355,243,355,2
   h7.addEventListener('pointerup', e => { if (e.pointerType === 'mouse') return; const t = performance.now(); if (t - sonDok < 320){ sonDok = 0; baslat(); } else sonDok = t; });
   const eskiYenile = window.__h7Yenile;   /* başlık yeniden çizilince (boyut değişimi) harita da kapanır */
   window.__h7Yenile = () => { if (eskiYenile) eskiYenile(); if (durum !== 'bos') bitir(); };
+})();
+
+
+/* ===== karşılama: tam sayfa yapraklar (tasarim14) ===== */
+(() => {
+  const kok = document.getElementById('top'); if (!kok) return;
+  const P = [...kok.querySelectorAll(':scope > .pn')]; if (P.length < 2) return;
+  const nav = document.querySelector('#lib .nav'), gost = document.getElementById('pnGost');
+  const RM = matchMedia('(prefers-reduced-motion: reduce)'), INCE = matchMedia('(hover: hover) and (pointer: fine)');
+  const EASE = 'cubic-bezier(.2,.8,.2,1)';
+  let navH = 0, av = 0, T = [], X = [], anim = null, kilit = 0, sonT = 0, birikim = 0, aktif = -1, raf = 0;
+
+  // büyük başlıkları maskele
+  for (const h of kok.querySelectorAll('.pn .sechead h2')) {
+    if (h.querySelector('.pn-m')) continue;
+    const m = document.createElement('span'); m.className = 'pn-m';
+    const i = document.createElement('span'); i.textContent = h.textContent; m.appendChild(i);
+    h.textContent = ''; h.appendChild(m);
+  }
+  // sağdaki sayfa göstergesi
+  if (gost) {
+    gost.innerHTML = P.map((p, i) => `<button type="button" data-i="${i}" aria-label="${p.dataset.ad}"><span>${String(i + 1).padStart(2, '0')} ${p.dataset.ad}</span><i></i></button>`).join('');
+    gost.onclick = e => { const b = e.target.closest('button'); if (b) git(+b.dataset.i); };
+  }
+
+  function gorunur(){ return kok.offsetParent !== null && getComputedStyle(kok).display !== 'none'; }
+  function etkin(){
+    if (!gorunur() || !INCE.matches || innerWidth <= 900) return false;
+    const el = document.elementFromPoint(innerWidth / 2, Math.min(innerHeight - 2, navH + 40));
+    return !!(el && (el.closest('#top') || el.closest('#lib .nav')));
+  }
+
+  function olc(){
+    navH = nav ? nav.offsetHeight : 0; av = innerHeight - navH;
+    document.documentElement.style.setProperty('--navh', navH + 'px');
+    const bas = kok.getBoundingClientRect().top + scrollY - navH;
+    let y = bas; T = []; X = [];
+    for (const p of P) {
+      const h = p.offsetHeight, ex = Math.max(0, Math.round(h - av));
+      p.style.top = (navH - ex) + 'px';
+      T.push(Math.round(y)); X.push(ex); y += h;
+    }
+    ciz();
+  }
+
+  // kaydırmaya bağlı görünüm: gelen yaprak yükselir, örtülen geri çekilip kararır
+  function ciz(){
+    raf = 0; const g = gorunur(); if (gost) gost.hidden = !g; if (!g) return;
+    const y = scrollY;
+    for (let i = 0; i < P.length; i++) {
+      const p = P[i];
+      // bu yaprağın gelişi (0: ekranın altında, 1: yerine oturdu)
+      const gel = i === 0 ? 1 : Math.min(1, Math.max(0, 1 - (T[i] - y) / av));
+      // bu yaprağın örtülüşü (sonraki yaprağın gelişi)
+      const ort = i === P.length - 1 ? 0 : Math.min(1, Math.max(0, 1 - (T[i + 1] - y) / av));
+      if (i > 0) { p.style.setProperty('--pr', (28 * (1 - gel)).toFixed(1) + 'px'); p.style.setProperty('--pg', (gel > 0 && gel < 1 ? 1 : 0)); }
+      p.style.setProperty('--po', (ort * .55).toFixed(3));
+      if (RM.matches) { p.style.transform = ''; }
+      else if (ort > 0) {
+        const e = ort * ort * (3 - 2 * ort);
+        p.style.transform = `translate3d(0,${(-2.5 * e).toFixed(2)}vh,0) scale(${(1 - .075 * e).toFixed(4)})`;
+      } else p.style.transform = '';
+      const kapali = ort >= 1 && P[i + 1] && P[i + 1].offsetHeight >= av - 1;
+      p.style.visibility = kapali ? 'hidden' : '';
+    }
+    // etkin yaprak
+    let a = 0; for (let i = 0; i < P.length; i++) if (y >= T[i] - av * .5) a = i;
+    if (a !== aktif) { const once = aktif; aktif = a; isaretle(); if (once >= 0 && a > once) yuksel(P[a]); }
+  }
+  function istek(){ if (!raf) raf = requestAnimationFrame(ciz); }
+
+  function isaretle(){
+    if (gost) for (const b of gost.children) b.classList.toggle('on', +b.dataset.i === aktif);
+    const ad = P[aktif]?.dataset.ad;
+    document.querySelectorAll('#lib .links .grp button').forEach(b => b.classList.toggle('pn-on', b.textContent.trim() === ad));
+  }
+
+  // sayfaya girince: başlık maskeden yükselir, bloklar hafifçe yukarı kayar
+  function yuksel(p){
+    if (RM.matches || !p.animate) return;
+    const m = p.querySelector('.sechead h2 .pn-m > span');
+    if (m) m.animate([{transform: 'translateY(105%)'}, {transform: 'none'}], {duration: 1000, easing: EASE, delay: 120});
+    const parcalar = [...p.querySelectorAll(':scope > .sechead > div > span, :scope > .sechead > :not(div), :scope > .hzrow, :scope > .cats, :scope > .feature, :scope > .hzfl:not([hidden])')];
+    parcalar.forEach((el, k) => el.animate([{transform: 'translateY(34px)', opacity: 0}, {transform: 'none', opacity: 1}], {duration: 900, easing: EASE, delay: 220 + k * 70, fill: 'backwards'}));
+  }
+
+  // pürüzsüz geçiş
+  const yumusak = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  function kaydir(hedef){
+    hedef = Math.max(0, Math.min(hedef, document.documentElement.scrollHeight - innerHeight));
+    if (anim) cancelAnimationFrame(anim.id);
+    const bas = scrollY, fark = hedef - bas;
+    if (Math.abs(fark) < 2) return;
+    if (RM.matches) { scrollTo(0, hedef); kilit = performance.now() + 250; return; }
+    const sure = Math.min(1250, 760 + Math.abs(fark) * .35), t0 = performance.now();
+    const html = document.documentElement, eski = html.style.scrollBehavior; html.style.scrollBehavior = 'auto';
+    anim = {id: 0};
+    const adim = now => {
+      const t = Math.min(1, (now - t0) / sure);
+      scrollTo(0, bas + fark * yumusak(t));
+      if (t < 1) anim.id = requestAnimationFrame(adim);
+      else { anim = null; html.style.scrollBehavior = eski; kilit = performance.now() + 180; birikim = 0; }
+    };
+    anim.id = requestAnimationFrame(adim);
+  }
+  function git(i){ i = Math.max(0, Math.min(P.length - 1, i)); kaydir(T[i]); }
+
+  // bir yönde gidilecek hedef (null: tarayıcı kendisi kaydırsın)
+  function hedefBul(yon, dy){
+    const y = scrollY;
+    for (let i = 0; i < P.length; i++) {
+      const a = T[i], b = T[i] + X[i];
+      if (y >= a - 1 && y <= b + 1) {
+        if (yon > 0 && y < b - 1) return {ic: Math.min(b, y + dy)};
+        if (yon < 0 && y > a + 1) return {ic: Math.max(a, y + dy)};
+        if (yon > 0) return i + 1 < P.length ? {git: T[i + 1]} : null;
+        return i > 0 ? {git: T[i - 1] + X[i - 1]} : null;
+      }
+    }
+    if (yon > 0) { for (let i = 0; i < P.length; i++) if (T[i] > y + 1) return {git: T[i]}; return null; }
+    for (let i = P.length - 1; i >= 0; i--) if (T[i] + X[i] < y - 1) return {git: T[i] + X[i]};
+    return null;
+  }
+
+  function kaydirabilir(el, dy){
+    for (; el && el !== document.body && el !== kok; el = el.parentElement) {
+      const s = getComputedStyle(el);
+      if (!/(auto|scroll)/.test(s.overflowY) || el.scrollHeight <= el.clientHeight + 1) continue;
+      if (dy > 0 ? el.scrollTop + el.clientHeight < el.scrollHeight - 1 : el.scrollTop > 0) return true;
+    }
+    return false;
+  }
+
+  addEventListener('wheel', e => {
+    if (e.ctrlKey || !etkin()) return;
+    let dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? innerHeight : 1);
+    if (Math.abs(e.deltaX) > Math.abs(dy) || !dy) return;
+    if (kaydirabilir(e.target, dy)) return;
+    const now = performance.now(), ara = now - sonT; sonT = now;
+    if (anim) { e.preventDefault(); return; }
+    if (now < kilit) { e.preventDefault(); kilit = now + 180; return; }   // dokunmatik yüzeyin ataleti sönene dek
+    const h = hedefBul(Math.sign(dy), dy);
+    if (!h) return;
+    e.preventDefault();
+    if (h.ic != null) { scrollTo(0, h.ic); birikim = 0; return; }
+    if (ara > 260) birikim = 0;
+    birikim += dy;
+    if (Math.abs(birikim) < 28) return;
+    birikim = 0; kaydir(h.git);
+  }, {passive: false});
+
+  addEventListener('keydown', e => {
+    if (e.altKey || e.ctrlKey || e.metaKey || !etkin()) return;
+    const t = e.target; if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+    let yon = 0;
+    if (e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey)) yon = 1;
+    else if (e.key === 'PageUp' || (e.key === ' ' && e.shiftKey)) yon = -1;
+    if (e.key === ' ' && t && t.tagName === 'BUTTON') return;
+    else if (e.key === 'Home') { e.preventDefault(); return git(0); }
+    else if (e.key === 'End') { e.preventDefault(); return git(P.length - 1); }
+    if (!yon) return;
+    const h = hedefBul(yon, yon * av * .85); if (!h) return;
+    e.preventDefault();
+    if (h.ic != null) kaydir(h.ic); else kaydir(h.git);
+  });
+
+  // menü ve karşılama düğmeleri yaprağa gitsin
+  document.addEventListener('click', e => {
+    const b = e.target.closest('#lib .links [data-go="top"], #lib .links [data-go="raf"], #heroShelf, #heroFih');
+    if (!b || !gorunur()) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    const ad = b.dataset.go === 'top' ? 0 : (b.dataset.go === 'raf' || b.id === 'heroShelf') ? 1 : 2;
+    if (kaydirabilirMi()) git(ad); else P[ad].scrollIntoView({behavior: RM.matches ? 'auto' : 'smooth'});
+  }, true);
+  function kaydirabilirMi(){ return T.length === P.length; }
+
+  addEventListener('scroll', istek, {passive: true});
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(olc, 120); });
+  if ('ResizeObserver' in window) { const ro = new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(olc, 120); }); P.forEach(p => ro.observe(p)); }
+  const goster = () => { if (gost) gost.hidden = !gorunur(); };
+  addEventListener('hashchange', () => setTimeout(() => { goster(); olc(); }, 60));
+  if ('MutationObserver' in window) new MutationObserver(() => { goster(); }).observe(kok, {attributes: true, attributeFilter: ['hidden', 'style', 'class']});
+  goster(); olc(); setTimeout(olc, 400); setTimeout(olc, 1500);
+  window.__pn = {git, olc, T: () => T, X: () => X, aktif: () => aktif};
 })();
 
 

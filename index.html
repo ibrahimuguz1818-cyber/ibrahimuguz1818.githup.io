@@ -1190,12 +1190,12 @@ body{letter-spacing:-.01em}
 #top > .pn .sechead h2 .pn-m,#top > .pn .sechead h2 .pn-m > span{font:inherit;color:inherit;letter-spacing:inherit;text-transform:inherit;margin-top:0}
 #top > .pn .sechead h2 .pn-m{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.04em;margin-bottom:-.04em}
 #top > .pn .sechead h2 .pn-m > span{display:inline-block}
-.pn-gost{position:fixed;right:max(18px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:6px;
+.pn-gost{position:fixed;left:max(18px,env(safe-area-inset-left,0px));top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:6px;
   font:500 10.5px/1 ui-monospace,"SF Mono",Menlo,monospace;letter-spacing:.14em;text-transform:uppercase}
 .pn-gost[hidden]{display:none}
-.pn-gost button{all:unset;cursor:pointer;display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:6px 0;color:#9a9a9a;transition:color .3s}
+.pn-gost button{all:unset;cursor:pointer;display:flex;flex-direction:row-reverse;align-items:center;justify-content:flex-end;gap:10px;padding:6px 0;color:#9a9a9a;transition:color .3s}
 .pn-gost button i{display:block;width:18px;height:2px;border-radius:2px;background:currentColor;transition:width .45s cubic-bezier(.2,.8,.2,1)}
-.pn-gost button span{opacity:0;transform:translateX(6px);transition:opacity .3s,transform .45s cubic-bezier(.2,.8,.2,1)}
+.pn-gost button span{padding:3px 7px;margin-left:-4px;border-radius:6px;background:rgba(255,255,255,.92);box-shadow:0 0 0 1px rgba(0,0,0,.04);opacity:0;transform:translateX(-6px);transition:opacity .3s,transform .45s cubic-bezier(.2,.8,.2,1)}
 .pn-gost button.on{color:#111}
 .pn-gost button.on i{width:34px}
 .pn-gost button.on span,.pn-gost:hover button span{opacity:1;transform:none}

@@ -2409,7 +2409,7 @@ EK.ready.then(() => { if (!$('#detail').hidden && selected) EK.render(selected);
 // ======================= OKUYUCU =======================
 const reader = $('#reader'), stage = $('#stage'), host = $('#bookHost');
 const BL = FLOW.blocks;
-const LASTP = Math.max(...BL.flatMap(b => b.c.map(t => t[2])));
+const LASTP = BL.reduce((m, b) => { for (const t of b.c) if (t[2] > m) m = t[2]; return m; }, -Infinity);
 // tokens: [metin, tür(0 kelime,1 sup,2 sayfa), sayfa, ad]
 let fs = store.get('fs', 18), ff = store.get('ff', 'sans'), rt = store.get('rt', 'beyaz');
 const FONTS = {sans:'"Inter Tight",-apple-system,"Segoe UI",sans-serif', serif:'"Source Serif 4",Georgia,"Times New Roman",serif'};

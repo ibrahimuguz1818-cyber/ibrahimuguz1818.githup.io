@@ -1473,12 +1473,48 @@ window.BULUT = (() => {
   }
 
   // ---------- 3) paketler (IndexedDB) ----------
-  let pdb = null;
-  const pdbAc = () => pdb || (pdb = new Promise(res => {
-    try { const rq = indexedDB.open('suffe-paket', 1); rq.onupgradeneeded = () => rq.result.createObjectStore('paket'); rq.onsuccess = () => res(rq.result); rq.onerror = () => res(null); } catch { res(null); }
-  }));
-  async function paketOku(key){ const db = await pdbAc(); if (!db) return null; return new Promise(res => { const rq = db.transaction('paket').objectStore('paket').get(key); rq.onsuccess = () => res(rq.result || null); rq.onerror = () => res(null); }); }
-  async function paketYaz(key, v){ const db = await pdbAc(); if (!db) return false; return new Promise(res => { const tx = db.transaction('paket', 'readwrite'); tx.objectStore('paket').put(v, key); tx.oncomplete = () => res(true); tx.onerror = () => res(false); }); }
+  // Paketler JSON metni olarak saklanır: WebKit (iPad/iPhone) büyük nesne ağaçlarını IndexedDB'den okurken
+  // takılabiliyor. Eski 'suffe-paket' veritabanındaki nesne kayıtları ilk okunuşta yeni biçime taşınır.
+  // Her işlemin süre sınırı var; takılan bir okuma açılışı durdurmaz, kitap yeniden indirilir.
+  const idbAc = (ad, sure) => new Promise(res => {
+    let bitti = false; const son = v => { if (!bitti){ bitti = true; res(v); } };
+    setTimeout(() => son(null), sure || 6000);
+    try {
+      const rq = indexedDB.open(ad, 1);
+      rq.onupgradeneeded = () => rq.result.createObjectStore('paket');
+      rq.onsuccess = () => { const db = rq.result; db.onversionchange = () => db.close(); son(db); };
+      rq.onerror = () => son(null); rq.onblocked = () => son(null);
+    } catch { son(null); }
+  });
+  let pdb = null, pdbEski = null;
+  const pdbAc = () => pdb || (pdb = idbAc('suffe-paket2'));
+  const pdbEskiAc = () => pdbEski || (pdbEski = idbAc('suffe-paket'));
+  const idbIs = (db, mod, f, sure) => new Promise(res => {
+    let bitti = false; const son = v => { if (!bitti){ bitti = true; clearTimeout(t); res(v); } };
+    const t = setTimeout(() => son(undefined), sure);
+    try { const tx = db.transaction('paket', mod); tx.onabort = () => son(undefined); f(tx.objectStore('paket'), tx, son); } catch (e){ console.warn('idb', e); son(undefined); }
+  });
+  const idbGet = (db, key, sure) => idbIs(db, 'readonly', (os, tx, son) => { const rq = os.get(key); rq.onsuccess = () => son(rq.result || null); rq.onerror = () => son(null); }, sure);
+  async function paketOku(key){
+    const db = await pdbAc();
+    if (db){
+      const r = await idbGet(db, key, 15000);
+      if (r && typeof r.txt === 'string'){ try { return {surum: r.surum, paket: JSON.parse(r.txt)}; } catch (e){ console.warn('paket bozuk', e); return null; } }
+      if (r) return r;
+    }
+    const eski = await pdbEskiAc(); if (!eski) return null;
+    const r = await idbGet(eski, key, 15000);
+    if (!r) return null;
+    paketYaz(key, r).then(ok => { if (ok) idbIs(eski, 'readwrite', (os, tx, son) => { os.delete(key); tx.oncomplete = () => son(true); tx.onerror = () => son(false); }, 8000); });
+    return r;
+  }
+  async function paketYaz(key, v){
+    const db = await pdbAc(); if (!db) return false;
+    let deger = v;
+    if (v && v.paket){ try { deger = {surum: v.surum, txt: v.txt || JSON.stringify(v.paket)}; } catch { return false; } }
+    const ok = await idbIs(db, 'readwrite', (os, tx, son) => { os.put(deger, key); tx.oncomplete = () => son(true); tx.onerror = () => son(false); }, 30000);
+    return ok === true;
+  }
   async function paketIndir(row, ilerleme){
     const {data, error} = await B.sb.storage.from('kitaplar').createSignedUrl(row.dosya, 900);
     if (error) throw error;
@@ -1491,7 +1527,7 @@ window.BULUT = (() => {
       txt = await new Blob(parts).text();
     } else txt = await r.text();
     const p = JSON.parse(txt); if (p.tur !== 'suffe-paket' || p.key !== row.key) throw new Error('paket bozuk');
-    await paketYaz(row.key, {surum: row.surum, paket: p});
+    await paketYaz(row.key, {surum: row.surum, paket: p, txt});
     return p;
   }
 
@@ -1530,18 +1566,27 @@ window.BULUT = (() => {
   }
 
   // ---------- 5) açılış ----------
+  function hataEkrani(baslik, mesaj){
+    const kat = B.katalog || [], simdi = (() => { try { return localStorage.getItem('lib.current'); } catch { return null; } })();
+    goster(`<h1>${esc(baslik)}</h1><p class="bacik">${esc(mesaj)}</p><button class="bbtn" id="bTekrar">Tekrar dene</button>`
+      + (kat.length > 1 ? `<p class="bacik" style="margin-top:20px">Başka bir kitapla aç:</p><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">${kat.filter(r => r.key !== simdi).map(r => `<button class="blink" data-k="${esc(r.key)}">${esc(r.meta && r.meta.title || r.key)}</button>`).join('')}</div>` : ''));
+    $e('#bTekrar').onclick = () => location.reload();
+    ekran.querySelectorAll('[data-k]').forEach(b => b.onclick = () => { try { localStorage.setItem('lib.current', b.dataset.k); } catch {} location.hash = '#kitap-' + b.dataset.k; location.reload(); });
+  }
   async function basla(){
+    B.acildi = false; B.adim = 'başlangıç'; clearTimeout(B.bekci);
+    B.bekci = setTimeout(() => { if (!B.acildi && (!ekran || ekran.hidden)) hataEkrani('Açılış uzun sürdü', 'Takıldığı adım: ' + B.adim + '. Sayfayı yenileyebilir ya da başka bir kitapla açabilirsin.'); }, 40000);
     B.ayar = ayarOku();
     if (!B.ayar) return ayarEkrani();
     if (!window.supabase){ return goster('<h1>Yüklenemedi</h1><p class="bacik">Bağlantı kütüphanesi eksik.</p>'); }
     if (!B.sb) B.sb = window.supabase.createClient(B.ayar.url, B.ayar.key, {auth: {persistSession: true, autoRefreshToken: true, storageKey: 'suffe.oturum', detectSessionInUrl: false}});
     let session = null;
-    try { session = (await zaman(B.sb.auth.getSession(), 6000)).data.session; } catch {}
+    B.adim = 'oturum'; try { session = (await zaman(B.sb.auth.getSession(), 6000)).data.session; } catch {}
     const cevrim = navigator.onLine !== false;
     // internet yoksa: daha önce girilmiş ve paket indirilmişse doğrudan aç
     if (!session && !(B.me && !cevrim)) return girisEkrani();
     if (session && cevrim){
-      try {
+      B.adim = 'sunucu'; try {
         const {data, error} = await zaman(B.sb.rpc('katil', {p_ad: LSG('suffe.adim', '') || ''}), 9000);
         if (error){ if (/davet_yok/.test(error.message)) return davetYokEkrani(session.user.email); throw error; }
         B.me = {uid: data.uid, ad: data.ad, rol: data.rol, eposta: data.eposta}; LSS('suffe.ben', B.me);
@@ -1557,12 +1602,13 @@ window.BULUT = (() => {
     const h = (location.hash.match(/^#(?:oku|kitap)-(\w+)/) || [])[1];
     let k = h; try { k = k || localStorage.getItem('lib.current'); } catch {}
     const row = B.katalog.find(r => r.key === k) || B.katalog[0];
+    B.adim = '“' + (row.meta && row.meta.title || row.key) + '” cihazdan okunuyor';
     let kayit = await paketOku(row.key), paket = kayit && kayit.paket;
     if (!kayit || kayit.surum !== row.surum){
       if (!B.cevrimdisi){
         goster(`<h1>${esc(row.meta.title)}</h1><p class="bacik">${kayit ? 'Yeni bölümler indiriliyor…' : 'Kitap bu cihaza indiriliyor; bir kez yapılır.'}</p><div class="bbar"><i id="bBar"></i></div><p class="bacik" id="bYuzde"></p>`);
         try {
-          paket = await paketIndir(row, (n, t) => { const y = t ? Math.min(100, Math.round(100 * n / t)) : 0; $e('#bBar').style.width = y + '%'; $e('#bYuzde').textContent = t ? `%${y} · ${(n / 1e6).toFixed(1)} / ${(t / 1e6).toFixed(1)} MB` : `${(n / 1e6).toFixed(1)} MB`; });
+          B.adim = 'kitap indiriliyor'; paket = await paketIndir(row, (n, t) => { const y = t ? Math.min(100, Math.round(100 * n / t)) : 0; $e('#bBar').style.width = y + '%'; $e('#bYuzde').textContent = t ? `%${y} · ${(n / 1e6).toFixed(1)} / ${(t / 1e6).toFixed(1)} MB` : `${(n / 1e6).toFixed(1)} MB`; });
         } catch (e){
           if (!paket){ goster(`<h1>İndirilemedi</h1><p class="bacik">${esc(e.message || e)}</p><button class="bbtn" id="bTekrar">Tekrar dene</button>`); $e('#bTekrar').onclick = basla; return; }
         }
@@ -1574,7 +1620,9 @@ window.BULUT = (() => {
     window.__PACK = paket;
     try { localStorage.setItem('lib.current', row.key); } catch {}
     if (ekran) ekran.hidden = true;
-    window.__START();
+    B.adim = 'kitap açılıyor'; B.acildi = true; clearTimeout(B.bekci);
+    try { window.__START(); }
+    catch (e){ console.error(e); hataEkrani('Kitap açılamadı', '“' + (row.meta && row.meta.title || row.key) + '”: ' + (e && e.message || e)); }
   }
   // ---------- 6) Mu'cem: kitaplar arası fihrist ----------
   // Her kitap için küçük bir dizin (adlar, geçtikleri sayfalar, bağlantılar) ayrıca saklanır;
@@ -1626,7 +1674,7 @@ window.BULUT = (() => {
   B.basla = basla;
   B.cikis = async () => { try { await B.sb.auth.signOut(); } catch {} localStorage.removeItem('suffe.ben'); location.reload(); };
   B.paketOku = paketOku;
-  addEventListener('DOMContentLoaded', basla);
+  addEventListener('DOMContentLoaded', () => basla().catch(e => { console.error(e); B.acildi = true; clearTimeout(B.bekci); hataEkrani('Açılış hatası', String(e && e.message || e)); }));
   return B;
 })();
 </script>

@@ -3201,6 +3201,8 @@ const SYNC = (() => {
         const i = arr.findIndex(x => x.id === r.id);
         // bu cihazda henüz gönderilmemiş değişikliğim varsa, sunucudaki eski hâli onu ezmesin
         if (benim && i >= 0 && bilinen[r.id] && hashOf(arr[i]) !== bilinen[r.id].h) continue;
+        // bu cihazda sildiğim ama silinmesi henüz sunucuya gitmemiş kaydı geri getirme
+        if (benim && i < 0 && !r.silindi && bilinen[r.id] && bilinen[r.id].m) continue;
         let yeni = null;
         if (r.silindi){ if (i >= 0) arr.splice(i, 1); }
         else {
